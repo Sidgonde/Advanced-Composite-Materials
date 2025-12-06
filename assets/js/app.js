@@ -25,7 +25,7 @@ loadHTML("navbar-placeholder", `${BASE_PATH}/components/navbar.html`);
 loadHTML("footer-placeholder", `${BASE_PATH}/components/footer.html`);
 
 // Load JSON and render cards
-fetch(`${BASE_PATH}/index.json`)
+fetch(`${BASE_PATH}/data/index.json`)
   .then(res => res.json())
   .then(data => {
     const container = document.getElementById("servicesContainer");
