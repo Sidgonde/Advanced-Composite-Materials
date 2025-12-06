@@ -3,7 +3,7 @@ import { createCard } from "../../components/card.js";
 
 
 // Inject Navbar
-fetch("/project-root/components/navbar.html")
+fetch("project-root/components/navbar.html")
   .then(res => res.text())
   .then(data => {
     document.getElementById("navbar-placeholder").innerHTML = data;
@@ -11,13 +11,13 @@ fetch("/project-root/components/navbar.html")
 
 
 // Inject Footer
-fetch("/project-root/components/footer.html")
+fetch("project-root/components/footer.html")
   .then(res => res.text())
   .then(data => {
     document.body.insertAdjacentHTML("beforeend", data);
   });
 
-fetch("/project-root/components/card.js")
+fetch("project-root/components/card.js")
   .then(res => res.json())
   .then(data => {
     const container = document.getElementById("servicesContainer");
@@ -28,7 +28,7 @@ fetch("/project-root/components/card.js")
   })
   .catch(err => console.error("JSON Load Error:", err));
 
-  fetch("/project-root/index.json")
+  fetch("project-root/index.json")
   .then(res => res.json())
   .then(data => {
     const container = document.getElementById("servicesContainer");
