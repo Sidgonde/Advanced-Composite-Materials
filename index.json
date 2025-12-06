@@ -1,0 +1,29 @@
+{
+  "services": [
+    {
+      "title": "Research Models & Services",
+      "description": "Exerci tation ullamcor suscipit lobortis nisl aliquip commodo.",
+      "icon": "🧪"
+    },
+    {
+      "title": "Biologics Testing Solutions",
+      "description": "Exerci tation ullamcor suscipit lobortis nisl aliquip commodo.",
+      "icon": "🔬"
+    },
+    {
+      "title": "Formulation & Product Chemistry",
+      "description": "Exerci tation ullamcor suscipit lobortis nisl aliquip commodo.",
+      "icon": "⚗️"
+    },
+    {
+      "title": "Screening & Profiling Assays",
+      "description": "Exerci tation ullamcor suscipit lobortis nisl aliquip commodo.",
+      "icon": "📄"
+    },
+    {
+      "title": "Screening & Profiling Assays",
+      "description": "Exerci tation ullamcor suscipit lobortis nisl aliquip commodo.",
+      "icon": "📄"
+    }
+  ]
+}
