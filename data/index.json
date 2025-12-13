@@ -38,8 +38,7 @@
       }
     ],
     "images": {
-      "main": "./assets/images/lab-main.jpg",
-      "overlay": "./assets/images/lab-overlay.jpg"
+      "main": "/project-root/assets/images/lab2.jpeg"
     }
   }
 }
