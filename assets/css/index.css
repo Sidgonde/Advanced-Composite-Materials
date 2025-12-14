@@ -96,8 +96,8 @@
   height: 80vh;
 }
 .main-img {
-  width: 100%;
-  max-width: 420px;
+  width:500px;
+  height: 600px;
   border-radius: 12px;
   box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
 }

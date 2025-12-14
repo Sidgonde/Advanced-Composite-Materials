@@ -16,6 +16,17 @@ async function loadHTML(id, path) {
   }
 }
 
+async function loadCarousel({ mountId, images }) {
+  const carouselItemsHTML = createCarouselItems(images);
+  document.getElementById(mountId).innerHTML = `
+    <div class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        ${carouselItemsHTML}
+      </div>
+    </div>
+  `;
+}
+
 // Load Navbar
 loadHTML("navbar-placeholder", `${BASE_PATH}/components/navbar.html`);
 

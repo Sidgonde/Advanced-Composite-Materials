@@ -45,7 +45,8 @@
     <section class="about-section" id="about-section">
       <div class="about-container">
         <div class="about-images">
-          <img id="mainImage" class="main-img" src="" alt="Lab Image"/>
+          <!-- <img id="mainImage" class="main-img" src="" alt="Lab Image"/> -->
+           <div id="aboutCarousel"></div>
         </div>
         <div class="about-content">
           <span id="aboutTag" class="section-tag"></span>
@@ -75,6 +76,7 @@
     <!-- loading header ends  -->
     <script type="module">
       import { createCard } from "./components/card.js";
+      import { createCarousel} from "./components/carousel.js";
       // Detect base path dynamically (local vs GitHub Pages)
       const BASE_PATH = window.location.hostname.includes("github.io")
         ? "/Advanced-Composite-Materials"
@@ -91,22 +93,31 @@
           });
           //Load about section
           const about = data.aboutSection;
+          // Loading carousel 
+          document.getElementById("aboutCarousel").innerHTML = createCarousel({id: "aboutCarouselId",images: about.images});
+          // moving carousel
+          const carouselElement = document.getElementById("aboutCarouselId");
+          new bootstrap.Carousel(carouselElement, {
+            interval: 4000,
+            ride: "carousel",
+            pause: false,
+            touch: true
+          });
           document.getElementById("aboutTag").textContent = about.tag;
           document.getElementById("aboutTitle").textContent = about.title;
           document.getElementById("aboutDesc").textContent = about.description;
-          document.getElementById("mainImage").src = about.images.main;
           const featureList = document.getElementById("featureList");
           featureList.innerHTML = "";
           about.features.forEach((item) => {
             featureList.innerHTML += `
-        <div class="feature-item">
-          <div class="feature-icon">${item.icon}</div>
-          <div>
-            <div class="feature-title">${item.title}</div>
-            <div class="feature-text">${item.text}</div>
-          </div>
-        </div>
-      `;
+              <div class="feature-item">
+                <div class="feature-icon">${item.icon}</div>
+                <div>
+                  <div class="feature-title">${item.title}</div>
+                  <div class="feature-text">${item.text}</div>
+                </div>
+              </div>
+            `;
           });
         })
         .catch((err) => console.error("JSON Load Error:", err));

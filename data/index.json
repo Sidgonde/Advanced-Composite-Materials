@@ -37,8 +37,10 @@
         "text": "Precision biological testing for reliable healthcare insights."
       }
     ],
-    "images": {
-      "main": "/project-root/assets/images/lab2.jpeg"
-    }
+    "images": [
+    "/project-root/assets/images/lab1.jpeg",
+    "/project-root/assets/images/lab2.jpeg",
+    "/project-root/assets/images/IIT_Madras_Logo.svg.png"
+  ]
   }
 }
