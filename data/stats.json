@@ -1,0 +1,20 @@
+[
+  {
+    "label": "Happy Clients",
+    "value": 50,
+    "tag": "HAPPY",
+    "desc": "Solution minimize the cost and increase the velocity"
+  },
+  {
+    "label": "Claims Completed",
+    "value": 70,
+    "tag": "CLAIMS",
+    "desc": "Solution minimize the cost and increase the velocity"
+  },
+  {
+    "label": "Business Partners",
+    "value": 35,
+    "tag": "BUSINESS",
+    "desc": "Solution minimize the cost and increase the velocity"
+  }
+]

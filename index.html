@@ -14,13 +14,14 @@
     <link rel="stylesheet" href="./assets/css/card.css" />
     <link rel="stylesheet" href="./assets/css/footer.css" />
     <link rel="stylesheet" href="./assets/css/index.css">
+    <link rel="stylesheet" href="./assets/css/stats.css">
     <!-- Current Page Styling -->
     
   </head>
   <body>
     <div id="landing">
       <canvas id="particle-canvas"></canvas>
-      <div id="navbar-placeholder"></div>
+        <div id="navbar-placeholder"></div>
       <section class="hero">
         <!-- <video autoplay muted loop playsinline class="bg-video">
           <source
@@ -55,6 +56,9 @@
           <div id="featureList" class="feature-list"></div>
         </div>
       </div>
+    </section>
+    <section class="stats-section">
+      <div id="statsContainer" class="stats-grid"></div>
     </section>
     <footer id="footer-placeholder"></footer>
     <!-- JS Loading -->
@@ -310,5 +314,43 @@
         animate();
       })();
       </script> -->
-  </body>
+      
+      <!-- stats sction -->
+       <script>
+         const BASE_PATHk = window.location.hostname.includes("github.io")
+        ? "/Advanced-Composite-Materials"
+        : "/project-root";
+        fetch(`${BASE_PATHk}/data/stats.json`)
+  .then(res => res.json())
+  .then(data => renderStats(data));
+
+function renderStats(items) {
+  const container = document.getElementById("statsContainer");
+
+  items.forEach(item => {
+    const card = document.createElement("div");
+    card.className = "stat-card";
+
+    const circle = document.createElement("div");
+    circle.className = "circle";
+    circle.innerHTML = `<span>${item.value}%</span>`;
+
+    const deg = item.value * 3.6;
+    circle.style.background = `conic-gradient(var(--accent) ${deg}deg, #eee ${deg}deg)`;
+
+    const info = document.createElement("div");
+    info.className = "stat-info";
+    info.innerHTML = `
+      <small>${item.tag}</small>
+      <h3>${item.label}</h3>
+      <p>${item.desc}</p>
+    `;
+
+    card.append(circle, info);
+    container.appendChild(card);
+  });
+}
+
+       </script>
+    </body>
 </html>
