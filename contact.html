@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ACM | Contact Us</title>
+  <!-- Bootstrap integration -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="./assets/css/contact.css"/>
+  <link rel="stylesheet" href="./assets/css/style.css"/>
+  <link rel="stylesheet" href="./assets/css/navbar.css"/>
+  <link rel="stylesheet" href="./assets/css/footer.css"/>
+</head>
+<body>
+  <script src="./assets/js/app.js"></script>
+  <div id="navbar-placeholder"></div>
+  <!-- loading header starts  -->
+    <script>
+      function toggleSidebar() {
+        const sidebar = document.getElementById("sidebar");
+        sidebar.classList.toggle("show");
+      }
+      function toggleDropdown(element) {
+        const parentLi = element.parentElement;
+        parentLi.classList.toggle("open");
+      }
+    </script>
+  <!-- loading header ends  -->
+  <section class="contact-section">
+    <div class="contact-container">
+      <!-- LEFT: GIF / Illustration -->
+      <div class="contact-visual">
+        <img src="./assets/images/contact-animation.gif" alt="Contact Illustration">
+      </div>
+      <!-- RIGHT: FORM -->
+      <div class="contact-form-wrapper">
+        <h2></h2>
+        <p class="subtitle"></p>
+        <div class="info-box">
+            <p>Email : <strong id="emailid"></strong></p>
+        </div>
+        <div class="social-links">
+            <span>Follow us:</span>
+            <a id="github-link"><img src="./assets/images/github.svg" alt="GitHub" /></a>
+            <a id="linkedin-link"><img src="./assets/images/linkedin.svg" alt="LinkedIn"/></a>
+        </div>
+        <form id="contactForm" action="https://formspree.io/f/xbdlpeyw" method="POST">
+          <input type="text" name="name" placeholder="Name" required />
+          <input type="email" name="email" placeholder="Email address" required />
+          <input type="text" name="subject" placeholder="Subject" required />
+          <textarea rows="4" name="message" placeholder="Message" required></textarea>
+          <button type="submit" class="submit-btn">Send message</button>
+        </form>
+      </div>
+    </div>
+  </section>
+  <footer id="footer-placeholder"></footer>
+  <script>
+      document.getElementById("contactForm").addEventListener("submit", function (e) {
+        e.preventDefault();
+        const name = this.querySelector('input[name="name"]').value;
+        const email = this.querySelector('input[name="email"]').value;
+        const subject = this.querySelector('input[name="subject"]').value;
+        const message = this.querySelector('textarea[name="message"]').value;
+
+        const finalMessage = 
+          "Subject: " + subject + "\n\n" +
+          "\n" + message;
+        this.querySelector('textarea[name="message"]').value = finalMessage;
+        this.submit();
+        // alert("Message sent successfully!");
+        this.reset();
+      });
+
+      fetch("./data/contact.json")
+  .then(response => response.json())
+  .then(data => {
+    document.querySelector(".contact-form-wrapper h2").textContent = data.title;
+    document.querySelector(".subtitle").textContent = data.subtitle;
+    document.getElementById("emailid").textContent = data.email;
+
+    document.getElementById("github-link").href = data.socials.github;
+    document.getElementById("linkedin-link").href = data.socials.linkedin;
+  })
+  .catch(err => console.error("Failed to load contact.json", err));
+
+  </script>
+</body>
+</html>

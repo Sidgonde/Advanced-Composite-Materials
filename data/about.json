@@ -1,0 +1,98 @@
+{
+  "title": "About Our Group",
+  "subtitle": "Leading research in computational multiphysics with a commitment to innovation, collaboration, and open science.",
+
+  "mission": "To advance the frontiers of computational science through groundbreaking research in multiphysics modeling, simulation, and computing.",
+  "vision": "To become a globally recognized research group combining cutting-edge computational techniques with practical applications.",
+
+  "features": [
+    { "icon": "🎯", "title": "Research-Driven", "description": "Pushing the boundaries of computational science." },
+    { "icon": "🤝", "title": "Collaborative Culture", "description": "Working closely with international academic partners." },
+    { "icon": "🏆", "title": "Award-Winning Research", "description": "Recognized with multiple prestigious awards." },
+    { "icon": "🌍", "title": "Open Science", "description": "Committed to open-source and community knowledge." }
+  ],
+
+  "founder": [
+    { "initial": "D", "name": "Dr. Nagappa", "role": "Director & PI", "bio": "Ph.D in Advanced Composite, 15+ years research." }
+  ],
+
+  "stats": [
+    { "value": "15+", "label": "Team Members" },
+    { "value": "50+", "label": "Publications" },
+    { "value": "25+", "label": "Research Projects" },
+    { "value": "10+", "label": "Years of Excellence" }
+  ],
+"education": [
+  {
+    "degree": "PhD., Aerospace Engineering",
+    "institution": "Indian Institute of Technology, Kharagpur, West Bengal",
+    "year": "2012",
+    "details": "Multiphysics modeling and numerical simulation"
+  },
+  {
+    "degree": "M.Tech., Machine Design",
+    "institution": "Visvesvaraya Technological University, Belgaum",
+    "year": "2008",
+    "details": "Thermal & Fluid Systems"
+  },
+  {
+    "degree": "B.E., Mechanical Engineering",
+    "institution": "Visvesvaraya Technological University, Belgaum",
+    "year": "2008",
+    "details": "Thermal & Fluid Systems"
+  },
+  {
+    "degree": "Diploma., Mechanical Engineering",
+    "institution": "Department of Technical Education Board, Bangalore",
+    "year": "2008",
+    "details": "Thermal & Fluid Systems"
+  }
+],
+
+"experience": [
+  {
+    "role": "Assistant Professor",
+    "org": "Indian Institute of Technology Madras, Chennai  India",
+    "period": "July 2025 – present",
+    "desc": "Leading multiphysics research and PhD supervision"
+  },
+  {
+    "role": "Research Associate",
+    "org": "The University of Edinburgh, Edinburgh Scotland, UK",
+    "period": "June 2023 – Nov 2024 ",
+    "desc": "Developed computational fluid labs"
+  },
+  {
+    "role": "Senior Research Fellow",
+    "org": "SRIC Indian Institute of Technology Kharagpur,  WB  India",
+    "period": "March 2022 – March 2023",
+    "desc": "Developed computational fluid labs"
+  },
+  {
+    "role": "Graduate Research Assistant",
+    "org": "Indian Institute of Technology Kharagpur, WB  India",
+    "period": "July 2016 – July 2022",
+    "desc": "Developed computational fluid labs"
+  }
+],
+
+"journals": [
+  { "title": "Journal of Computational Physics", "count": 18 },
+  { "title": "Computer Methods in Applied Mechanics", "count": 12 },
+  { "title": "International Journal of Heat & Mass Transfer", "count": 9 }
+],
+
+"memberships": [
+  "Indian National Academy of Engineering (INAE)",
+  "ASME",
+  "ACM",
+  "IEEE"
+],
+
+"awards": [
+  { "title": "Young Scientist Award", "year": "2015" },
+  { "title": "Best Research Paper Award", "year": "2019" },
+  { "title": "INAE Outstanding Faculty Award", "year": "2022" }
+]
+
+}
