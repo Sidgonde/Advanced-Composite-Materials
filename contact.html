@@ -2,88 +2,124 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ACM | Contact Us</title>
-  <!-- Bootstrap integration -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"/>
-  <link rel="stylesheet" href="./assets/css/contact.css"/>
-  <link rel="stylesheet" href="./assets/css/style.css"/>
-  <link rel="stylesheet" href="./assets/css/navbar.css"/>
-  <link rel="stylesheet" href="./assets/css/footer.css"/>
+
+  <!-- Vendor CSS -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+  />
+
+  <!-- Project CSS -->
+  <link rel="stylesheet" href="./assets/css/style.css" />
+  <link rel="stylesheet" href="./assets/css/navbar.css" />
+  <link rel="stylesheet" href="./assets/css/contact.css" />
+  <link rel="stylesheet" href="./assets/css/footer.css" />
 </head>
+
 <body>
-  <script src="./assets/js/app.js"></script>
+  <!-- Navbar -->
   <div id="navbar-placeholder"></div>
-  <!-- loading header starts  -->
-    <script>
-      function toggleSidebar() {
-        const sidebar = document.getElementById("sidebar");
-        sidebar.classList.toggle("show");
-      }
-      function toggleDropdown(element) {
-        const parentLi = element.parentElement;
-        parentLi.classList.toggle("open");
-      }
-    </script>
-  <!-- loading header ends  -->
+
+  <!-- =========================
+       Contact Section
+  ========================== -->
   <section class="contact-section">
     <div class="contact-container">
-      <!-- LEFT: GIF / Illustration -->
+
+      <!-- Left: Visual -->
       <div class="contact-visual">
-        <img src="./assets/images/contact-animation.gif" alt="Contact Illustration">
+        <img
+          src="./assets/images/contact-animation.gif"
+          alt="Contact illustration"
+          loading="lazy"
+        />
       </div>
-      <!-- RIGHT: FORM -->
+
+      <!-- Right: Content + Form -->
       <div class="contact-form-wrapper">
         <h2></h2>
         <p class="subtitle"></p>
+
         <div class="info-box">
-            <p>Email : <strong id="emailid"></strong></p>
+          <p>Email : <strong id="emailid"></strong></p>
         </div>
+
         <div class="social-links">
-            <span>Follow us:</span>
-            <a id="github-link"><img src="./assets/images/sanmpe image.jpg" alt="GitHub" /></a>
-            <a id="linkedin-link"><img src="./assets/images/linkedin.svg" alt="LinkedIn"/></a>
+          <span>Follow us:</span>
+          <a id="github-link" target="_blank" rel="noopener">
+            <img src="./assets/images/github.svg" alt="GitHub" />
+          </a>
+          <a id="linkedin-link" target="_blank" rel="noopener">
+            <img src="./assets/images/linkedin.svg" alt="LinkedIn" />
+          </a>
         </div>
-        <form id="contactForm" action="https://formspree.io/f/xbdlpeyw" method="POST">
+
+        <form
+          id="contactForm"
+          action="https://formspree.io/f/xbdlpeyw"
+          method="POST"
+        >
           <input type="text" name="name" placeholder="Name" required />
           <input type="email" name="email" placeholder="Email address" required />
           <input type="text" name="subject" placeholder="Subject" required />
-          <textarea rows="4" name="message" placeholder="Message" required></textarea>
+          <textarea
+            rows="4"
+            name="message"
+            placeholder="Message"
+            required
+          ></textarea>
           <button type="submit" class="submit-btn">Send message</button>
         </form>
       </div>
     </div>
   </section>
+
+  <!-- Footer -->
   <footer id="footer-placeholder"></footer>
+
+  <!-- =========================
+       Scripts
+  ========================== -->
+  <script type="module" src="./assets/js/app.js"></script>
+
   <script>
-      document.getElementById("contactForm").addEventListener("submit", function (e) {
-        e.preventDefault();
-        const name = this.querySelector('input[name="name"]').value;
-        const email = this.querySelector('input[name="email"]').value;
-        const subject = this.querySelector('input[name="subject"]').value;
-        const message = this.querySelector('textarea[name="message"]').value;
+    /* Navbar helpers (can be moved to navbar.js later) */
+    function toggleSidebar() {
+      document.getElementById("sidebar")?.classList.toggle("show");
+    }
 
-        const finalMessage = 
-          "Subject: " + subject + "\n\n" +
-          "\n" + message;
-        this.querySelector('textarea[name="message"]').value = finalMessage;
-        this.submit();
-        // alert("Message sent successfully!");
-        this.reset();
-      });
+    function toggleDropdown(element) {
+      element.parentElement.classList.toggle("open");
+    }
 
-      fetch("./data/contact.json")
-  .then(response => response.json())
-  .then(data => {
-    document.querySelector(".contact-form-wrapper h2").textContent = data.title;
-    document.querySelector(".subtitle").textContent = data.subtitle;
-    document.getElementById("emailid").textContent = data.email;
+    /* Contact Form Handling */
+    const contactForm = document.getElementById("contactForm");
 
-    document.getElementById("github-link").href = data.socials.github;
-    document.getElementById("linkedin-link").href = data.socials.linkedin;
-  })
-  .catch(err => console.error("Failed to load contact.json", err));
+    contactForm.addEventListener("submit", function (e) {
+      e.preventDefault();
 
+      const subject = this.subject.value;
+      const message = this.message.value;
+
+      this.message.value = `Subject: ${subject}\n\n${message}`;
+      this.submit();
+      this.reset();
+    });
+
+    /* Load Contact Data */
+    fetch("./data/contact.json")
+      .then(res => res.json())
+      .then(data => {
+        document.querySelector(".contact-form-wrapper h2").textContent = data.title;
+        document.querySelector(".subtitle").textContent = data.subtitle;
+        document.getElementById("emailid").textContent = data.email;
+
+        document.getElementById("github-link").href = data.socials.github;
+        document.getElementById("linkedin-link").href = data.socials.linkedin;
+      })
+      .catch(err => console.error("Failed to load contact.json", err));
   </script>
 </body>
 </html>

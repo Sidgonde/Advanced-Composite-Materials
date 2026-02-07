@@ -20,7 +20,12 @@
 }
 
 /* ---------- Columns ---------- */
-
+.footer-col p,.footer-col a{
+  display: flex;
+}
+svg{
+  margin-right: 10px;
+}
 .footer-col h3 {
   margin-bottom: 15px;
   font-size: 18px;
@@ -63,7 +68,7 @@
 
 .social-icons {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   gap: 10px;
 }
 

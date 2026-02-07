@@ -1,41 +1,49 @@
-
-/* SECTION */
+/* =========================
+   Contact Section
+========================= */
 .contact-section {
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #f6f8fa;
   padding: 40px 20px;
+  background: #f6f8fa;
 }
 
-/* CONTAINER */
+/* =========================
+   Container
+========================= */
 .contact-container {
-  max-width: 1100px;
   width: 100%;
-  background: #fff;
+  max-width: 1100px;
   display: flex;
+  background: #fff;
   border-radius: 14px;
   overflow: hidden;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
 }
 
-/* LEFT */
+/* =========================
+   Left: Visual
+========================= */
 .contact-visual {
   flex: 1;
-  background: #fef4d8;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 40px;
+  background: #fef4d8;
 }
 
 .contact-visual img {
   max-width: 100%;
   height: auto;
+  display: block;
 }
 
-/* RIGHT */
+/* =========================
+   Right: Form Wrapper
+========================= */
 .contact-form-wrapper {
   flex: 1;
   padding: 50px 45px;
@@ -52,78 +60,95 @@
   margin-bottom: 25px;
 }
 
-/* FORM */
+/* =========================
+   Info Box
+========================= */
+.info-box {
+  margin-bottom: 15px;
+  padding: 14px 20px;
+  border-radius: 10px;
+  background-color: #f1f5f9;
+  font-size: 0.95rem;
+  color: var(--secondary);
+}
+
+/* =========================
+   Social Links
+========================= */
+.social-links {
+  margin-bottom: 20px;
+}
+
+.social-links span {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.social-links a {
+  display: inline-block;
+  margin-right: 12px;
+}
+
+.social-links img {
+  width: 24px;
+  height: 24px;
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+.social-links img:hover {
+  opacity: 1;
+}
+
+/* =========================
+   Form
+========================= */
 form {
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
 
-input, textarea {
+input,
+textarea {
   padding: 12px 14px;
+  font-size: 14px;
   border: 1px solid #ddd;
   border-radius: 6px;
-  font-size: 14px;
   resize: none;
 }
 
-input:focus, textarea:focus {
+input:focus,
+textarea:focus {
   outline: none;
   border-color: #111;
 }
 
-/* BUTTON */
+/* =========================
+   Button
+========================= */
 .submit-btn {
   align-self: flex-end;
+  padding: 12px 22px;
+  font-size: 14px;
+  border-radius: 25px;
+  cursor: pointer;
+  border: 2px solid var(--primary);
   background: var(--secondary);
   color: #fff;
-  border: none;
-  padding: 12px 22px;
-  border-radius: 25px;
-  font-size: 14px;
-  cursor: pointer;
-  transition: 0.3s ease;
-  border:2px solid var(--primary);
+  transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
 .submit-btn:hover {
-  border-color: var(--secondary);
-  color:var(--secondary);
   background: var(--primary);
+  color: var(--secondary);
+  border-color: var(--secondary);
 }
-.social-links{
-  margin-bottom: 20px;
-}
-.social-links span {
-        display: block;
-        margin-bottom: 10px;
-        font-weight: 500;
 
-      }
-      .social-links a {
-        margin-right: 12px;
-        display: inline-block;
-      }
-      .social-links img {
-        width: 24px;
-        height: 24px;
-        opacity: 0.8;
-        transition: 0.3s;
-      }
-      .social-links img:hover {
-        opacity: 1;
-      }
-
-      .info-box {
-        background-color: #f1f5f9;
-        padding: 14px 20px;
-        border-radius: 10px;
-        margin-bottom: 15px;
-        font-size: 0.95rem;
-        color: var(--secondary);
-      }
-
-/* RESPONSIVE */
+/* =========================
+   Responsive
+========================= */
 @media (max-width: 900px) {
   .contact-container {
     flex-direction: column;
@@ -137,7 +162,7 @@ input:focus, textarea:focus {
     padding: 35px 25px;
   }
 
-  button {
+  .submit-btn {
     width: 100%;
     align-self: center;
   }
