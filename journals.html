@@ -1,313 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>ACM | Journals</title>
+  <meta charset="UTF-8">
+  <title>Publications | ACM Lab</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-    rel="stylesheet"
-  />
-  <link rel="stylesheet" href="./assets/css/about.css" />
-  <link rel="stylesheet" href="./assets/css/style.css" />
-  <link rel="stylesheet" href="./assets/css/navbar.css" />
-  <link rel="stylesheet" href="./assets/css/card.css" />
-  <link rel="stylesheet" href="./assets/css/footer.css" />
-  <link rel="stylesheet" href="./assets/css/journals.css" />
-  <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-    />
+  <link rel="stylesheet" href="./assets/css/journals.css">
 </head>
+<body>
 
-<body class="journals-v2">
-  <div id="navbar-placeholder"></div>
+  <!-- Ribbon Section -->
+  <section class="ribbon">
+    <div class="ribbon-content">
+      <h1 id="ribbonTitle"></h1>
+      <p id="ribbonDesc"></p>
+    </div>
+  </section>
 
-  <div class="ribbon about-hero text-center">
-    <h1 class="ribbon-title"></h1>
-    <p class="ribbon-desc"></p>
-  </div>
-
-    <!-- Complete stats starts  -->
+  <!-- Recent Highlight -->
+  <section class="recent-section">
     <div class="container">
-      <div class="stats">
-        <div class="stat-box">
-          <h2 id="total-publications"></h2>
-          <p>Total Publications</p>
-        </div>
-        <div class="stat-box">
-          <h2 id="total-citations"></h2>
-          <p>Total Citations</p>
-        </div>
-        <div class="stat-box">
-          <h2 id="h-index"></h2>
-          <p>H-Index</p>
-        </div>
-        <div class="stat-box">
-          <h2 id="total-journals"></h2>
-          <p>Journals</p>
-        </div>
-      </div>
+      <h2 id="recentTitle"></h2>
+      <p id="recentSubtitle"></p>
+      <div id="recentCards" class="recent-grid"></div>
     </div>
-    <!-- Complete stats ends  -->
-    <!-- Complete filter starts  -->
-    <div class="filters">
-      <div class="search-box">
-        <input
-          type="text"
-          id="searchInput"
-          placeholder="Type here to Search Publications..."
-          oninput="filterPublications()"
-        />
-      </div>
-    </div>
-    <!-- Complete filter ends  -->
-    <!-- Complete publication card starts  -->
-    <div id="cards"></div>
-    <template id="template">
-      <div class="card">
-        <img src="" alt="" />
-        <div class="card-content">
-          <div class="card-header">
-            <div class="card-title">
-              <h2 class="card-heading"></h2>
-              <p class="authors">
-                <span
-                  >👲<span class="author-name"></span> 🗓️
-                  <span class="year"></span> 🎖️ <span class="citation"></span
-                ></span>
-              </p>
-              <div class="tags"></div>
-            </div>
-            <div class="labels">
-              <span class="journal category"></span>
-            </div>
-          </div>
-          <div class="publication">
-            <strong class="publication-title"></strong>
-          </div>
-          <p class="description" style="text-align: justify"></p>
-          <div class="doi"></div>
-          <div class="actions">
-            <a href="#" class="view-btn pdf-btn" onclick="navigate(this)"
-              >View</a
-            >
-            <!-- <a href="#" class="pdf-btn">PDF</a> -->
-          </div>
-        </div>
-      </div>
-    </template>
-    <!-- Complete publication card ends  -->
-    <!-- Complete Recent Highlights starts  -->
-    <section class="recent-highlights-section">
-      <h2 class="recent-section-title"></h2>
-      <p class="recent-section-subtitle"></p>
-      <div class="recent-highlight-cards"></div>
-    </section>
-    <!-- Complete Recent Highlights ends  -->
-  <footer id="footer-placeholder"></footer>
+  </section>
 
-  <script type="module" src="./assets/js/app.js"></script>
+  <!-- Publications -->
+  <section class="journals-section">
+    <div class="container" id="journalsContainer"></div>
+  </section>
 
-  
-  <!-- loading publications starts  -->
-    <script>
-      let allPublications = [];
-      async function loadPublications() {
-        try {
-          const res = await fetch("./data/journals.json");
-          const data = await res.json();
-          allPublications = data.publications;
-          // Ribbon
-          document.querySelector(".ribbon-title").textContent = data.ribbon.title;
-          document.querySelector(".ribbon-desc").textContent = data.ribbon.description;
-          // Stats calculation starts
-          // Total Publications
-          const totalPublications = allPublications.length;
-          // Total Citations
-          const totalCitations = allPublications.reduce((sum, pub) => {
-            const citation = parseInt(pub.card?.citation || 0);
-            return sum + citation;
-          }, 0);
-          // H-Index calculation
-          const citationsSorted = allPublications
-            .map((pub) => parseInt(pub.card?.citation || 0))
-            .sort((a, b) => b - a);
-          let hIndex = 0;
-          for (let i = 0; i < citationsSorted.length; i++) {
-            if (citationsSorted[i] >= i + 1) hIndex++;
-            else break;
-          }
-          // Unique Journals
-          const journalSet = new Set(
-            allPublications.map((pub) => pub.card?.["publication-title"])
-          );
-          const totalJournals = journalSet.size;
-          // Inject into DOM
-          document.getElementById("total-publications").textContent =
-            totalPublications + "+";
-          document.getElementById("total-citations").textContent =
-            totalCitations;
-          document.getElementById("h-index").textContent = hIndex;
-          document.getElementById("total-journals").textContent =
-            totalJournals + "+";
-          //Stats calculation ends
-          renderPublications(allPublications);
-          // Recent Highlights
-          // Load recent highlights from JSON
-          const recentHighlightData = data["recent-highlights"];
-          // Set section title and subtitle
-          document.querySelector(".recent-section-title").textContent = recentHighlightData["recent-section-title"];
-          document.querySelector(".recent-section-subtitle").textContent = recentHighlightData["recent-section-subtitle"];
-          // Render recent highlight cards
-          const highlightCards = document.querySelector(".recent-highlight-cards");
-          highlightCards.innerHTML = "";
-          recentHighlightData.cards.forEach((highlight) => {
-            const div = document.createElement("div");
-            div.className = "recent-highlight-card";
-            const recentauthor = highlight["recent-authors"];
-            div.innerHTML = `
-                <div class="recent-card-content">
-                  <span class="recent-badge">${highlight["recent-badge"]}</span>
-                  <h3 class="recent-title">${highlight["recent-title"]}</h3>
-                  <p class="recent-authors">${recentauthor.replace(
-                  "Seshadri, P. K",
-                  `<span style='color: #d63384; font-weight: bold;'>Seshadri, P. K</span>`
-                )}</p>
-                  <p class="recent-journal">${highlight["recent-journal"]}</p>
-                  <p class="recent-description">${highlight["recent-description"]}</p>
-                </div>
-                <div class="recent-card-footer">
-                  <a href="#" class="recent-citations">${highlight["recent-citations"]}</a>
-                  <a href="${highlight["recent-link"]}" class="recent-read-more"">Read More</a>
-                </div>
-              `;
-            highlightCards.appendChild(div);
-          });
-        } catch (err) {
-          console.error("Error loading publications data:", err);
-        }
-      }
-      // function renderPublications(publications) {
-      //   const cardsContainer = document.getElementById("cards");
-      //   const template = document.getElementById("template");
-      //   cardsContainer.innerHTML = "";
-      //   publications.forEach((pub) => {
-      //   const clone = template.content.cloneNode(true);
-      //   const card = pub.card;
-      //   clone.querySelector("img").src = card.thumbnail;
-      //   clone.querySelector(".card-heading").textContent = card["card-heading"];
-      //   const author = card["author-name"];
-      //   clone.querySelector(".author-name").innerHTML = author.replace(
-      //     "Seshadri, P. K",
-      //     `<span style='color: #d63384; font-weight: bold;'>Seshadri, P. K</span>`
-      //   );
-      //   clone.querySelector(".year").textContent = card.year;
-      //   clone.querySelector(".citation").textContent = card.citation;
-      //   clone.querySelector(".journal.category").textContent = card.category;
-      //   clone.querySelector(".publication-title").textContent = card["publication-title"];
-      //   const description = clone.querySelector(".description");
-      //   description.textContent = card.description;
-      //   const showMoreBtn = document.createElement("span");
-      //   showMoreBtn.className = "show-more-btn";
-      //   showMoreBtn.textContent = "Show more";
-      //   let isExpanded = false;
-      //   showMoreBtn.onclick = () => {
-      //     isExpanded = !isExpanded;
-      //     description.classList.toggle("expanded");
-      //     showMoreBtn.textContent = isExpanded ? "Show less" : "Show more";
-      //   };
-      //   // Only show button if description is long
-      //   if (card.description.length > 300) {
-      //     description.after(showMoreBtn);
-      //   }
-      //   clone.querySelector(".doi").innerHTML = `<a href="${card.doi}" target="_blank">${card.doi}</a>`;
-      //   clone.querySelector(".view-btn").href = card["view-link"];
-      //   // clone.querySelector(".pdf-btn").href = card["pdf-link"];
-      //   // Tags
-      //   const tagsContainer = clone.querySelector(".tags");
-      //   card.tags.forEach((tag) => {
-      //     const span = document.createElement("span");
-      //     span.textContent = tag;
-      //     tagsContainer.appendChild(span);
-      //   });
-      //   cardsContainer.appendChild(clone);
-      //   });
-      // }
-      
-      function renderPublications(publications) {
-  const cardsContainer = document.getElementById("cards");
-  const template = document.getElementById("template");
-  cardsContainer.innerHTML = "";
-
-  publications.forEach((pub, index) => {
-    const clone = template.content.cloneNode(true);
-    const cardEl = clone.querySelector(".card");
-    const card = pub.card;
-
-    // ✅ Alternate layout (every odd card reversed)
-    if (index % 2 !== 0) {
-      cardEl.classList.add("card--reverse");
-    }
-
-    clone.querySelector("img").src = card.thumbnail;
-    clone.querySelector(".card-heading").textContent = card["card-heading"];
-
-    const author = card["author-name"];
-    clone.querySelector(".author-name").innerHTML = author.replace(
-      "Seshadri, P. K",
-      `<span style='color:#d63384;font-weight:bold'>Seshadri, P. K</span>`
-    );
-
-    clone.querySelector(".year").textContent = card.year;
-    clone.querySelector(".citation").textContent = card.citation;
-    clone.querySelector(".journal.category").textContent = card.category;
-    clone.querySelector(".publication-title").textContent =
-      card["publication-title"];
-
-    const description = clone.querySelector(".description");
-    description.textContent = card.description;
-
-    if (card.description.length > 300) {
-      const showMoreBtn = document.createElement("span");
-      showMoreBtn.className = "show-more-btn";
-      showMoreBtn.textContent = "Show more";
-      let expanded = false;
-
-      showMoreBtn.onclick = () => {
-        expanded = !expanded;
-        description.classList.toggle("expanded");
-        showMoreBtn.textContent = expanded ? "Show less" : "Show more";
-      };
-      description.after(showMoreBtn);
-    }
-
-    clone.querySelector(".doi").innerHTML =
-      `<a href="${card.doi}" target="_blank">${card.doi}</a>`;
-    clone.querySelector(".view-btn").href = card["view-link"];
-
-    const tagsContainer = clone.querySelector(".tags");
-    card.tags.forEach(tag => {
-      const span = document.createElement("span");
-      span.textContent = tag;
-      tagsContainer.appendChild(span);
-    });
-
-    cardsContainer.appendChild(clone);
-  });
-}
-
-      function filterPublications() {
-        const query = document.getElementById("searchInput").value.toLowerCase();
-        const filtered = allPublications.filter((pub) => {
-          const card = pub.card;
-          const allValues = Object.values(card).flat().join(" ").toLowerCase();
-          return allValues.includes(query);
-        });
-        renderPublications(filtered);
-      }
-      document.addEventListener("DOMContentLoaded", loadPublications);
-    </script>
-    <!-- loading publications ends  -->
+  <script src="./assets/js/journals.js"></script>
 </body>
 </html>

@@ -1,0 +1,94 @@
+{
+  "ribbon": {
+    "title": "Books & Blogs",
+    "description": "Explore our curated books and thought-provoking research blogs covering computational multiphysics, machine learning, and scientific innovation."
+  },
+
+  "items": [
+    {
+      "type": "Book",
+      "title": "Computational Multiphysics Foundations",
+      "image": "./assets/images/lab1.jpeg",
+      "short": "A comprehensive guide to multiphysics modeling and simulation.A comprehensive guide to multiphysics modeling and simulation.",
+      "full": "This book presents theoretical foundations and practical approaches for computational multiphysics including fluid-structure interaction, reactive flows, and numerical methods.",
+      "link": "book-details.html"
+    },
+
+    {
+      "type": "Blog",
+      "title": "AI in Energetic Materials Research",
+      "image": "./assets/images/lab1.jpeg",
+      "short": "How machine learning accelerates materials discovery.",
+      "full": "We discuss deep learning-driven microstructure generation, surrogate modeling, and predictive simulation frameworks transforming energetic materials research.",
+      "link": "blog-details.html"
+    },
+    {
+      "type": "Book",
+      "title": "Computational Multiphysics Foundations",
+      "image": "./assets/images/lab1.jpeg",
+      "short": "A comprehensive guide to multiphysics modeling and simulation.",
+      "full": "This book presents theoretical foundations and practical approaches for computational multiphysics including fluid-structure interaction, reactive flows, and numerical methods.",
+      "link": "book-details.html"
+    },
+
+    {
+      "type": "Blog",
+      "title": "AI in Energetic Materials Research",
+      "image": "./assets/images/lab1.jpeg",
+      "short": "How machine learning accelerates materials discovery.",
+      "full": "We discuss deep learning-driven microstructure generation, surrogate modeling, and predictive simulation frameworks transforming energetic materials research.",
+      "link": "blog-details.html"
+    },
+    {
+      "type": "Book",
+      "title": "Computational Multiphysics Foundations",
+      "image": "./assets/images/lab1.jpeg",
+      "short": "A comprehensive guide to multiphysics modeling and simulation.",
+      "full": "This book presents theoretical foundations and practical approaches for computational multiphysics including fluid-structure interaction, reactive flows, and numerical methods.",
+      "link": "book-details.html"
+    },
+
+    {
+      "type": "Blog",
+      "title": "AI in Energetic Materials Research",
+      "image": "./assets/images/lab1.jpeg",
+      "short": "How machine learning accelerates materials discovery.",
+      "full": "We discuss deep learning-driven microstructure generation, surrogate modeling, and predictive simulation frameworks transforming energetic materials research.",
+      "link": "blog-details.html"
+    },
+    {
+      "type": "Book",
+      "title": "Computational Multiphysics Foundations",
+      "image": "./assets/images/lab1.jpeg",
+      "short": "A comprehensive guide to multiphysics modeling and simulation.",
+      "full": "This book presents theoretical foundations and practical approaches for computational multiphysics including fluid-structure interaction, reactive flows, and numerical methods.",
+      "link": "book-details.html"
+    },
+
+    {
+      "type": "Blog",
+      "title": "AI in Energetic Materials Research",
+      "image": "./assets/images/lab1.jpeg",
+      "short": "How machine learning accelerates materials discovery.",
+      "full": "We discuss deep learning-driven microstructure generation, surrogate modeling, and predictive simulation frameworks transforming energetic materials research.",
+      "link": "blog-details.html"
+    },
+    {
+      "type": "Book",
+      "title": "Computational Multiphysics Foundations",
+      "image": "./assets/images/lab1.jpeg",
+      "short": "A comprehensive guide to multiphysics modeling and simulation.",
+      "full": "This book presents theoretical foundations and practical approaches for computational multiphysics including fluid-structure interaction, reactive flows, and numerical methods.",
+      "link": "book-details.html"
+    },
+
+    {
+      "type": "Blog",
+      "title": "AI in Energetic Materials Research",
+      "image": "./assets/images/lab1.jpeg",
+      "short": "How machine learning accelerates materials discovery.",
+      "full": "We discuss deep learning-driven microstructure generation, surrogate modeling, and predictive simulation frameworks transforming energetic materials research.",
+      "link": "blog-details.html"
+    }
+  ]
+}

@@ -6,7 +6,7 @@
   "publications": [
     {
       "card": {
-        "thumbnail": "images/Pub_Journal_JAP_2025.jpg",
+        "thumbnail": "./assets/images/lab1.jpeg",
         "card-heading": "A physics-aware deep learning model for shear band formation around collapsing pores in shocked reactive materials",
         "author-name": "Cheng, X., Chen, B., Choi, J., Nguyen, Y.T., Seshadri, P. K., Verma, M., Udaykumar, H.S. and Baek, S.",
         "year": "2025",
@@ -22,7 +22,7 @@
     },
     {
       "card": {
-        "thumbnail": "images/Pub_Journal_1_IJMF_2024.jpg",
+        "thumbnail": "./assets/images/lab1.jpeg",
         "card-heading": "Physics-aware recurrent convolutional neural networks for modeling multiphase compressible flows.",
         "author-name": "Cheng, X., Nguyen, P. C. H., Seshadri, P. K., Verma, M. Gray, Z., Beerman, J., Udaykumar, H.S., and Baek, S.",
         "year": "2024",
