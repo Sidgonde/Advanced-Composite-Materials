@@ -2,8 +2,9 @@
 
 .ribbon {
   text-align: center;
-  padding: 80px 20px;
+  padding: 100px 20px;
   background: #f8fafc;
+  color: var(--secondary);
 }
 
 .ribbon h1 {
@@ -13,10 +14,8 @@
 }
 
 .ribbon p {
-  max-width: 800px;
+  max-width: 700px;
   margin: auto;
-  color: #475569;
-  line-height: 1.6;
 }
 
 /* Timeline */

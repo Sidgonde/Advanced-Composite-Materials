@@ -2,9 +2,10 @@
    About Hero Section
 ========================= */
 .about-hero {
+  text-align: center;
   padding: 100px 20px;
   background: #f8fafc;
-  color: #002132;
+  color: var(--secondary);
 }
 
 .about-hero h1 {

@@ -1,11 +1,5 @@
 /* ================= GLOBAL ================= */
 
-body {
-  background: #f8fafc;
-  color: #1e293b;
-  line-height: 1.6;
-}
-
 .container {
   width: 90%;
   max-width: 1200px;
@@ -20,7 +14,7 @@ body {
   text-align: center;
   padding: 100px 20px;
   background: #f8fafc;
-  color: #002132;
+  color: var(--secondary);
 }
 
 .ribbon h1 {

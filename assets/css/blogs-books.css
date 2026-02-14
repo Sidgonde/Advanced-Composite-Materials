@@ -2,14 +2,15 @@
 
 .ribbon {
   text-align: center;
-  padding: 80px 20px;
+  padding: 100px 20px;
   background: #f8fafc;
-  color: #002132;
+  color: var(--secondary);
 }
 
 .ribbon h1 {
-  font-size: 36px;
-  margin-bottom: 15px;
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 20px;
 }
 
 .ribbon p {
