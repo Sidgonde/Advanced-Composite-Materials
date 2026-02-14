@@ -83,7 +83,6 @@ nav.desktop-nav a.active::after {
 nav.desktop-nav a.active {
   color: var(--highlight);
 }
-
 /* ---------- Dropdown ---------- */
 
 .dropdown-content {

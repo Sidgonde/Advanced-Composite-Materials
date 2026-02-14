@@ -3,19 +3,22 @@
 ========================= */
 .about-hero {
   padding: 100px 20px;
-  background: var(--secondary);
+  /* background: var(--secondary); */
+  background: #f8fafc;
+  color: #002132;
 }
 
 .about-hero h1 {
   font-size: 3rem;
   font-weight: 700;
-  color: var(--primary);
+  margin-bottom: 20px;
+  /* color: var(--primary); */
 }
 
 .about-hero p {
   max-width: 700px;
   margin: auto;
-  color: var(--primary);
+  /* color: var(--primary); */
 }
 
 /* =========================
