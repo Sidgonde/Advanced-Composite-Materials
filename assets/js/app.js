@@ -32,11 +32,20 @@ function setActiveNav() {
 
   const activateLinks = (selector) => {
     document.querySelectorAll(selector).forEach(link => {
-      if (link.getAttribute("href") === currentPage) {
+      const href = link.getAttribute("href");
+
+      if (href === currentPage) {
+        // Activate the clicked/current link
         link.classList.add("active");
 
+        // If inside dropdown, activate parent
         const dropdown = link.closest(".dropdown");
-        dropdown && dropdown.classList.add("open");
+        if (dropdown) {
+          dropdown.classList.add("open");
+
+          const parentLink = dropdown.querySelector(":scope > a");
+          parentLink && parentLink.classList.add("active");
+        }
       }
     });
   };
@@ -44,6 +53,7 @@ function setActiveNav() {
   activateLinks("nav.desktop-nav a");
   activateLinks(".sidebar a");
 }
+
 
 // Sidebar toggle (used by HTML onclick)
 window.toggleSidebar = () => {
