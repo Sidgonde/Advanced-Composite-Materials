@@ -1,5 +1,5 @@
 {
-  "title": "About Our Group",
+  "title": "About",
   "subtitle": "Leading research in computational multiphysics with a commitment to innovation, collaboration, and open science.",
 
   "mission": "To advance the frontiers of computational science through groundbreaking research in multiphysics modeling, simulation, and computing.",
@@ -25,7 +25,7 @@
 "education": [
   {
     "degree": "PhD., Aerospace Engineering",
-    "institution": "Indian Institute of Technology, Kharagpur, West Bengal",
+    "institution": "Indian Institute of Technology Kharagpur, West Bengal",
     "year": "2022",
     "details": "Advanced Composite Materials"
   },
