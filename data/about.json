@@ -13,7 +13,7 @@
   ],
 
   "founder": [
-    { "initial": "D", "name": "Dr. Nagappa", "role": "Director & PI", "bio": "Ph.D in Advanced Composite, 15+ years research." }
+    { "initial": "D", "name": "Dr. Nagappa Siddgonde", "role": "Director & PI", "bio": "Ph.D in Advanced Composite, 15+ years research." }
   ],
 
   "stats": [
@@ -27,7 +27,7 @@
     "degree": "PhD., Aerospace Engineering",
     "institution": "Indian Institute of Technology Kharagpur, West Bengal",
     "year": "2022",
-    "details": "AThesis: Experimental and Numerical Characterization of Woven Fabric Composites Considering Void Defects.      Advisor: Prof. Anup Ghosh"
+    "details": "Thesis: Experimental and Numerical Characterization of Woven Fabric Composites Considering Void Defects.      Advisor: Prof. Anup Ghosh"
   },
   {
     "degree": "M.Tech., Machine Design",
@@ -60,7 +60,7 @@
     "role": "Research Associate",
     "org": "The University of Edinburgh, Edinburgh Scotland, UK",
     "period": "June 2023 – Nov 2024 ",
-    "desc": "Developed computational fluid labs"
+    "desc": "Project:Advanced Composites Manufacturing"
   },
   {
     "role": "Senior Research Fellow",
@@ -72,7 +72,7 @@
     "role": "Graduate Research Assistant",
     "org": "Indian Institute of Technology Kharagpur, WB  India",
     "period": "July 2016 – July 2022",
-    "desc": "Developed computational fluid labs"
+    "desc": "Experimental Mechanics, Micromechanics, Multiscale modeling, Textile composites"
   }
 ],
 
@@ -83,10 +83,9 @@
 ],
 
 "memberships": [
-  "Indian National Academy of Engineering (INAE)",
+  "Institute of Engineers India (IEI)",
   "ASME",
-  "ACM",
-  "IEEE"
+  "ACM"
 ],
 
 "awards": [
