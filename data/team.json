@@ -74,13 +74,6 @@
       "image": "https://ui-avatars.com/api/?name=Dipa+Roy&&background=0d3b5e&color=ffffff&size=200&bold=true",
       "description": "Short description of the collaboration.",
       "socials": { "linkedin": "#", "g_scholar": "#", "email": "mailto:Dipa.Roy@ed.ac.uk" }
-    },
-    {
-      "name": "Prof. Conchúr Ó Brádaigh",
-      "role": "The University of Sheffield, England UK",
-      "image": "https://ui-avatars.com/api/?name=Conchur+Obradaigh&&background=0d3b5e&color=ffffff&size=200&bold=true",
-      "description": "Short description of the collaboration.",
-      "socials": { "linkedin": "#", "g_scholar": "#", "email": "mailto:c.obradaigh@sheffield.ac.uk" }
     }
   ],
   "Stats": [
