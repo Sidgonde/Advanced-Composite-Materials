@@ -51,6 +51,22 @@
       "image": "./assets/images/Amit_Shailesh.png",
       "description": "Area of interest: Finite Element Analysis, Structural Dynamics, Composite Structures, and Fracture Mechanics. Department of Aerospace Engineering, IIT Madras.",
       "socials": { "linkedin": "#", "researchGate": "#", "g_scholar": "#", "email": "mailto:ae25m011@smail.iitm.ac.in" }
+    },
+    {
+      "name": "K. G. Abimuhesh",
+      "role": "M.Tech Student, Project Intern",
+      "category": "mtech",
+      "image": "https://ui-avatars.com/api/?name=K+Abimuhesh&background=0d3b5e&color=ffffff&size=200&bold=true",
+      "description": "Area of interest: Composite Structures, Finite Element Analysis. Dept. of Rocketry and Space Engineering, BIT Mesra.",
+      "socials": { "linkedin": "#", "researchGate": "#", "g_scholar": "#", "email": "mailto:mtser10020.25@bitmesra.ac.in" }
+    },
+    {
+      "name": "Monish Y",
+      "role": "M.Tech Student, Project Intern",
+      "category": "mtech",
+      "image": "https://ui-avatars.com/api/?name=Monish+Y&background=0d3b5e&color=ffffff&size=200&bold=true",
+      "description": "Area of interest: Fracture Mechanics, Finite Element Analysis. Dept. of Rocketry and Space Engineering, BIT Mesra.",
+      "socials": { "linkedin": "#", "researchGate": "#", "g_scholar": "#", "email": "mailto:mtser10021.25@bitmesra.ac.in" }
     }
   ],
   "Collaborators": [
