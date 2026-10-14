@@ -94,10 +94,10 @@
 ],
 
 "journals": [
-  { "title": "Mechanics of Materials", "count": 01 },
-  { "title": "Aerospace Science and Technology", "count": 01 },
-  { "title": "Journal of Intelligent Material Systemsand Structures", "count": 01 },
-  { "title": "Polymer Composites", "count": 01 }
+  { "title": "Mechanics of Materials", "count": 1 },
+  { "title": "Aerospace Science and Technology", "count": 1 },
+  { "title": "Journal of Intelligent Material Systemsand Structures", "count": 1 },
+  { "title": "Polymer Composites", "count": 1 }
 ],
 
 "memberships": [
