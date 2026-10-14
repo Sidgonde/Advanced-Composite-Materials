@@ -29,10 +29,18 @@
       "socials": { "linkedin": "#", "researchGate": "#", "g_scholar": "#", "email": "mailto:ae25d023@smail.iitm.ac.in" }
     },
     {
+      "name": "Amit Shailesh Nayak",
+      "role": "M.Tech Student",
+      "category": "mtech",
+      "image": "./assets/images/Amit_Shailesh.png",
+      "description": "Area of interest: Fracture Mechanics, Composite Structures.",
+      "socials": { "linkedin": "#", "researchGate": "#", "g_scholar": "#", "email": "mailto:ae25m011@smail.iitm.ac.in" }
+    },
+    {
       "name": "Ashutosh Rai",
       "role": "M.Tech Student",
       "category": "mtech",
-      "image": "./assets/images/Ashutosh.png",
+      "image": "./assets/images/Ashutosh1.png",
       "description": "Area of interest: Secondary Bonded Joints.",
       "socials": { "linkedin": "#", "researchGate": "#", "g_scholar": "#", "email": "mailto:ae25m001@smail.iitm.ac.in" }
     },
@@ -43,14 +51,6 @@
       "image": "./assets/images/P_Vamshidhar.png",
       "description": "Area of interest: Composite Structural Repairs.",
       "socials": { "linkedin": "#", "researchGate": "#", "g_scholar": "#", "email": "mailto:ae25m004@smail.iitm.ac.in" }
-    },
-    {
-      "name": "Amit Shailesh Nayak",
-      "role": "M.Tech Student",
-      "category": "mtech",
-      "image": "./assets/images/Amit_Shailesh.png",
-      "description": "Area of interest: Fracture Mechanics, Composite Structures.",
-      "socials": { "linkedin": "#", "researchGate": "#", "g_scholar": "#", "email": "mailto:ae25m011@smail.iitm.ac.in" }
     },
     {
       "name": "K. G. Abimuhesh",
