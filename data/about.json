@@ -17,7 +17,7 @@
   ],
 
   "stats": [
-    { "value": "6+", "label": "Team Members" },
+    { "value": "8+", "label": "Team Members" },
     { "value": "10+", "label": "Publications" },
     { "value": "4+", "label": "Research Projects" },
     { "value": "8+", "label": "Years of Excellence" }
@@ -94,21 +94,23 @@
 ],
 
 "journals": [
-  { "title": "Journal of Computational Physics", "count": 18 },
-  { "title": "Computer Methods in Applied Mechanics", "count": 12 },
-  { "title": "International Journal of Heat & Mass Transfer", "count": 9 }
+  { "title": "Mechanics of Materials", "count": 01 },
+  { "title": "Aerospace Science and Technology", "count": 01 },
+  { "title": "Journal of Intelligent Material
+Systems and Structures", "count": 01 },
+  { "title": "Polymer Composites", "count": 01 }
 ],
 
 "memberships": [
   "Institute of Engineers India (IEI)",
   "ASME",
-  "ACM"
+  "ISAMPE"
 ],
 
 "awards": [
-  { "title": "Young Scientist Award", "year": "2015" },
   { "title": "Best Research Paper Award", "year": "2019" },
-  { "title": "INAE Outstanding Faculty Award", "year": "2022" }
+  { "title": " Award", "year": "2015" },
+  { "title": " Award", "year": "2022" }
 ]
 
 }
