@@ -14,23 +14,23 @@
     },
     {
       "name": "Vislavath Uday Kiran",
-      "role": "PhD Research Scholar (Structures)",
+      "role": "PhD Research Scholar",
       "category": "phd",
       "image": "./assets/images/Uday.png",
-      "description": "Advanced composite materials, FEA",
+      "description": "Advanced composite materials",
       "socials": { "linkedin": "#", "researchGate": "#", "g_scholar": "#", "email": "mailto:ae25d023@smail.iitm.ac.in" }
     },
     {
       "name": "Parag Garg",
-      "role": "PhD Research Scholar (Structures)",
+      "role": "PhD Research Scholar",
       "category": "phd",
       "image": "./assets/images/Parag.jpg",
-      "description": "Advanced composite materials, Sandwich structures",
+      "description": "Advanced composite materials",
       "socials": { "linkedin": "#", "researchGate": "#", "g_scholar": "#", "email": "mailto:ae25d023@smail.iitm.ac.in" }
     },
     {
       "name": "Ashutosh Rai",
-      "role": "M.Tech Student, Aerospace Engineering",
+      "role": "M.Tech Student",
       "category": "mtech",
       "image": "./assets/images/Ashutosh_Rai.png",
       "description": "Area of interest: Composite Structures and Secondary Bonded Joints. Department of Aerospace Engineering, IIT Madras.",
@@ -38,7 +38,7 @@
     },
     {
       "name": "Potula Vamshidhar Reddy",
-      "role": "M.Tech Student, Aerospace Engineering",
+      "role": "M.Tech Student",
       "category": "mtech",
       "image": "./assets/images/Potula_Vamshidhar.png",
       "description": "Area of interest: Structural Mechanics and Composite Structural Repairs. Department of Aerospace Engineering, IIT Madras.",
@@ -46,10 +46,10 @@
     },
     {
       "name": "Amit Shailesh Nayak",
-      "role": "M.Tech Student, Aerospace Engineering",
+      "role": "M.Tech Student",
       "category": "mtech",
       "image": "./assets/images/Amit_Shailesh.png",
-      "description": "Area of interest: Finite Element Analysis, Structural Dynamics, Composite Structures, and Fracture Mechanics. Department of Aerospace Engineering, IIT Madras.",
+      "description": "Area of interest: Fracture Mechanics, Composite Structures. Department of Aerospace Engineering, IIT Madras.",
       "socials": { "linkedin": "#", "researchGate": "#", "g_scholar": "#", "email": "mailto:ae25m011@smail.iitm.ac.in" }
     },
     {
@@ -57,7 +57,7 @@
       "role": "M.Tech Project Intern",
       "category": "mtech",
       "image": "./assets/images/Abimuhesh.png",
-      "description": "Area of interest: Composite Structures, Finite Element Analysis. Department of Space Eng and Rocketry, BIT Mesra.",
+      "description": "Area of interest: Sandwich Structures, Finite Element Analysis. Department of Space Eng and Rocketry, BIT Mesra.",
       "socials": { "linkedin": "#", "researchGate": "#", "g_scholar": "#", "email": "mailto:mtser10020.25@bitmesra.ac.in" }
     },
     {
