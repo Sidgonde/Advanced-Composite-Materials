@@ -16,7 +16,7 @@
       "name": "Vislavath Uday Kiran",
       "role": "PhD Research Scholar (Structures)",
       "category": "phd",
-      "image": "https://ui-avatars.com/api/?name=Uday+Kiran&background=0d3b5e&color=ffffff&size=200&bold=true",
+      "image": "./assets/images/Uday.png",
       "description": "Advanced composite materials, FEA",
       "socials": { "linkedin": "#", "researchGate": "#", "g_scholar": "#", "email": "mailto:ae25d023@smail.iitm.ac.in" }
     },
@@ -56,7 +56,7 @@
       "name": "K. G. Abimuhesh",
       "role": "M.Tech Project Intern",
       "category": "mtech",
-      "image": "https://ui-avatars.com/api/?name=K+Abimuhesh&background=0d3b5e&color=ffffff&size=200&bold=true",
+      "image": "./assets/images/Abimuhesh.png",
       "description": "Area of interest: Composite Structures, Finite Element Analysis. Department of Space Eng and Rocketry, BIT Mesra.",
       "socials": { "linkedin": "#", "researchGate": "#", "g_scholar": "#", "email": "mailto:mtser10020.25@bitmesra.ac.in" }
     },
@@ -64,7 +64,7 @@
       "name": "Monish Y",
       "role": "M.Tech Project Intern",
       "category": "mtech",
-      "image": "https://ui-avatars.com/api/?name=Monish+Y&background=0d3b5e&color=ffffff&size=200&bold=true",
+      "image": "./assets/images/Mounish.jpg",
       "description": "Area of interest: Fracture Mechanics, Finite Element Analysis. Department of Space Eng and Rocketry, BIT Mesra.",
       "socials": { "linkedin": "#", "researchGate": "#", "g_scholar": "#", "email": "mailto:mtser10021.25@bitmesra.ac.in" }
     }
