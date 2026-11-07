@@ -90,7 +90,7 @@
         "Mapping and imaging mode"
       ],
       "availabilityLabel": "Machine Available",
-      "status": "Available"
+      "status": "Maintenance"
     },
     {
       "name": "High-Performance Computing Cluster",
@@ -122,7 +122,7 @@
         "Multiple clamp geometries"
       ],
       "availabilityLabel": "Machine Available:Composite Tech Centre, IITM",
-      "status": "Maintenance"
+      "status": "Available"
     }
   ],
 
