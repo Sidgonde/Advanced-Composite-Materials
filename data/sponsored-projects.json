@@ -16,14 +16,6 @@
       "funding": "₹ 5,00,000",
       "agency": "New Faculty Initiation Grant",
       "pi": "PI: Nagappa"
-    },
-    {
-      "title": "Federated Learning Framework for Privacy-Preserving Healthcare Analytics",
-      "description": "Developing a federated learning framework that enables collaborative healthcare analytics across institutions without sharing raw patient data.",
-      "duration": "Jun 2023 – May 2026",
-      "funding": "₹ 72,00,000",
-      "agency": "Bill & Melinda Gates Foundation",
-      "pi": "PI"
     }
   ],
   "completed": [
