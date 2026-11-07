@@ -25,7 +25,7 @@
         "Temperature: -40°C to 250°C",
         "Digital image correlation ready"
       ],
-      "availabilityLabel": "Machine Available",
+      "availabilityLabel": "Machine Available: Composite Tech Centre, IITM",
       "status": "Available"
     },
     {
@@ -41,7 +41,7 @@
         "Max pressure: 20 bar",
         "Multi-zone heating"
       ],
-      "availabilityLabel": "Machine Available",
+      "availabilityLabel": "Machine Available:Composite Tech Centre, IITM",
       "status": "Available"
     },
     {
@@ -57,7 +57,7 @@
         "Sensitivity: 0.2 µW",
         "Auto-sampler available"
       ],
-      "availabilityLabel": "Machine Available",
+      "availabilityLabel": "Machine Available:Composite Tech Centre, IITM",
       "status": "Available"
     },
     {
@@ -73,7 +73,7 @@
         "6-axis CNC control",
         "Compatible with glass, carbon, aramid"
       ],
-      "availabilityLabel": "Machine Available",
+      "availabilityLabel": "Machine Available:Composite Tech Centre, IITM",
       "status": "Available"
     },
     {
@@ -121,7 +121,7 @@
         "Frequency: 0.01–200 Hz",
         "Multiple clamp geometries"
       ],
-      "availabilityLabel": "Machine Available",
+      "availabilityLabel": "Machine Available:Composite Tech Centre, IITM",
       "status": "Maintenance"
     }
   ],
