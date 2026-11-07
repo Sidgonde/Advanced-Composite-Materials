@@ -1,46 +1,21 @@
 {
   "ongoing": [
     {
-      "title": "AI-Driven Structural Health Monitoring for Smart Infrastructure",
-      "description": "Developing AI-based sensor fusion and predictive analytics to continuously monitor structural integrity of bridges, buildings and critical infrastructure in real time.",
-      "duration": "Jan 2023 – Dec 2026",
-      "funding": "₹ 85,00,000",
-      "agency": "Department of Science & Technology (DST)",
-      "pi": "PI :  Nagappa",
+      "title": "Design and analysis of composite pipes",
+      "description": "Development of filament wind pipes and its failure analysis used in Jarraff",
+      "duration": "Nov 2026 – Jun 2027",
+      "funding": "₹ 7,50,000",
+      "agency": "Winomechanic Private Limited",
+      "pi": "PI : Prof. R Velmurugan",
       "coPi": "Co-PI : Nagappa"
     },
     {
-      "title": "Nanomaterial-Based Biosensors for Early Cancer Detection",
+      "title": "Experimental and Numerical Characterization of Mechanical and Mode-I Interlaminar Fracture Behaviour of CNT-Reinforced CFRP Composites",
       "description": "Designing nanomaterial-enabled biosensor platforms for rapid, low-cost and highly sensitive detection of early-stage cancer biomarkers.",
-      "duration": "Mar 2022 – Feb 2026",
-      "funding": "₹ 1,20,00,000",
-      "agency": "Indian Council of Medical Research (ICMR)",
-      "pi": "Co-PI"
-    },
-    {
-      "title": "Sustainable Urban Mobility: IoT-Enabled Traffic Flow Optimization",
-      "description": "Building an IoT-enabled traffic management system that uses real-time data to reduce congestion and improve sustainable urban mobility.",
-      "duration": "Jul 2023 – Jun 2027",
-      "funding": "₹ 65,00,000",
-      "agency": "Ministry of Electronics & IT (MeitY)",
-      "pi": "Role : Principal Investigator",
-      "coPi": "Co-PI's : Nagappa, Nirmal, someone"
-    },
-    {
-      "title": "Deep Learning for Remote Sensing and Disaster Risk Assessment",
-      "description": "Applying deep learning to satellite and remote-sensing imagery for early disaster risk assessment and rapid post-disaster damage mapping.",
-      "duration": "Sep 2022 – Aug 2025",
-      "funding": "₹ 48,50,000",
-      "agency": "ISRO Space Applications Centre",
-      "coPi": "Co-PI's : Nagappa, Nirmal, someone"
-    },
-    {
-      "title": "Hybrid Renewable Energy Systems for Rural Electrification",
-      "description": "Designing hybrid solar-wind-storage microgrid systems to deliver reliable, low-cost electrification to underserved rural communities.",
-      "duration": "Apr 2024 – Mar 2027",
-      "funding": "₹ 95,00,000",
-      "agency": "Ministry of New & Renewable Energy (MNRE)",
-      "pi": "PI"
+      "duration": "July 2026 – July 2028",
+      "funding": "₹ 5,00,000",
+      "agency": "New Faculty Initiation Grant",
+      "pi": "PI: Nagappa"
     },
     {
       "title": "Federated Learning Framework for Privacy-Preserving Healthcare Analytics",
@@ -48,7 +23,7 @@
       "duration": "Jun 2023 – May 2026",
       "funding": "₹ 72,00,000",
       "agency": "Bill & Melinda Gates Foundation",
-      "pi": "Co-PI"
+      "pi": "PI"
     }
   ],
   "completed": [
