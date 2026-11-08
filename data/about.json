@@ -13,7 +13,7 @@
   ],
 
   "Founder": [
-    { "initial": "NS", "name": "Dr. Nagappa Siddgonde", "role": "Assistant Professor, Dept. of AE, IIT Madras, Principal Investigator", "bio": "Ph.D in Advanced Composite Materials, 10+ years research.", "cv": "./assets/images/Nagappa_CV.pdf" }
+    { "initial": "NS", "name": "Dr. Nagappa Siddgonde", "role": "Assistant Professor, Dept. of AE, IIT Madras", "bio": "Ph.D in Advanced Composite Materials, 10+ years research.", "cv": "./assets/images/Nagappa_CV.pdf" }
   ],
 
   "stats": [
