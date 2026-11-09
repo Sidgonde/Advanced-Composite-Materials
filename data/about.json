@@ -12,8 +12,8 @@
     { "icon": "🌍", "title": "Open Science", "description": "Committed to open-source and community knowledge." }
   ],
 
-  "Founder": [
-    { "initial": "NS", "name": "Dr. Nagappa Siddgonde", "role": "Assistant Professor", "bio": "Ph.D in Advanced Composite Materials, 10+ years research.", "cv": "./assets/images/Nagappa_CV.pdf"}
+  "founder": [
+    { "initial": "NS", "name": "Dr. Nagappa Siddgonde", "role": "Assistant Professor, Dept. of AE IIT Madras", "bio": "Ph.D in Advanced Composite Materials, 10+ years research.", "cv": "./assets/images/Nagappa_CV.pdf"}
   ],
 
   "stats": [
