@@ -28,7 +28,6 @@
   {
     "degree": "PhD., Aerospace Engineering",
     "institution": "Indian Institute of Technology Kharagpur, West Bengal",
-    "year": "",
     "details": "Thesis: Experimental and Numerical Characterization of Woven Fabric Composites Considering Void Defects.",
     "advisor": "Advisor: Prof. Anup Ghosh",
     "logo": "./assets/images/IITKgp.jpg",
@@ -37,7 +36,6 @@
   {
     "degree": "M.Tech., Machine Design",
     "institution": "Visvesvaraya Technological University, Belgaum",
-    "year": "",
     "details": "Thesis: Numerical Analysis of Low-Velocity Impact on Fibre Reinforced Laminated Composite Plates.",
     "advisor": "Advisor: Prof. Shravankumar B Kerur",
     "logo": "./assets/images/VTU Logo.png",
@@ -46,7 +44,6 @@
   {
     "degree": "B.E., Mechanical Engineering",
     "institution": "Visvesvaraya Technological University, Belgaum",
-    "year": "",
     "details": "--",
     "logo": "./assets/images/VTU Logo.png",
     "logoInitials": "VTU"
@@ -54,7 +51,6 @@
   {
     "degree": "Diploma., Mechanical Engineering",
     "institution": "Department of Technical Education Board, Bangalore",
-    "year": "",
     "details": "--"
   }
 ],
