@@ -2,17 +2,39 @@ const BASE_PATH = window.location.hostname.includes("github.io")
   ? "/Advanced-Composite-Materials"
   : ".";
 
-// Tab definitions: label → category key in JSON
+// Tab definitions: label → category key(s) in JSON.
+// `match` lists every category the tab shows (defaults to [key]).
 const TABS = [
   { label: "All",          key: "all" },
   { label: "Post Doc",     key: "postdoc" },
   { label: "PhD",          key: "phd" },
-  { label: "MTech / MS",   key: "mtech" },
+  { label: "MTech / MS",   key: "mtech", match: ["mtech", "ms"] },
   { label: "UG / Dual",    key: "ug" },
   { label: "Student",      key: "student" },
   { label: "Project Staff",key: "project_staff" },
   { label: "Alumni",       key: "alumni" },
 ];
+
+// Only these categories show a photo on their card; everyone else
+// (UG, student, project staff, alumni) gets a text-only card.
+const PHOTO_CATEGORIES = ["postdoc", "phd", "ms", "mtech"];
+
+// Escape text from JSON before putting it into HTML
+function esc(value) {
+  return String(value ?? "")
+    .replace(/&/g, "&amp;").replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+}
+
+// One labelled detail line — skipped entirely when the value is empty
+function detailRow(label, value) {
+  if (!value || !String(value).trim()) return "";
+  return `
+    <p class="team-detail">
+      <span class="team-detail-label">${label}</span>
+      <span class="team-detail-value">${esc(value)}</span>
+    </p>`;
+}
 
 document.addEventListener("DOMContentLoaded", () => {
   fetch(`${BASE_PATH}/data/team.json`)
@@ -75,40 +97,105 @@ document.addEventListener("DOMContentLoaded", () => {
         `;
       }
 
-      // Alumni card: name, project/thesis title, passed-out year — no role/description/socials
-      function alumniCardBody(member) {
+      // Co-guide gets its own separate row on the card
+      function coGuideRow(member) {
+        if (!member.coGuide || !member.coGuide.trim()) return "";
         return `
-          <h3 class="team-name">${member.name}</h3>
-          <p class="team-role">Alumnus · Class of ${member.passedOutYear}</p>
-          <p class="team-desc">${member.project}</p>
+          <div class="team-coguide">
+            <span class="team-detail-label">Co-Guide</span>
+            <span class="team-coguide-name">${esc(member.coGuide)}</span>
+          </div>`;
+      }
+
+      // Alumni card (no photo): name, degree graduated, thesis title, current role
+      function alumniCardBody(member) {
+        const graduated = [member.degree, member.gradYear && `Graduated ${member.gradYear}`]
+          .filter(Boolean).join(" · ");
+        return `
+          <h3 class="team-name">${esc(member.name)}</h3>
+          ${graduated ? `<p class="team-role">${esc(graduated)}</p>` : ""}
+          ${detailRow("Thesis", member.thesis)}
+          ${detailRow("Current Role", member.currentRole)}
         `;
       }
 
+      // Current member card. PhD layout: name, role, graduation year,
+      // thesis title, area of interest. Co-guide + social icons sit in a
+      // footer pinned to the bottom, so every card in a row lines up.
       function standardCardBody(member) {
         return `
-          <h3 class="team-name">${member.name}</h3>
-          <p class="team-role">${member.role}</p>
-          <p class="team-desc">${member.description}</p>
-          <div class="social-links">
-            ${member.category === "student" ? compactSocialLinks(member) : fullSocialLinks(member)}
+          <h3 class="team-name">${esc(member.name)}</h3>
+          <p class="team-role">${esc(member.role)}</p>
+          ${detailRow("Graduation Year", member.gradYear)}
+          ${detailRow("Thesis", member.thesis)}
+          ${member.description ? `
+            <p class="team-desc">${esc(member.description)}</p>
+            <button type="button" class="team-desc-toggle" hidden>Read more</button>` : ""}
+          <div class="team-card-footer">
+            ${coGuideRow(member)}
+            <div class="social-links">
+              ${member.category === "student" ? compactSocialLinks(member) : fullSocialLinks(member)}
+            </div>
           </div>
         `;
       }
 
+      // Photo cards first, text-only cards (alumni etc.) after, so rows
+      // don't mix tall photo cards with short text cards.
+      const hasPhoto = m => PHOTO_CATEGORIES.includes(m.category || "other") && m.image;
+      const members = [...data.Team.filter(hasPhoto), ...data.Team.filter(m => !hasPhoto(m))];
+
+      // Text-only cards start on a fresh row (see .team-row-break) so a
+      // short card never gets stretched next to a tall photo card.
+      const firstTextOnly = members.find(m => !hasPhoto(m));
+
       // Render all team cards
-      data.Team.forEach(member => {
+      members.forEach(member => {
+        if (member === firstTextOnly && members.some(hasPhoto)) {
+          const rowBreak = document.createElement("div");
+          rowBreak.className = "team-row-break";
+          rowBreak.setAttribute("aria-hidden", "true");
+          container.appendChild(rowBreak);
+        }
+
+        const category  = member.category || "other";
+        const showPhoto = hasPhoto(member);
+
         const card = document.createElement("div");
         card.classList.add("team-card");
-        card.dataset.category = member.category || "other";
+        if (!showPhoto) card.classList.add("team-card--no-photo");
+        if (category === "alumni") card.classList.add("team-card--alumni");
+        card.dataset.category = category;
 
         card.innerHTML = `
-          <img src="${member.image}" alt="${member.name}" class="team-img" loading="lazy">
+          ${showPhoto ? `<img src="${esc(member.image)}" alt="${esc(member.name)}" class="team-img" loading="lazy">` : ""}
           <div class="team-content">
-            ${member.category === "alumni" ? alumniCardBody(member) : standardCardBody(member)}
+            ${category === "alumni" ? alumniCardBody(member) : standardCardBody(member)}
           </div>
         `;
         container.appendChild(card);
       });
+
+      // Descriptions are clamped to 3 lines so cards stay the same size;
+      // a "Read more" toggle appears only on cards whose text is cut off.
+      container.addEventListener("click", e => {
+        const btn = e.target.closest(".team-desc-toggle");
+        if (!btn) return;
+        const desc = btn.previousElementSibling;
+        const expanded = desc.classList.toggle("expanded");
+        btn.textContent = expanded ? "Show less" : "Read more";
+      });
+
+      function updateDescToggles() {
+        container.querySelectorAll(".team-card:not(.hidden) .team-desc").forEach(desc => {
+          const btn = desc.nextElementSibling;
+          if (!btn || desc.classList.contains("expanded")) return;
+          btn.hidden = desc.scrollHeight <= desc.clientHeight + 1;
+        });
+      }
+      updateDescToggles();
+      document.fonts?.ready.then(updateDescToggles);
+      window.addEventListener("resize", updateDescToggles);
 
       // Filter logic
       function applyFilter(activeKey) {
@@ -117,11 +204,19 @@ document.addEventListener("DOMContentLoaded", () => {
         // Remove stale empty state
         container.querySelectorAll(".team-empty").forEach(el => el.remove());
 
+        const tab = TABS.find(t => t.key === activeKey);
+        const matchKeys = tab?.match || [activeKey];
+
         let visibleCount = 0;
         cards.forEach(card => {
-          const match = activeKey === "all" || card.dataset.category === activeKey;
+          const match = activeKey === "all" || matchKeys.includes(card.dataset.category);
           card.classList.toggle("hidden", !match);
           if (match) visibleCount++;
+        });
+
+        // Row break only matters when both kinds of card are visible
+        container.querySelectorAll(".team-row-break").forEach(el => {
+          el.hidden = activeKey !== "all";
         });
 
         // Show empty state if no matches
@@ -131,6 +226,8 @@ document.addEventListener("DOMContentLoaded", () => {
           empty.textContent = "No team members found in this category.";
           container.appendChild(empty);
         }
+
+        updateDescToggles();
       }
 
       filterBar.addEventListener("click", e => {
@@ -165,6 +262,36 @@ document.addEventListener("DOMContentLoaded", () => {
         `;
         collabContainer.appendChild(card);
       });
+
+      /* ── Open Positions / Hiring ── */
+      const positionsContainer = document.getElementById("positionsContainer");
+      if (positionsContainer) {
+        const positions = data.Positions || [];
+        positionsContainer.innerHTML = positions.length
+          ? positions.map(pos => {
+              const external = /^https?:\/\//i.test(pos.link || "");
+              return `
+                <article class="position-card">
+                  <div class="position-head">
+                    ${pos.type ? `<span class="position-type">${esc(pos.type)}</span>` : ""}
+                    ${pos.status ? `<span class="position-status">${esc(pos.status)}</span>` : ""}
+                  </div>
+                  <h3 class="position-title">${esc(pos.title)}</h3>
+                  ${pos.description ? `<p class="position-desc">${esc(pos.description)}</p>` : ""}
+                  ${detailRow("Eligibility", pos.eligibility)}
+                  ${detailRow("Start", pos.start)}
+                  ${detailRow("Last Date", pos.deadline)}
+                  ${pos.link ? `
+                    <a class="position-btn" href="${esc(pos.link)}"${external ? ' target="_blank" rel="noopener noreferrer"' : ""}>
+                      ${esc(pos.linkLabel || "Apply / Enquire")}
+                    </a>` : ""}
+                </article>`;
+            }).join("")
+          : `<p class="positions-empty">
+               There are no open positions at the moment. Motivated candidates are
+               welcome to <a href="./contact.html">get in touch</a>.
+             </p>`;
+      }
 
       /* ── Stats ── */
       const statsGrid = document.getElementById("statsGrid");

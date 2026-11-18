@@ -121,6 +121,7 @@
   color: var(--secondary);
   transition: background-color 0.2s ease-in, color 0.2s ease-in;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .founder-btn:hover {
@@ -131,6 +132,41 @@
 .highlight {
   background-color: var(--secondary);
   color: var(--primary);
+}
+
+/* Principal Investigator photo — same circle as the initials avatar */
+.founder-avatar-photo {
+  display: block;
+  object-fit: cover;
+  object-position: center top;
+  background-color: #f1f5f9;
+  border: 3px solid var(--highlight);
+}
+
+/* Journals list — collapse control when the list grows long */
+.journals-more {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.journals-more .founder-btn {
+  width: auto;
+  margin: 0;
+  padding: 7px 22px;
+}
+
+.journals-all-link {
+  color: var(--secondary);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.journals-all-link:hover {
+  text-decoration: underline;
 }
 
 .highlight:hover {
@@ -313,7 +349,6 @@
     height: 88px;
     font-size: 32px;
   }
-
   .stats-item {
     font-size: 24px;
     padding: 6px 0;

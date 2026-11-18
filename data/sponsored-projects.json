@@ -1,6 +1,7 @@
 {
   "ongoing": [
     {
+      "type": "Sponsored",
       "title": "Design and analysis of composite pipes",
       "description": "Development of filament wind pipes and its failure analysis used in Jarraff",
       "duration": "Nov 2026 – Jun 2027",
@@ -10,6 +11,7 @@
       "coPi": "Co-PI : Nagappa"
     },
     {
+      "type": "Sponsored",
       "title": "Experimental and Numerical Characterization of Mechanical and Mode-I Interlaminar Fracture Behaviour of CNT-Reinforced CFRP Composites",
       "description": "Investigation of the effects of CNT reinforcement on the mechanical properties, Mode-I fracture toughness, and delamination resistance of CFRP composites.",
       "duration": "July 2026 – July 2028",
@@ -20,6 +22,7 @@
   ],
   "completed": [
     {
+      "type": "Sponsored",
       "title": "Advanced Composites Manufacturing",
       "description": "Investigated advanced manufacturing routes for high-performance fibre-reinforced composite structures, from layup to cure optimisation.",
       "duration": "June 2023 – Nov 2024",
@@ -28,6 +31,7 @@
       "role": "Research Associate"
     },
     {
+      "type": "Sponsored",
       "title": "Fracture Control of CFRP Laminated Composites using Smart Materials Approach under Cryogenic Environmental Conditions",
       "description": "Studied fracture behaviour and damage control of CFRP laminates embedded with smart materials under extreme cryogenic conditions.",
       "duration": "Mar 2022 – March 2023",
@@ -36,6 +40,7 @@
       "role": "SRF"
     },
     {
+      "type": "Sponsored",
       "title": " Experimental and Numerical Characterization of Woven Fabric Composites Considering Void Defects",
       "description": "Investigated the influence of manufacturing-induced void defects on the mechanical and thermo-mechanical properties of woven fabric composites through experimental characterisation, FEA, and micromechanical analysis.",
       "duration": "Jul 2016 – Jul 2022",

@@ -88,6 +88,7 @@ hr {
   gap: 25px;
   grid-template-columns: repeat(auto-fill, minmax(280px, 320px));
   justify-content: center;
+  align-items: stretch; /* every card in a row gets the same height */
 }
 
 /* ================= TEAM CARD ================= */
@@ -155,6 +156,50 @@ hr {
   color: #6c757d;
   line-height: 1.6;
   margin-bottom: 20px;
+  /* clamp to 3 lines so all cards stay the same size */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  overflow: hidden;
+}
+
+.team-desc.expanded {
+  display: block;
+  -webkit-line-clamp: unset;
+  line-clamp: unset;
+}
+
+.team-desc-toggle {
+  align-self: center;
+  margin: -12px 0 16px;
+  padding: 0;
+  border: none;
+  background: none;
+  color: #00796b;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.team-desc-toggle:hover {
+  text-decoration: underline;
+}
+
+/* Forces text-only cards onto their own row in the grid */
+.team-row-break {
+  grid-column: 1 / -1;
+  height: 0;
+  margin-top: -25px; /* cancel the extra grid gap this empty row adds */
+}
+
+.team-row-break[hidden] {
+  display: none;
+}
+
+/* Co-guide + social icons pinned to the bottom of every card */
+.team-card-footer {
+  margin-top: auto;
 }
 
 /* Social Icons */
@@ -203,6 +248,168 @@ hr {
 
 .social-links a:hover {
   color: #009688;
+}
+
+/* Labelled detail lines (Graduation Year, Thesis, Current Role …) */
+.team-detail {
+  font-size: 14px;
+  line-height: 1.55;
+  color: #444;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+.team-detail-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #8a959c;
+  margin-bottom: 2px;
+}
+
+.team-detail-value {
+  display: block;
+}
+
+/* Co-guide — its own separate row on the card */
+.team-coguide {
+  margin: 0 0 14px;
+  padding: 10px 14px;
+  background: #e0f2f1;
+  border-left: 3px solid #009688;
+  border-radius: 8px;
+  text-align: left;
+}
+
+.team-coguide-name {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #00695c;
+}
+
+/* Text-only cards (MTech, interns, alumni …) — no photo */
+.team-card--no-photo {
+  border-top: 4px solid #009688;
+}
+
+.team-card--no-photo .team-content {
+  padding-top: 22px;
+}
+
+.team-card--alumni {
+  border-top-color: #001f30;
+}
+
+.team-card--alumni .team-role {
+  color: #001f30;
+}
+
+/* ================= OPEN POSITIONS ================= */
+.positions-section {
+  padding: 70px 20px;
+  background: #f8fafc;
+}
+
+.positions-section .section-title {
+  margin-bottom: 12px;
+}
+
+.positions-section .section-subtitle {
+  margin-bottom: 40px;
+}
+
+.positions-grid {
+  display: grid;
+  gap: 25px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  text-align: left;
+}
+
+.position-card {
+  background: #fff;
+  border: 1px solid #e3e8ec;
+  border-left: 4px solid #009688;
+  border-radius: 14px;
+  padding: 26px 26px 24px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+}
+
+.position-head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.position-type,
+.position-status {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 4px 11px;
+  border-radius: 50px;
+}
+
+.position-type {
+  background: #001f30;
+  color: #fff;
+}
+
+.position-status {
+  background: #e0f2f1;
+  color: #00695c;
+}
+
+.position-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #222;
+  line-height: 1.35;
+  margin-bottom: 10px;
+}
+
+.position-desc {
+  font-size: 15px;
+  color: #6c757d;
+  line-height: 1.6;
+  margin-bottom: 14px;
+}
+
+.position-btn {
+  align-self: flex-start;
+  margin-top: auto;
+  padding: 10px 22px;
+  background: #00796b;
+  color: #fff;
+  border-radius: 30px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.25s ease, transform 0.2s ease;
+}
+
+.position-btn:hover {
+  background: #00695c;
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.positions-empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: #6c757d;
+  padding: 30px 20px;
+}
+
+.positions-empty a {
+  color: #009688;
+  font-weight: 600;
 }
 
 /* Empty State */

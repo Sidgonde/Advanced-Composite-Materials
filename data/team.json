@@ -9,7 +9,10 @@
       "role": "PhD Research Scholar",
       "category": "phd",
       "image": "./assets/images/Dharani.png",
-      "description": "High Strain Rate studies of Polymer Composites using Split Hopkinson Pressure Bar Test (SHPB). Focuses on dynamic stress-strain behaviour of materials at strain rates from 10² to 10⁵ s⁻¹. Co-Gude: Prof. R Velmurugan",
+      "gradYear": "",
+      "thesis": "",
+      "description": "High Strain Rate studies of Polymer Composites using Split Hopkinson Pressure Bar Test (SHPB). Focuses on dynamic stress-strain behaviour of materials at strain rates from 10² to 10⁵ s⁻¹.",
+      "coGuide": "Prof. R Velmurugan",
       "socials": { "linkedin": "#", "researchGate": "#", "g_scholar": "#", "email": "mailto:ae25d019@smail.iitm.ac.in" }
     },
     {
@@ -17,7 +20,10 @@
       "role": "PhD Research Scholar",
       "category": "phd",
       "image": "./assets/images/Uday.png",
+      "gradYear": "",
+      "thesis": "",
       "description": "Advanced Composite Materials",
+      "coGuide": "",
       "socials": { "linkedin": "#", "researchGate": "#", "g_scholar": "#", "email": "mailto:ae25d023@smail.iitm.ac.in" }
     },
     {
@@ -25,7 +31,10 @@
       "role": "PhD Research Scholar",
       "category": "phd",
       "image": "./assets/images/Parag.jpg",
+      "gradYear": "",
+      "thesis": "",
       "description": "Advanced Composite Materials",
+      "coGuide": "",
       "socials": { "linkedin": "#", "researchGate": "#", "g_scholar": "#", "email": "mailto:ae25d023@smail.iitm.ac.in" }
     },
     {
@@ -46,11 +55,11 @@
     },
     {
       "name": "Potula Vamshidhar Reddy",
-      "role": "M.Tech Student",
       "category": "alumni",
-      "image": "./assets/images/P_Vamshidhar.png",
-      "description": "Area of interest: Composite Structural Repairs.",
-      "socials": { "linkedin": "#", "researchGate": "#", "g_scholar": "#", "email": "mailto:ae25m004@smail.iitm.ac.in" }
+      "degree": "M.Tech",
+      "gradYear": "",
+      "thesis": "",
+      "currentRole": ""
     },
     {
       "name": "K. G. Abimuhesh",
@@ -67,6 +76,19 @@
       "image": "./assets/images/Mounish.jpg",
       "description": "Area of interest: Fracture Mechanics, Finite Element Analysis. Department of Space Eng and Rocketry, BIT Mesra.",
       "socials": { "linkedin": "#", "researchGate": "#", "g_scholar": "#", "email": "mailto:mtser10021.25@bitmesra.ac.in" }
+    }
+  ],
+  "Positions": [
+    {
+      "type": "PhD / MS",
+      "status": "Open",
+      "title": "Ph.D. & M.S. Research Scholar Positions — January 2027 Intake",
+      "description": "The Department of Aerospace Engineering, IIT Madras, invites applications from motivated candidates for full-time Ph.D. and M.S. research scholar positions in Micromechanics, Experimental Mechanics, Fracture Mechanics and Polymer Composite Materials. Shortlisted applicants will be contacted for an interview and offered institute fellowship support.",
+      "eligibility": "Master's degree in Mechanical, Aerospace, or Materials Engineering.",
+      "start": "January 2027",
+      "deadline": "",
+      "link": "./contact.html",
+      "linkLabel": "Enquire Now"
     }
   ],
   "Collaborators": [

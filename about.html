@@ -219,11 +219,15 @@
           .map(service => createCard(service))
           .join("");
 
+        // Avatar shows the photo when "image" is set in about.json,
+        // otherwise falls back to the initials circle.
         els.founder.innerHTML = data.founder
           .map(t => `
             <div class="col-md-4 founderinnerGrid">
               <div class="founder-card text-center">
-                <div class="founder-avatar">${t.initial}</div>
+                ${t.image
+                  ? `<img class="founder-avatar founder-avatar-photo" src="${t.image}" alt="${t.name}" loading="lazy">`
+                  : `<div class="founder-avatar">${t.initial}</div>`}
                 <h5 class="mt-3">${t.name}</h5>
                 <p class="text-dark">${t.role}</p>
                 <p class="text-muted">${t.bio}</p>
@@ -272,13 +276,36 @@
             </div>`)
           .join("");
 
+        // Long journal lists: show the first JOURNALS_VISIBLE rows, then a
+        // "Show all" toggle plus a link to the full Journals page.
+        const JOURNALS_VISIBLE = 6;
         els.journals.innerHTML = data.journals
-          .map(j => `
-            <tr>
+          .map((j, i) => `
+            <tr${i >= JOURNALS_VISIBLE ? ' class="journal-extra" hidden' : ""}>
               <td>${j.title}</td>
               <td>${j.count}</td>
             </tr>`)
           .join("");
+
+        const extraCount = data.journals.length - JOURNALS_VISIBLE;
+        if (extraCount > 0) {
+          const moreBar = document.createElement("div");
+          moreBar.className = "journals-more";
+          moreBar.innerHTML = `
+            <button type="button" class="founder-btn journals-toggle" aria-expanded="false">
+              Show all ${data.journals.length} journals
+            </button>
+            <a class="journals-all-link" href="./journals.html">View full publication list →</a>`;
+          els.journals.closest(".table-responsive").after(moreBar);
+
+          const toggle = moreBar.querySelector(".journals-toggle");
+          toggle.addEventListener("click", () => {
+            const expand = toggle.getAttribute("aria-expanded") !== "true";
+            els.journals.querySelectorAll(".journal-extra").forEach(r => { r.hidden = !expand; });
+            toggle.setAttribute("aria-expanded", String(expand));
+            toggle.textContent = expand ? "Show fewer" : `Show all ${data.journals.length} journals`;
+          });
+        }
 
         els.memberships.innerHTML = data.memberships
           .map(m => `<li class="list-group-item">${m}</li>`)

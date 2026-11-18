@@ -37,6 +37,12 @@ const icons = {
     <path d="M4 21c0-4 3.6-6 8-6s8 2 8 6"/>
   </svg>`,
 
+  tag: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M20.59 13.41l-7.18 7.18a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/>
+    <line x1="7" y1="7" x2="7.01" y2="7"/>
+  </svg>`,
+
   empty: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
     stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
     <circle cx="12" cy="12" r="10"/>
@@ -84,6 +90,24 @@ function roleMetaRow(entry) {
     </div>`;
 }
 
+/* Project type (Sponsored / Consultancy) — always the first, highlighted
+   row of the meta list. Accepts loose spellings from the JSON
+   ("consultant", "Consultancy", "sponsored") and normalises them. */
+function projectTypeRow(rawType) {
+  if (!rawType || !rawType.trim()) return '';
+  const isConsultancy = /consult/i.test(rawType);
+  const label   = isConsultancy ? 'Consultancy' : rawType.trim().replace(/^\w/, c => c.toUpperCase());
+  const variant = isConsultancy ? 'consultancy' : 'sponsored';
+  return `
+    <div class="meta-row type-row type-${variant}">
+      <div class="meta-icon">${icons.tag}</div>
+      <div class="meta-text">
+        <span class="meta-label">Project Type</span>
+        <span class="meta-value">${label}</span>
+      </div>
+    </div>`;
+}
+
 /* single project card  */
 function buildCard(project, type) {
   const badgeClass = type === 'ongoing' ? 'badge-ongoing' : 'badge-completed';
@@ -107,6 +131,8 @@ function buildCard(project, type) {
       ${project.description ? `<p class="card-desc">${project.description}</p>` : ''}
 
       <div class="card-meta">
+
+        ${projectTypeRow(project.type)}
 
         <div class="meta-row">
           <div class="meta-icon">${icons.calendar}</div>
@@ -181,7 +207,7 @@ async function init() {
   /* Show a loading placeholder in each grid while fetching */
   grids.forEach(type => {
     const grid = document.getElementById(`grid-${type}`);
-    if (grid) grid.innerHTML = '<div class="loading-state">Loading projectsâ€¦</div>';
+    if (grid) grid.innerHTML = '<div class="loading-state">Loading projects…</div>';
   });
 
   try {
@@ -203,7 +229,7 @@ async function init() {
       if (grid) {
         grid.innerHTML = `
           <div class="error-state">
-            âš ï¸ Could not load projects. Please try again later.<br>
+            ⚠️ Could not load projects. Please try again later.<br>
             <small style="opacity:.6">${err.message}</small>
           </div>`;
       }
