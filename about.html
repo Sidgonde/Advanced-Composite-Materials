@@ -58,9 +58,9 @@
     </div>
   </section>
 
-  <!-- ── Founder ── -->
+  <!-- ── Principal Investigator ── -->
   <section class="container py-5 text-center reveal">
-    <h2>Founder</h2>
+    <h2>Principal Investigator</h2>
     <p class="text-muted">Talented researchers dedicated to pushing boundaries</p>
     <div id="founderGrid">
       <div class="founderinnerGrid">
@@ -230,7 +230,7 @@
                 ${t.cv
                   ? `<a class="d-block founder-btn" href="${t.cv}" target="_blank" rel="noopener">View CV</a>`
                   : `<button class="d-block founder-btn" disabled>View CV</button>`}
-                <button class="d-block founder-btn founder-btn1 highlight contact-btn">Get Connect</button>
+                <a class="d-block founder-btn founder-btn1 highlight" href="${t.connect || "./contact.html"}"${/^https?:/.test(t.connect || "") ? ' target="_blank" rel="noopener"' : ""}>Get Connect</a>
               </div>
             </div>`)
           .join("");

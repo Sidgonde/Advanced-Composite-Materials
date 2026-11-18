@@ -62,9 +62,10 @@
 
           <span class="toggle-btn">Read more...</span>
 
-          <a href="${item.link}" class="explore-btn">
+          ${item.link ? `
+          <a href="${item.link}" class="explore-btn"${/^https?:\/\//i.test(item.link) ? ' target="_blank" rel="noopener noreferrer"' : ""}>
             ${item.type === "Book" ? "Explore Book" : "Read Blog"}
-          </a>
+          </a>` : ""}
 
         </div>
       `;

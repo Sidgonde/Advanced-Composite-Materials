@@ -74,10 +74,15 @@
   transform: translateY(-6px);
 }
 
+/* contain: whole photo always visible, centred in the same fixed frame for every card */
 .card img {
   width: 100%;
   height: 240px;
-  object-fit: cover;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+  flex-shrink: 0;
+  background: #f1f5f9;
 }
 
 /* Content */
