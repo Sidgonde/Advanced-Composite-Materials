@@ -1,5 +1,4 @@
 ﻿document.addEventListener("DOMContentLoaded", function () {
-
   const grid = document.getElementById("cardGrid");
   const tabs = document.querySelectorAll(".tab");
 
@@ -12,7 +11,6 @@
   fetch(`${BASE_PATH}/data/blogs-books.json`)
     .then(res => res.json())
     .then(data => {
-
       document.getElementById("ribbonTitle").innerText = data.ribbon.title;
       document.getElementById("ribbonDesc").innerText = data.ribbon.description;
 
@@ -23,7 +21,6 @@
 
   tabs.forEach(tab => {
     tab.addEventListener("click", () => {
-
       tabs.forEach(t => t.classList.remove("active"));
       tab.classList.add("active");
 
@@ -39,11 +36,9 @@
   });
 
   function renderCards(items) {
-
     grid.innerHTML = "";
 
     items.forEach(item => {
-
       const card = document.createElement("div");
       card.classList.add("card");
 
@@ -72,7 +67,6 @@
 
       grid.appendChild(card);
 
-      // Expand toggle
       const toggle = card.querySelector(".toggle-btn");
       const fullText = card.querySelector(".full-text");
 
@@ -85,6 +79,4 @@
       });
     });
   }
-
 });
-

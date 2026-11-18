@@ -47,9 +47,6 @@ async function loadUpdates() {
   });
 }
 
-// ==========================
-// MODAL
-// ==========================
 const modalOverlay = document.getElementById("updateModalOverlay");
 const modalTag = document.getElementById("updateModalTag");
 const modalDate = document.getElementById("updateModalDate");

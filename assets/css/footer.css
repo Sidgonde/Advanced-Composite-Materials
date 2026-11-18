@@ -1,4 +1,3 @@
-/* ================= FOOTER ================= */
 .site-footer {
   background: var(--secondary, #0f172a);
   color: #e2e8f0;
@@ -9,7 +8,6 @@
   line-height: 1.8;
 }
 
-/* ── Grid layout ── */
 .footer-container {
   max-width: 1200px;
   margin: 0 auto;
@@ -19,7 +17,6 @@
   align-items: start;
 }
 
-/* ── Headings ── */
 .footer-heading {
   font-size: 14.5px;
   font-weight: 700;
@@ -29,7 +26,6 @@
   margin: 0 0 18px;
 }
 
-/* ── Brand column ── */
 .footer-logo {
   font-size: 20px;
   font-weight: 700;
@@ -45,7 +41,6 @@
   max-width: 280px;
 }
 
-/* ── Social icons ── */
 .social-icons {
   display: flex;
   align-items: center;
@@ -87,7 +82,6 @@
   mask-position: center;
 }
 
-/* ── Quick links ── */
 .footer-links {
   list-style: none;
   padding: 0;
@@ -121,7 +115,6 @@
   color: #fff;
 }
 
-/* ── Contact list ── */
 .footer-contact-list {
   list-style: none;
   padding: 0;
@@ -155,7 +148,6 @@
   color: #fff;
 }
 
-/* ── Map ── */
 .map-link {
   display: block;
 }
@@ -175,7 +167,6 @@
   opacity: 0.9;
 }
 
-/* ── Divider + bottom ── */
 .footer-bottom {
   max-width: 1200px;
   margin: 40px auto 0;
@@ -215,9 +206,6 @@
   margin: 0;
 }
 
-/* ================= RESPONSIVE ================= */
-
-/* Tablet — 2 column */
 @media (max-width: 960px) {
   .footer-container {
     grid-template-columns: 1fr 1fr;
@@ -233,7 +221,6 @@
   }
 }
 
-/* Mobile — 1 column, all left-aligned */
 @media (max-width: 540px) {
   .site-footer {
     padding: 48px 20px 20px;
@@ -256,7 +243,6 @@
     max-width: 100%;
   }
 
-  /* Keep everything left-aligned on mobile — clean and readable */
   .footer-container,
   .footer-links,
   .footer-contact-list,

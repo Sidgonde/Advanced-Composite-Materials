@@ -1,6 +1,3 @@
-/* =========================
-   About Hero Section
-========================= */
 .about-hero {
   text-align: center;
   padding: 100px 20px;
@@ -19,13 +16,10 @@
   margin: auto;
 }
 
-/* =========================
-   Text Cards (Mission/Vision)
-========================= */
 .text-card-div {
   display: flex;
   justify-content: space-around;
-  flex-wrap: wrap;      /* ← cards wrap on small screens instead of overflowing */
+  flex-wrap: wrap;
   gap: 24px;
 }
 
@@ -37,7 +31,7 @@
   color: var(--secondary);
   box-shadow: 0 10px 28px rgba(0, 31, 48, 0.08);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  min-width: 0;         /* ← prevent flex blowout */
+  min-width: 0;
 }
 
 .text-card:hover {
@@ -45,9 +39,6 @@
   box-shadow: 0 14px 32px rgba(0, 31, 48, 0.12);
 }
 
-/* =========================
-   Services Section
-========================= */
 .services-section {
   padding: 80px 40px;
   background-color: var(--grey-bg);
@@ -60,27 +51,10 @@
   margin-top: 30px;
 }
 
-.icon-box {
-  width: 60px;
-  height: 60px;
-  margin-bottom: 20px;
-  border-radius: 16px;
-  background: linear-gradient(to bottom, #020f1f, #002132);
-  color: var(--secondary);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 28px;
-  flex-shrink: 0;
-}
-
-/* =========================
-   Founder Section
-========================= */
 #founderGrid {
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;      /* ← wraps gracefully on mobile */
+  flex-wrap: wrap;
   gap: 20px;
 }
 
@@ -91,7 +65,7 @@
 
 .founder-card {
   padding: 24px 20px;
-  margin: 0;            /* ← was 10px, gap on parent handles spacing now */
+  margin: 0;
   border: 1px solid var(--secondary);
   border-radius: 10px;
   height: 100%;
@@ -134,7 +108,6 @@
   color: var(--primary);
 }
 
-/* Principal Investigator photo — same circle as the initials avatar */
 .founder-avatar-photo {
   display: block;
   object-fit: cover;
@@ -143,7 +116,6 @@
   border: 3px solid var(--highlight);
 }
 
-/* Journals list — collapse control when the list grows long */
 .journals-more {
   display: flex;
   flex-wrap: wrap;
@@ -174,9 +146,6 @@
   color: var(--secondary);
 }
 
-/* =========================
-   Stats Bar
-========================= */
 .stats-bar {
   padding: 60px 0;
   background: var(--secondary);
@@ -196,9 +165,6 @@
   color: var(--primary);
 }
 
-/* =========================
-   Education / Feature Cards
-========================= */
 .feature-card {
   padding: 24px;
   border: 1px solid #dee2e6;
@@ -213,9 +179,6 @@
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
-/* =========================
-   Institution Logos
-========================= */
 .institution-logo {
   width: 84px;
   height: 84px;
@@ -240,9 +203,6 @@
   background: #fff;
 }
 
-/* =========================
-   Experience Timeline
-========================= */
 #experienceTimeline .border-start {
   border-left-width: 3px !important;
 }
@@ -258,9 +218,6 @@
   min-width: 0;
 }
 
-/* =========================
-   Education Cards
-========================= */
 .feature-card.edu-card {
   position: relative;
   padding-right: 114px;
@@ -284,20 +241,12 @@
   transform: translateY(-50%);
 }
 
-/* =========================
-   Table
-========================= */
 .table-responsive {
   width: 100%;
-  overflow-x: auto;   /* ← table scrolls horizontally on mobile */
+  overflow-x: auto;
   -webkit-overflow-scrolling: touch;
 }
 
-/* =========================
-   RESPONSIVE
-========================= */
-
-/* ── Tablet ── */
 @media (max-width: 900px) {
   .about-hero {
     padding: 72px 20px;
@@ -313,7 +262,7 @@
   }
 
   .text-card {
-    width: 100%;        /* full width when stacked */
+    width: 100%;
   }
 
   .services-container {
@@ -330,7 +279,6 @@
   }
 }
 
-/* ── Mobile ── */
 @media (max-width: 600px) {
   .about-hero {
     padding: 56px 16px;
@@ -382,9 +330,6 @@
   }
 }
 
-/* =========================
-   Print
-========================= */
 @media print {
   #navbar-placeholder,
   #footer-placeholder,

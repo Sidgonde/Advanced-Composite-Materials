@@ -10,7 +10,6 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Advanced Composite Materials Lab" />
 
-  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
@@ -24,13 +23,11 @@
 <body>
   <div id="navbar-placeholder"></div>
 
-  <!-- ── Hero ── -->
   <div class="about-hero text-center reveal">
     <h1 id="aboutTitle"></h1>
     <p id="aboutSubtitle"></p>
   </div>
 
-  <!-- ── Mission / Vision ── -->
   <section class="container py-5 reveal">
     <div class="text-card-div row g-4">
       <div class="text-card col-md-5">
@@ -44,7 +41,6 @@
     </div>
   </section>
 
-  <!-- ── What Sets Us Apart ── -->
   <section class="bg-light py-5 text-center reveal">
     <div class="container">
       <h2>What Sets Us Apart</h2>
@@ -58,7 +54,6 @@
     </div>
   </section>
 
-  <!-- ── Principal Investigator ── -->
   <section class="container py-5 text-center reveal">
     <h2>Principal Investigator</h2>
     <p class="text-muted">Talented researchers dedicated to pushing boundaries</p>
@@ -73,7 +68,6 @@
     </div>
   </section>
 
-  <!-- ── Stats ── -->
   <section class="stats-bar reveal">
     <div id="statsGrid" class="container">
       <div class="row g-4" aria-hidden="true">
@@ -85,7 +79,6 @@
     </div>
   </section>
 
-  <!-- ── Education ── -->
   <section class="container py-5 reveal">
     <h2 class="mb-4">Education</h2>
     <div id="educationList" class="row g-4">
@@ -96,7 +89,6 @@
     </div>
   </section>
 
-  <!-- ── Experience ── -->
   <section class="bg-light py-5 reveal">
     <div class="container">
       <h2 class="mb-4">Experience</h2>
@@ -132,7 +124,6 @@
     </div>
   </section>
 
-  <!-- ── Journal Publications ── -->
   <section class="container py-5 reveal">
     <h2 class="mb-4">Journal Publications</h2>
     <div class="table-responsive">
@@ -152,7 +143,6 @@
     </div>
   </section>
 
-  <!-- ── Professional Memberships ── -->
   <section class="bg-light py-5 reveal">
     <div class="container">
       <h2 class="mb-4">Professional Memberships</h2>
@@ -164,7 +154,6 @@
     </div>
   </section>
 
-  <!-- ── Awards ── -->
   <section class="container py-5 reveal">
     <h2 class="mb-4">Awards & Achievements</h2>
     <div id="awardsGrid" class="row g-4">
@@ -209,7 +198,6 @@
     fetch(`${BASE_PATH}/data/about.json`)
       .then(res => res.json())
       .then(data => {
-
         els.title.textContent    = data.title;
         els.subtitle.textContent = data.subtitle;
         els.mission.textContent  = data.mission;
@@ -219,8 +207,6 @@
           .map(service => createCard(service))
           .join("");
 
-        // Avatar shows the photo when "image" is set in about.json,
-        // otherwise falls back to the initials circle.
         els.founder.innerHTML = data.founder
           .map(t => `
             <div class="col-md-4 founderinnerGrid">
@@ -276,8 +262,6 @@
             </div>`)
           .join("");
 
-        // Long journal lists: show the first JOURNALS_VISIBLE rows, then a
-        // "Show all" toggle plus a link to the full Journals page.
         const JOURNALS_VISIBLE = 6;
         els.journals.innerHTML = data.journals
           .map((j, i) => `
@@ -321,7 +305,6 @@
             </div>`)
           .join("");
 
-        // Structured data — built from the same live data, so it stays in sync
         const founder = data.founder && data.founder[0];
         if (founder) {
           const ld = document.createElement("script");

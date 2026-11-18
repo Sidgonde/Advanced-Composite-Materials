@@ -7,7 +7,6 @@
     ? "/Advanced-Composite-Materials"
     : ".";
 
-  // â”€â”€ Highlight target name â”€â”€
   function highlightName(text, name) {
     if (!text) return "";
     const escaped = name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");

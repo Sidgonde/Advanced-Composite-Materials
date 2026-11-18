@@ -1,13 +1,9 @@
-/* ===============================
-   LANDING / HERO SECTION
-================================= */
-
 #landing {
   position: relative;
   width: 100%;
   min-height: 100vh;
   background: linear-gradient(to bottom, #020f1f, #002132, #00394a);
-  overflow: hidden; /* prevent canvas overflow on small screens */
+  overflow: hidden;
 }
 
 #particle-canvas {
@@ -25,23 +21,19 @@
   justify-content: center;
   text-align: center;
   color: var(--light-text);
-  padding: 0 20px; /* prevent text touching screen edges on mobile */
+  padding: 0 20px;
 }
 
 .hero-content {
   position: relative;
   z-index: 1;
-  max-width: 100%; /* prevent overflow on small screens */
+  max-width: 100%;
 }
 
 .hero-content h1 {
   font-family: 'Cormorant Garamond', serif;
   font-weight: 700;
 }
-
-/* ===============================
-   SERVICES SECTION
-================================= */
 
 .services-section {
   padding: 80px 40px;
@@ -60,10 +52,6 @@
   height: 100%;
 }
 
-/* ===============================
-   ABOUT SECTION
-================================= */
-
 .about-section {
   padding: 80px 20px;
   background-color: var(--grey-bg);
@@ -76,8 +64,6 @@
   align-items: center;
   gap: 60px;
 }
-
-/* ---------- Images ---------- */
 
 .carousel {
   overflow: hidden;
@@ -97,8 +83,7 @@
   display: block;
 }
 
-.carousel-item,
-.swiper-slide {
+.carousel-item {
   width: 100%;
   height: 100%;
 }
@@ -106,14 +91,12 @@
 .about-images {
   flex: 1.4;
   position: relative;
-  min-width: 0;       /* prevent flex blowout */
+  min-width: 0;
 }
-
-/* ---------- Content ---------- */
 
 .about-content {
   flex: 1;
-  min-width: 0;       /* prevent flex blowout */
+  min-width: 0;
 }
 
 .section-tag {
@@ -141,8 +124,6 @@
   color: var(--dark-text);
   margin-bottom: 30px;
 }
-
-/* ---------- Features ---------- */
 
 .feature-list {
   display: flex;
@@ -172,8 +153,6 @@
   color: #022;
 }
 
-/* ---------- Skeleton (loading state) ---------- */
-
 .skeleton-carousel {
   aspect-ratio: 16 / 9;
 }
@@ -188,10 +167,6 @@
   flex: 1;
   min-width: 0;
 }
-
-/* ===============================
-   CTA SECTION
-================================= */
 
 .cta-section {
   padding: 100px 20px;
@@ -237,8 +212,6 @@
   flex-wrap: wrap;
 }
 
-/* ---------- Buttons (override the default .btn-primary for a pill look,
-   and add the .btn-outline variant used only by the CTA section) ---------- */
 .btn-primary {
   padding: 12px 28px;
   background: #ffffff;
@@ -270,11 +243,6 @@
   color: #0f2027;
 }
 
-/* ===============================
-   RESPONSIVE
-================================= */
-
-/* ── Tablet (900px) — already existed, only additions ── */
 @media (max-width: 900px) {
   .about-container {
     flex-direction: column;
@@ -282,18 +250,18 @@
   }
 
   .about-images {
-    height: auto;       /* was already here */
-    width: 100%;        /* ← fill full width when stacked */
+    height: auto;
+    width: 100%;
   }
 
   .carousel {
-    max-width: 100%;    /* ← allow carousel to fill column on tablet */
-    margin-top: 0;      /* ← remove top offset when stacked */
+    max-width: 100%;
+    margin-top: 0;
   }
 
   .feature-item {
-    align-items: center;  /* already existed */
-    text-align: left;     /* ← keep feature text readable when section is centered */
+    align-items: center;
+    text-align: left;
   }
 
   .cta-content h2 { font-size: 1.8rem; }
@@ -301,23 +269,21 @@
   .cta-section    { padding: 72px 20px; }
 }
 
-/* ── Mobile (600px) — already existed, only additions ── */
 @media (max-width: 600px) {
   .services-section {
-    padding: 60px 20px;   /* already existed */
+    padding: 60px 20px;
   }
 
   .services-container {
-    margin-top: -140px;   /* already existed */
-    grid-template-columns: 1fr 1fr; /* ← 2-col grid on large phones */
+    margin-top: -140px;
+    grid-template-columns: 1fr 1fr;
   }
 
   .about-content h2 {
-    font-size: 32px;      /* already existed */
+    font-size: 32px;
   }
 }
 
-/* ── Mobile (480px) ── */
 @media (max-width: 480px) {
   .cta-section {
     padding: 56px 16px;
@@ -345,14 +311,13 @@
   }
 }
 
-/* ── Small mobile (400px) ── */
 @media (max-width: 400px) {
   .hero {
     padding: 0 16px;
   }
 
   .services-container {
-    grid-template-columns: 1fr; /* ← single column on tiny phones */
+    grid-template-columns: 1fr;
     margin-top: -100px;
   }
 
@@ -363,8 +328,6 @@
   .about-section {
     padding: 48px 16px;
   }
-
-
 
   .about-content h2 {
     font-size: 28px;

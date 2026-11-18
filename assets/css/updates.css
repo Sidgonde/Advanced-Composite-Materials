@@ -1,7 +1,3 @@
-/* ═══════════════════════════════════════════════
-   updates.css  — Blogs & Announcements section
-═══════════════════════════════════════════════ */
-
 .updates-section {
   padding: 100px 20px;
   background: var(--grey-bg);
@@ -21,7 +17,6 @@
   text-align: left;
 }
 
-/* ── Card ── */
 .update-card {
   background: var(--primary);
   border-radius: 16px;
@@ -120,10 +115,6 @@
 .update-link:hover {
   text-decoration: underline;
 }
-
-/* ════════════════════════════════
-   UPDATE DETAILS MODAL
-════════════════════════════════ */
 
 .update-modal-overlay {
   position: fixed;
@@ -225,15 +216,10 @@
   opacity: 0.9;
 }
 
-/* ── Skeleton ── */
 .update-card.skeleton-block {
   min-height: 200px;
   border-top: 4px solid transparent;
 }
-
-/* ════════════════════════════════
-   RESPONSIVE
-════════════════════════════════ */
 
 @media (max-width: 768px) {
   .updates-section {

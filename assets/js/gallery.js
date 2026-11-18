@@ -2,9 +2,6 @@
   ? "/Advanced-Composite-Materials"
   : ".";
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-   SVG helpers
-â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const svgClock = `<svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.62)"
   stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
   <circle cx="12" cy="12" r="10"/>
@@ -26,16 +23,10 @@ const svgZoom = `<svg viewBox="0 0 24 24" fill="none" stroke="#fff"
   <line x1="8"  y1="11" x2="14" y2="11"/>
 </svg>`;
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-   State
-â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
-let allItems       = [];   // flat array of all gallery items
-let filteredItems  = [];   // currently visible items
-let currentIndex   = 0;    // open modal index in filteredItems
+let allItems       = [];
+let filteredItems  = [];
+let currentIndex   = 0;
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-   Build one gallery card
-â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 function buildCard(item, globalIndex) {
   const div = document.createElement('div');
   div.className = 'gallery-item';
@@ -65,9 +56,6 @@ function buildCard(item, globalIndex) {
   return div;
 }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-   Render grid
-â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 function renderGrid(items) {
   const grid  = document.getElementById('masonryGrid');
   const stats = document.getElementById('galleryStats');
@@ -83,15 +71,11 @@ function renderGrid(items) {
   stats.innerHTML = `Showing <span>${items.length}</span> of <span>${allItems.length}</span> items`;
 
   items.forEach((item, i) => {
-    // find its original index in allItems for modal navigation
     const globalIndex = allItems.indexOf(item);
     grid.appendChild(buildCard(item, globalIndex));
   });
 }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-   Build filter buttons
-â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 function buildFilters(categories) {
   const bar = document.getElementById('filterBar');
   bar.innerHTML = '';
@@ -111,11 +95,7 @@ function buildFilters(categories) {
   });
 }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-   Apply filter
-â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 function applyFilter(category, clickedBtn) {
-  // toggle active class
   document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
   clickedBtn.classList.add('active');
 
@@ -126,9 +106,6 @@ function applyFilter(category, clickedBtn) {
   renderGrid(filteredItems);
 }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-   MODAL
-â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const overlay    = document.getElementById('modalOverlay');
 const modalImg   = document.getElementById('modalImg');
 const modalImgPane  = document.querySelector('.modal-img-pane');
@@ -153,9 +130,8 @@ function closeModal() {
 }
 
 function populateModal(item) {
-  // image
   if (item.image) {
-    modalImgPane.style.aspectRatio = '4 / 3'; // sensible default until the real ratio loads
+    modalImgPane.style.aspectRatio = '4 / 3';
     modalImg.onload = () => {
       modalImgPane.style.aspectRatio = `${modalImg.naturalWidth} / ${modalImg.naturalHeight}`;
     };
@@ -168,8 +144,6 @@ function populateModal(item) {
     modalImg.style.display = 'block';
     modalFallback.style.display = 'none';
     modalImg.src = `${BASE_PATH}/${item.image}`;
-    // src may already be cached (e.g. same image reopened) — onload won't
-    // re-fire in that case, so pick up the already-known dimensions directly
     if (modalImg.complete && modalImg.naturalWidth) {
       modalImgPane.style.aspectRatio = `${modalImg.naturalWidth} / ${modalImg.naturalHeight}`;
     }
@@ -179,7 +153,6 @@ function populateModal(item) {
     modalImgPane.style.aspectRatio = '4 / 3';
   }
 
-  // text content
   modalCategory.textContent  = item.category;
   modalTitle.textContent     = item.title;
   modalDesc.textContent      = item.description;
@@ -187,7 +160,6 @@ function populateModal(item) {
   modalTimeline.textContent  = item.timeline;
   modalCounter.textContent   = `${currentIndex + 1} / ${allItems.length}`;
 
-  // hide/show prev-next based on position
   document.getElementById('modalPrev').style.display = currentIndex > 0 ? 'flex' : 'none';
   document.getElementById('modalNext').style.display = currentIndex < allItems.length - 1 ? 'flex' : 'none';
 }
@@ -199,9 +171,6 @@ function navigateModal(direction) {
   populateModal(allItems[currentIndex]);
 }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-   Event listeners
-â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 document.getElementById('modalClose').addEventListener('click', closeModal);
 document.getElementById('modalPrev').addEventListener('click', () => navigateModal(-1));
 document.getElementById('modalNext').addEventListener('click', () => navigateModal(1));
@@ -217,12 +186,9 @@ document.addEventListener('keydown', e => {
   if (e.key === 'ArrowRight') navigateModal(1);
 });
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-   Fetch & initialise
-â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 async function init() {
   const grid = document.getElementById('masonryGrid');
-  grid.innerHTML = '<div class="loading-state">Loading galleryâ€¦</div>';
+  grid.innerHTML = '<div class="loading-state">Loading gallery…</div>';
 
   try {
     const res = await fetch(`${BASE_PATH}/data/gallery.json`);
@@ -231,18 +197,16 @@ async function init() {
     const data = await res.json();
     allItems = data;
 
-    // extract unique categories preserving order
     const categories = [...new Set(data.map(item => item.category))];
 
     filteredItems = [...allItems];
     buildFilters(categories);
     renderGrid(filteredItems);
-
   } catch (err) {
     console.error('Gallery load error:', err);
     grid.innerHTML = `
       <div class="error-state">
-        âš ï¸ Could not load gallery. Please try again later.<br>
+        ⚠️ Could not load gallery. Please try again later.<br>
         <small style="opacity:.6">${err.message}</small>
       </div>`;
   }

@@ -1,13 +1,7 @@
- // ================================
-// CONFIG
-// ================================
 const BASE_PATH = window.location.hostname.includes("github.io")
   ? "/Advanced-Composite-Materials"
   : ".";
 
-// ================================
-// UTILITIES
-// ================================
 async function loadHTML(targetId, filePath, onLoad) {
   try {
     const res = await fetch(filePath);
@@ -24,9 +18,6 @@ async function loadHTML(targetId, filePath, onLoad) {
   }
 }
 
-// ================================
-// NAVIGATION
-// ================================
 function setActiveNav() {
   const currentPage = window.location.pathname.split("/").pop();
 
@@ -35,10 +26,8 @@ function setActiveNav() {
       const href = link.getAttribute("href");
 
       if (href === currentPage) {
-        // Activate the clicked/current link
         link.classList.add("active");
 
-        // If inside dropdown, activate parent
         const dropdown = link.closest(".dropdown");
         if (dropdown) {
           dropdown.classList.add("open");
@@ -57,10 +46,8 @@ function setActiveNav() {
     window.location.href = `${BASE_PATH}/contact.html`;
   });
 });
-
 }
 
-// Sidebar toggle (used by HTML onclick)
 window.toggleSidebar = () => {
   const isOpen = document.getElementById("sidebar")?.classList.toggle("show");
   const btn = document.querySelector(".hamburger");
@@ -72,9 +59,6 @@ window.toggleDropdown = (el) => {
   if (el) el.setAttribute("aria-expanded", isOpen ? "true" : "false");
 };
 
-// ================================
-// SCROLL REVEAL
-// ================================
 function initScrollReveal() {
   const io = new IntersectionObserver(
     (entries) => entries.forEach(entry => {
@@ -94,16 +78,12 @@ function initScrollReveal() {
 
   observeNew();
 
-  // Auto-pick up .reveal elements added by dynamic renderers
   new MutationObserver(observeNew).observe(document.body, {
     childList: true,
     subtree: true,
   });
 }
 
-// ================================
-// STICKY HEADER
-// ================================
 function initStickyHeader() {
   const header = document.querySelector("header");
   if (!header) return;
@@ -115,11 +95,7 @@ function initStickyHeader() {
   window.addEventListener("scroll", onScroll, { passive: true });
 }
 
-// ================================
-// INIT
-// ================================
 document.addEventListener("DOMContentLoaded", () => {
-  // Navbar
   loadHTML(
     "navbar-placeholder",
     `${BASE_PATH}/components/navbar.html`,
@@ -129,7 +105,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   );
 
-  // Footer
   loadHTML(
     "footer-placeholder",
     `${BASE_PATH}/components/footer.html`,

@@ -25,13 +25,11 @@ document.addEventListener("DOMContentLoaded", () => {
     .catch((err) => console.error("Facilities load error:", err));
 });
 
-/* Ribbon */
 function renderRibbon({ title, description }) {
   document.getElementById("ribbonTitle").innerText = title;
   document.getElementById("ribbonDesc").innerText  = description;
 }
 
-/* Stats bar */
 function renderStats(stats) {
   const grid = document.getElementById("facStatsGrid");
   grid.innerHTML = stats.map(s => `
@@ -42,7 +40,6 @@ function renderStats(stats) {
   `).join("");
 }
 
-/* Filter tabs (built from categories in data) */
 function renderFilters(equipment) {
   const categories = ["All", ...new Set(equipment.map(e => e.category))];
   const filterBar  = document.getElementById("facFilter");
@@ -64,7 +61,6 @@ function renderFilters(equipment) {
   });
 }
 
-/* Filter logic */
 function applyFilter(selected) {
   const cards  = document.querySelectorAll(".fac-card");
   const empty  = document.getElementById("facEmpty");
@@ -79,7 +75,6 @@ function applyFilter(selected) {
   empty.classList.toggle("hidden", visible > 0);
 }
 
-/* Equipment cards */
 function renderEquipment(equipment) {
   const grid = document.getElementById("facGrid");
 
@@ -114,7 +109,6 @@ function renderEquipment(equipment) {
   }).join("");
 }
 
-/* Info cards (access, safety, contact) */
 function renderInfoCards(info) {
   const grid = document.getElementById("facInfoGrid");
 

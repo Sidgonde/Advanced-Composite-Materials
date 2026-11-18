@@ -8,11 +8,9 @@ fetch(`${BASE_PATH}/data/footer.json`)
     const footer = document.querySelector(".site-footer");
     if (!footer) return;
 
-    /* Brand */
     footer.querySelector(".footer-logo").textContent = data.logoTitle;
     footer.querySelector(".footer-desc").textContent = data.description;
 
-    /* Social icons (icon-only) */
     footer.querySelector(".social-icons").innerHTML = `
       <a href="${data.contact.socials.linkedin}" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn">
         <svg width="15" height="15" fill="currentColor" viewBox="0 0 16 16">
@@ -36,12 +34,10 @@ fetch(`${BASE_PATH}/data/footer.json`)
       </a>
     `;
 
-    /* Quick links */
     footer.querySelector(".footer-links").innerHTML = data.quickLinks
       .map((link) => `<li><a href="${link.url}">${link.label}</a></li>`)
       .join("");
 
-    /* Contact */
     footer.querySelector(".contact-location").innerHTML = `
       <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
         <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6"/>
@@ -63,16 +59,13 @@ fetch(`${BASE_PATH}/data/footer.json`)
       <span>${data.contact.phone}</span>
     `;
 
-    /* Map */
     const mapLink = footer.querySelector(".map-link");
     mapLink.href = data.map.link;
     mapLink.querySelector(".map-image").src = data.map.image;
 
-    /* Institute + lab logos */
     footer.querySelector(".footer-institute-logo").src = data.instituteLogo;
     footer.querySelector(".footer-lab-logo").src = data.labLogo;
 
-    /* Copyright (year fetched from the visitor's current date) */
     const currentYear = new Date().getFullYear();
     footer.querySelector(".footer-copyright").textContent = `© ${currentYear} ${data.copyright}`;
   })

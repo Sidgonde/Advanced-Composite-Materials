@@ -51,11 +51,6 @@ const icons = {
   </svg>`
 };
 
-/* Split a role string like "Co-PI : Nagappa" into a { label, value } pair,
-   and colour it by whatever the text actually says rather than which JSON
-   field it came from — some entries carry a bare role word (e.g. "Co-PI")
-   in the wrong field, and trusting the field name alone would mislabel and
-   miscolour those chips. */
 function parseRole(raw, fallbackVariant, fallbackLabel) {
   if (!raw) return null;
   const trimmed = raw.trim();
@@ -68,16 +63,11 @@ function parseRole(raw, fallbackVariant, fallbackLabel) {
   if (/co-?pi|co-?principal/.test(probe)) variant = 'copi';
   else if (/\bpi\b|principal investigator/.test(probe)) variant = 'pi';
 
-  // A bare role keyword with no name attached (e.g. raw === "PI") — show it
-  // on its own instead of pairing it with a label that may not fit it.
   const bareKeyword = !label && /^(pi|co-pi|role)$/i.test(value);
 
   return { label: bareKeyword ? null : (label || fallbackLabel), value, variant };
 }
 
-/* Renders a PI/Co-PI/role entry as one more row in the same meta list as
-   Duration/Funding/Agency, so the card reads as a single consistent list
-   instead of a separate pill/chip cluster. Colour lives on the icon box. */
 function roleMetaRow(entry) {
   if (!entry?.value) return '';
   return `
@@ -90,9 +80,6 @@ function roleMetaRow(entry) {
     </div>`;
 }
 
-/* Project type (Sponsored / Consultancy) — always the first, highlighted
-   row of the meta list. Accepts loose spellings from the JSON
-   ("consultant", "Consultancy", "sponsored") and normalises them. */
 function projectTypeRow(rawType) {
   if (!rawType || !rawType.trim()) return '';
   const isConsultancy = /consult/i.test(rawType);
@@ -108,7 +95,6 @@ function projectTypeRow(rawType) {
     </div>`;
 }
 
-/* single project card  */
 function buildCard(project, type) {
   const badgeClass = type === 'ongoing' ? 'badge-ongoing' : 'badge-completed';
   const badgeLabel = type === 'ongoing' ? 'Ongoing'       : 'Completed';
@@ -160,11 +146,10 @@ function buildCard(project, type) {
 
         ${roleRowsHTML}
 
-      </div><!-- /.card-meta -->
+      </div>
     </article>`;
 }
 
-/* Render a grid panel */
 function renderGrid(type, data) {
   const grid  = document.getElementById(`grid-${type}`);
   const count = document.getElementById(`count-${type}`);
@@ -184,7 +169,6 @@ function renderGrid(type, data) {
   grid.innerHTML = projects.map(p => buildCard(p, type)).join('');
 }
 
-/*  Tab switching */
 function switchTab(tab) {
   ['ongoing', 'completed'].forEach(t => {
     const btn   = document.getElementById(`tab-${t}`);
@@ -197,14 +181,11 @@ function switchTab(tab) {
   });
 }
 
-/* Expose switchTab globally so inline onclick in HTML can reach it */
 window.switchTab = switchTab;
 
-/*  Fetch data & initialise  */
 async function init() {
   const grids = ['ongoing', 'completed'];
 
-  /* Show a loading placeholder in each grid while fetching */
   grids.forEach(type => {
     const grid = document.getElementById(`grid-${type}`);
     if (grid) grid.innerHTML = '<div class="loading-state">Loading projects…</div>';
@@ -220,7 +201,6 @@ async function init() {
     const data = await response.json();
 
     grids.forEach(type => renderGrid(type, data));
-
   } catch (err) {
     console.error('Failed to load project data:', err);
 
@@ -237,5 +217,4 @@ async function init() {
   }
 }
 
-/*  Boot  */
 init();

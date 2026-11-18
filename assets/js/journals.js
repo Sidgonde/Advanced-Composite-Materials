@@ -8,11 +8,8 @@ const BASE_PATH = window.location.hostname.includes("github.io")
 fetch(`${BASE_PATH}/data/journals.json`)
   .then((res) => res.json())
   .then((data) => {
-    /* ================= RIBBON ================= */
     document.getElementById("ribbonTitle").innerText = data.ribbon.title;
     document.getElementById("ribbonDesc").innerText = data.ribbon.description;
-
-    /* ================= RECENT ================= */
 
     document.getElementById("recentTitle").innerText =
       data["recent-highlights"]["recent-section-title"];
@@ -33,7 +30,7 @@ fetch(`${BASE_PATH}/data/journals.json`)
           data-full="${card["recent-description"].replace(/"/g, "&quot;")}">
           Read More
         </button>
-        
+
         <div class="buttons">
           <a href="${card["recent-link"]}" target="_blank">View</a>
         </div>
@@ -41,8 +38,6 @@ fetch(`${BASE_PATH}/data/journals.json`)
 
       recentContainer.appendChild(div);
     });
-
-    /* ================= PUBLICATIONS ================= */
 
     data.publications.forEach((item, index) => {
       const card = item.card;
@@ -85,8 +80,6 @@ fetch(`${BASE_PATH}/data/journals.json`)
       container.appendChild(div);
     });
 
-    /* ================= EVENTS ================= */
-
     const imageModalOverlay = document.getElementById("imageModalOverlay");
     const imageModalImg = document.getElementById("imageModalImg");
 
@@ -103,7 +96,6 @@ fetch(`${BASE_PATH}/data/journals.json`)
     }
 
     document.addEventListener("click", function (e) {
-      /* Modal for Recent */
       if (e.target.dataset.full) {
         document.getElementById("modalTitle").innerText =
           e.target.dataset.title;
@@ -112,7 +104,6 @@ fetch(`${BASE_PATH}/data/journals.json`)
         document.getElementById("modalOverlay").classList.add("active");
       }
 
-      /* Close Modal */
       if (
         e.target.classList.contains("close-modal") ||
         e.target.id === "modalOverlay"
@@ -120,7 +111,6 @@ fetch(`${BASE_PATH}/data/journals.json`)
         document.getElementById("modalOverlay").classList.remove("active");
       }
 
-      /* Expand Journal Description */
       if (e.target.classList.contains("expand-btn")) {
         const desc = e.target.previousElementSibling;
         desc.classList.toggle("expanded");
@@ -129,13 +119,11 @@ fetch(`${BASE_PATH}/data/journals.json`)
           : "Read More";
       }
 
-      /* Open Image Modal */
       const clickedThumb = e.target.closest(".journal-image img");
       if (clickedThumb) {
         openImageModal(clickedThumb);
       }
 
-      /* Close Image Modal */
       if (
         e.target.id === "imageModalClose" ||
         e.target.id === "imageModalOverlay"
@@ -154,4 +142,3 @@ fetch(`${BASE_PATH}/data/journals.json`)
     });
   })
   .catch((error) => console.error("Error loading JSON:", error));
-

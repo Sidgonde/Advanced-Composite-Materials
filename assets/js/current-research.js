@@ -2,7 +2,6 @@
   ? "/Advanced-Composite-Materials"
   : ".";
 
-/* â”€â”€ SVG icons â”€â”€ */
 const icons = {
   fallback: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
     stroke="#ffffff" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
@@ -19,18 +18,14 @@ const icons = {
   </svg>`
 };
 
-/* â”€â”€ Build one research card â”€â”€ */
 function buildCard(item, index) {
-  /* alternating: even index (0,2,4â€¦) = image-left, odd = image-right (flip) */
   const flipClass = index % 2 !== 0 ? ' flip' : '';
   const cardNum   = String(index + 1).padStart(2, '0');
 
-  /* keywords */
   const keywordsHTML = (item.keywords ?? [])
     .map(k => `<span class="keyword-tag">${k}</span>`)
     .join('');
 
-  /* thumbnail */
   const imgHTML = item.image
     ? `<img src="${BASE_PATH}/${item.image}" alt="${item.title}" loading="lazy"
          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
@@ -66,7 +61,6 @@ function buildCard(item, index) {
     </article>`;
 }
 
-/* â”€â”€ Toggle description expand / collapse â”€â”€ */
 function toggleDesc(index, btn) {
   const desc     = document.getElementById(`desc-${index}`);
   const expanded = desc.classList.toggle('expanded');
@@ -78,14 +72,11 @@ function toggleDesc(index, btn) {
     : `Show more <span class="arrow">&#x25BE;</span>`;
 }
 
-/* expose globally for inline onclick */
 window.toggleDesc = toggleDesc;
 
-/* â”€â”€ Render one domain panel â”€â”€ */
 function renderPanel(domainKey, items, container) {
   const safeKey = domainKey.replace(/\s+/g, '-').toLowerCase();
 
-  /* split title for teal highlight on last word */
   const words     = domainKey.split(' ');
   const last      = words.pop();
   const rest      = words.join(' ');
@@ -111,7 +102,6 @@ function renderPanel(domainKey, items, container) {
   container.appendChild(panelEl);
 }
 
-/* â”€â”€ Build tab buttons â”€â”€ */
 function buildTabs(domains, tabBar) {
   domains.forEach((domain, idx) => {
     const safeKey = domain.replace(/\s+/g, '-').toLowerCase();
@@ -129,7 +119,6 @@ function buildTabs(domains, tabBar) {
   });
 }
 
-/* â”€â”€ Tab switching â”€â”€ */
 function switchTab(activeKey, domains) {
   domains.forEach(domain => {
     const safeKey  = domain.replace(/\s+/g, '-').toLowerCase();
@@ -144,12 +133,11 @@ function switchTab(activeKey, domains) {
   });
 }
 
-/* â”€â”€ Fetch & initialise â”€â”€ */
 async function init() {
   const tabBar    = document.getElementById('tab-bar');
   const container = document.getElementById('panels-container');
 
-  container.innerHTML = '<div class="loading-state">Loading researchâ€¦</div>';
+  container.innerHTML = '<div class="loading-state">Loading research…</div>';
 
   try {
     const response = await fetch(`${BASE_PATH}/data/current-research.json`);
@@ -163,15 +151,13 @@ async function init() {
     buildTabs(domains, tabBar);
     domains.forEach(domain => renderPanel(domain, data[domain], container));
 
-    /* activate first panel */
     const firstKey = domains[0].replace(/\s+/g, '-').toLowerCase();
     document.getElementById(`panel-${firstKey}`)?.classList.add('active');
-
   } catch (err) {
     console.error('Failed to load current research:', err);
     container.innerHTML = `
       <div class="error-state">
-        âš ï¸ Could not load research data. Please try again later.<br>
+        ⚠️ Could not load research data. Please try again later.<br>
         <small style="opacity:.6">${err.message}</small>
       </div>`;
   }

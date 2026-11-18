@@ -2,8 +2,6 @@ const BASE_PATH = window.location.hostname.includes("github.io")
   ? "/Advanced-Composite-Materials"
   : ".";
 
-// Tab definitions: label → category key(s) in JSON.
-// `match` lists every category the tab shows (defaults to [key]).
 const TABS = [
   { label: "All",          key: "all" },
   { label: "Post Doc",     key: "postdoc" },
@@ -15,18 +13,14 @@ const TABS = [
   { label: "Alumni",       key: "alumni" },
 ];
 
-// Only these categories show a photo on their card; everyone else
-// (UG, student, project staff, alumni) gets a text-only card.
 const PHOTO_CATEGORIES = ["postdoc", "phd", "ms", "mtech"];
 
-// Escape text from JSON before putting it into HTML
 function esc(value) {
   return String(value ?? "")
     .replace(/&/g, "&amp;").replace(/</g, "&lt;")
     .replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 }
 
-// One labelled detail line — skipped entirely when the value is empty
 function detailRow(label, value) {
   if (!value || !String(value).trim()) return "";
   return `
@@ -40,16 +34,11 @@ document.addEventListener("DOMContentLoaded", () => {
   fetch(`${BASE_PATH}/data/team.json`)
     .then(res => res.json())
     .then(data => {
-
-      /* ── Ribbon ── */
       document.getElementById("ribbonTitle").innerText = data.ribbon.title;
       document.getElementById("ribbonDesc").innerText  = data.ribbon.description;
 
-      /* ── Team section with filter tabs ── */
-      const teamSection = document.querySelector(".team-section");
-      const container   = document.getElementById("teamContainer");
+      const container = document.getElementById("teamContainer");
 
-      // Inject filter tabs before the grid
       const filterBar = document.createElement("div");
       filterBar.classList.add("team-filter");
       filterBar.setAttribute("role", "tablist");
@@ -68,9 +57,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
       container.insertAdjacentElement("beforebegin", filterBar);
 
-      // Icon set: Email, Google Scholar, Profile (LinkedIn) — used for student cards & collaborators
-      // Icons always render, even when a value is missing from the data — a
-      // missing link just falls back to "#" instead of hiding the icon.
       function compactSocialLinks(member) {
         const s = member.socials || {};
         return `
@@ -85,7 +71,6 @@ document.addEventListener("DOMContentLoaded", () => {
         `;
       }
 
-      // Icon set: ResearchGate, Email, LinkedIn, GitHub — default for team cards
       function fullSocialLinks(member) {
         const s = member.socials || {};
         return `
@@ -97,7 +82,6 @@ document.addEventListener("DOMContentLoaded", () => {
         `;
       }
 
-      // Co-guide gets its own separate row on the card
       function coGuideRow(member) {
         if (!member.coGuide || !member.coGuide.trim()) return "";
         return `
@@ -107,7 +91,6 @@ document.addEventListener("DOMContentLoaded", () => {
           </div>`;
       }
 
-      // Alumni card (no photo): name, degree graduated, thesis title, current role
       function alumniCardBody(member) {
         const graduated = [member.degree, member.gradYear && `Graduated ${member.gradYear}`]
           .filter(Boolean).join(" · ");
@@ -119,9 +102,6 @@ document.addEventListener("DOMContentLoaded", () => {
         `;
       }
 
-      // Current member card. PhD layout: name, role, graduation year,
-      // thesis title, area of interest. Co-guide + social icons sit in a
-      // footer pinned to the bottom, so every card in a row lines up.
       function standardCardBody(member) {
         return `
           <h3 class="team-name">${esc(member.name)}</h3>
@@ -140,16 +120,11 @@ document.addEventListener("DOMContentLoaded", () => {
         `;
       }
 
-      // Photo cards first, text-only cards (alumni etc.) after, so rows
-      // don't mix tall photo cards with short text cards.
       const hasPhoto = m => PHOTO_CATEGORIES.includes(m.category || "other") && m.image;
       const members = [...data.Team.filter(hasPhoto), ...data.Team.filter(m => !hasPhoto(m))];
 
-      // Text-only cards start on a fresh row (see .team-row-break) so a
-      // short card never gets stretched next to a tall photo card.
       const firstTextOnly = members.find(m => !hasPhoto(m));
 
-      // Render all team cards
       members.forEach(member => {
         if (member === firstTextOnly && members.some(hasPhoto)) {
           const rowBreak = document.createElement("div");
@@ -176,8 +151,6 @@ document.addEventListener("DOMContentLoaded", () => {
         container.appendChild(card);
       });
 
-      // Descriptions are clamped to 3 lines so cards stay the same size;
-      // a "Read more" toggle appears only on cards whose text is cut off.
       container.addEventListener("click", e => {
         const btn = e.target.closest(".team-desc-toggle");
         if (!btn) return;
@@ -197,11 +170,9 @@ document.addEventListener("DOMContentLoaded", () => {
       document.fonts?.ready.then(updateDescToggles);
       window.addEventListener("resize", updateDescToggles);
 
-      // Filter logic
       function applyFilter(activeKey) {
         const cards = container.querySelectorAll(".team-card");
 
-        // Remove stale empty state
         container.querySelectorAll(".team-empty").forEach(el => el.remove());
 
         const tab = TABS.find(t => t.key === activeKey);
@@ -214,12 +185,10 @@ document.addEventListener("DOMContentLoaded", () => {
           if (match) visibleCount++;
         });
 
-        // Row break only matters when both kinds of card are visible
         container.querySelectorAll(".team-row-break").forEach(el => {
           el.hidden = activeKey !== "all";
         });
 
-        // Show empty state if no matches
         if (visibleCount === 0) {
           const empty = document.createElement("p");
           empty.classList.add("team-empty");
@@ -244,7 +213,6 @@ document.addEventListener("DOMContentLoaded", () => {
         applyFilter(btn.dataset.filter);
       });
 
-      /* ── Collaborators ── */
       const collabContainer = document.getElementById("teamContainer1");
       data.Collaborators.forEach(member => {
         const card = document.createElement("div");
@@ -263,7 +231,6 @@ document.addEventListener("DOMContentLoaded", () => {
         collabContainer.appendChild(card);
       });
 
-      /* ── Open Positions / Hiring ── */
       const positionsContainer = document.getElementById("positionsContainer");
       if (positionsContainer) {
         const positions = data.Positions || [];
@@ -293,7 +260,6 @@ document.addEventListener("DOMContentLoaded", () => {
              </p>`;
       }
 
-      /* ── Stats ── */
       const statsGrid = document.getElementById("statsGrid");
       data.Stats.forEach(stat => {
         const item = document.createElement("div");
@@ -307,8 +273,6 @@ document.addEventListener("DOMContentLoaded", () => {
         statsGrid.appendChild(item);
       });
 
-      /* ── Logos (rendered twice back-to-back for a seamless, gapless
-             marquee loop — see .clients-track's translateX(-50%) animation) ── */
       function buildLogoCard(client, isClone) {
         const a = document.createElement("a");
         a.href = client.url;
@@ -317,8 +281,6 @@ document.addEventListener("DOMContentLoaded", () => {
         a.rel = "noopener noreferrer";
         a.innerHTML = `<img src="${client.logo}" alt="${client.name} logo" loading="lazy">`;
         if (isClone) {
-          // Hide the duplicated set from assistive tech / keyboard nav so
-          // screen readers and tab order don't see each logo twice.
           a.setAttribute("aria-hidden", "true");
           a.tabIndex = -1;
         }
@@ -329,7 +291,6 @@ document.addEventListener("DOMContentLoaded", () => {
       data.Logo.forEach(client => logoContainer.appendChild(buildLogoCard(client, false)));
       data.Logo.forEach(client => logoContainer.appendChild(buildLogoCard(client, true)));
 
-      /* ── Expertise ── */
       const expertContainer = document.getElementById("expertiseContainer");
       renderExpertise(data.Expert);
       animateBars();
@@ -373,7 +334,6 @@ document.addEventListener("DOMContentLoaded", () => {
         };
         return icons[type] || "⭐";
       }
-
     })
     .catch(err => console.error("Error loading team data:", err));
 });

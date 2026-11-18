@@ -1,14 +1,9 @@
-/* ===============================
-   Global Reset & Base
-   =============================== */
-
 *{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* Improve text rendering consistency */
 html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
@@ -25,10 +20,6 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
 }
 
-/* ===============================
-   CSS Variables (Design Tokens)
-   =============================== */
-
 :root {
   --primary: #ffffff;
   --secondary: #001f30;
@@ -39,10 +30,6 @@ h1, h2, h3, h4, h5, h6 {
   --highlight: #58e3e1;
 }
 
-/* ===============================
-   Layout Utilities
-   =============================== */
-
 .container {
   width: 90%;
   max-width: 1200px;
@@ -50,7 +37,6 @@ h1, h2, h3, h4, h5, h6 {
   margin-right: auto;
 }
 
-/* Prevent images from breaking layouts */
 img,
 picture,
 video,
@@ -59,10 +45,6 @@ svg {
   max-width: 100%;
   display: block;
 }
-
-/* ===============================
-   Buttons
-   =============================== */
 
 .btn-primary {
   background-color: var(--primary);
@@ -80,32 +62,20 @@ svg {
   transform: scale(1.05);
 }
 
-/* ===============================
-   Accessibility & Defaults
-   =============================== */
-
-/* Remove default button styles inconsistencies */
 button {
   font-family: inherit;
 }
 
-/* Improve focus visibility without changing UI */
 :focus-visible {
   outline: 2px solid var(--highlight);
   outline-offset: 2px;
 }
 
-/* SVG CENTER ALIGNMENT */
-
-/* 1. Every inline SVG: block display, no extra space below */
 svg {
   display: block !important;
   flex-shrink: 0 !important;
 }
 
-/* 2. Icon wrapper boxes (.meta-icon, .modal-meta-icon, .doi-icon)
-      Force true centering — GitHub Pages inherits line-height
-      differences that break the default flex alignment        */
 .meta-icon,
 .modal-meta-icon,
 .doi-icon,
@@ -114,10 +84,9 @@ svg {
   align-items: center !important;
   justify-content: center !important;
   flex-shrink: 0 !important;
-  line-height: 1 !important;          /* neutralise inherited line-height  */
+  line-height: 1 !important;
 }
 
-/* 3. SVGs inside icon boxes — explicit block + centred size  */
 .meta-icon svg,
 .modal-meta-icon svg,
 .doi-icon svg,
@@ -132,55 +101,43 @@ svg {
   height: 22px !important;
 }
 
-/* 4. Role pip dot — inline-flex rows with mixed content      */
 .meta-row,
 .modal-meta-row,
-.rcard-doi,
-.role-pill {
-  align-items: center  !important;     /* override flex-start where set    */
+.rcard-doi {
+  align-items: center !important;
 }
 
-/* 5. Breadcrumb sep and overlay-timeline SVG                 */
 .overlay-timeline svg,
 .breadcrumb svg {
   display: inline-block !important;
   vertical-align: middle !important;
   position: relative !important;
-  top: -1px !important;               /* sub-pixel nudge for text baseline */
+  top: -1px !important;
 }
 
-/* 6. Tab dot (the teal bullet in active tabs)                */
 .tab-dot {
   display: inline-flex !important;
   align-items: center !important;
   vertical-align: middle !important;
 }
 
-/* 7. Toggle arrow in show-more button                        */
 .toggle-desc .arrow {
   display: inline-flex !important;
   align-items: center !important;
   line-height: 1 !important;
 }
 
-/* 8. Modal nav + close SVGs                                  */
 .modal-close svg,
 .modal-nav svg {
   display: block  !important;
   margin: auto  !important;
 }
 
-/* 9. Gallery zoom badge SVG                                  */
 .gallery-item-zoom svg {
   display: block  !important;
   margin: auto  !important;
 }
 
-/* 10. Thumb fallback centred SVG
-      (display is intentionally NOT forced here — each of these is
-      shown/hidden via inline style from JS depending on whether the
-      item actually has a valid image; forcing display:flex here used
-      to override that and keep the fallback visible even on success) */
 .thumb-fallback,
 .modal-img-fallback,
 .img-placeholder {
@@ -194,10 +151,6 @@ svg {
   display: block  !important;
 }
 
-/* ===============================
-   Scroll Reveal
-   =============================== */
-
 .reveal {
   opacity: 0;
   transform: translateY(24px);
@@ -209,7 +162,6 @@ svg {
   transform: translateY(0);
 }
 
-/* Honour prefers-reduced-motion: skip animations entirely */
 @media (prefers-reduced-motion: reduce) {
   .reveal {
     opacity: 1;
@@ -217,10 +169,6 @@ svg {
     transition: none;
   }
 }
-
-/* ===============================
-   Loading Skeletons
-   =============================== */
 
 @keyframes skeleton-shimmer {
   0% { background-position: 200% 0; }
@@ -256,10 +204,6 @@ svg {
     animation: none;
   }
 }
-
-/* ===============================
-   Visually Hidden (accessibility)
-   =============================== */
 
 .sr-only {
   position: absolute;

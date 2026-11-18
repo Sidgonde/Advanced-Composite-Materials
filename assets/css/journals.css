@@ -1,14 +1,8 @@
-/* ================= GLOBAL ================= */
-
 .container {
   width: 90%;
   max-width: 1200px;
   margin: auto;
 }
-
-/* ================= RIBBON ================= */
-
-/* Ribbon */
 
 .ribbon {
   text-align: center;
@@ -27,8 +21,6 @@
   max-width: 700px;
   margin: auto;
 }
-
-/* ================= RECENT ================= */
 
 .recent-section {
   padding: 70px 0;
@@ -91,8 +83,6 @@
   text-decoration: underline;
 }
 
-/* ================= JOURNALS ================= */
-
 .journals-section {
   padding: 80px 0;
 }
@@ -154,8 +144,6 @@
   max-height: none;
 }
 
-/* ================= TAGS ================= */
-
 .tags {
   margin: 15px 0;
 }
@@ -168,8 +156,6 @@
   font-size: 0.75rem;
   margin: 5px 5px 0 0;
 }
-
-/* ================= BUTTON LINKS ================= */
 
 .buttons {
   margin-top: auto;
@@ -190,8 +176,6 @@
 .buttons a:hover {
   background: #1e293b;
 }
-
-/* ================= MODAL ================= */
 
 .modal-overlay {
   position: fixed;
@@ -226,8 +210,6 @@
   font-size: 22px;
   cursor: pointer;
 }
-
-/* ================= IMAGE MODAL ================= */
 
 .image-modal-overlay {
   position: fixed;
@@ -296,8 +278,6 @@
 .image-modal-close:hover {
   background: rgba(0, 0, 0, 0.75);
 }
-
-/* ================= RESPONSIVE ================= */
 
 @media (max-width: 900px) {
   .journal-card,

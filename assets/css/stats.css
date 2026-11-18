@@ -1,17 +1,9 @@
-/* ═══════════════════════════════════════════════
-   stats.css  — Stats section
-   Responsive only — zero layout/style changes
-═══════════════════════════════════════════════ */
-
 :root {
   --accent: #4fe1dc;
   --dark:   #003b3b;
   --muted:  #777;
 }
 
-/* ════════════════════════════════
-   STATS SECTION
-════════════════════════════════ */
 .stats-section {
   padding: 80px 20px;
   background: #fff;
@@ -25,16 +17,14 @@
   gap: 50px;
 }
 
-/* ── Stat Card ── */
 .stat-card {
   display: flex;
   align-items: center;
   gap: 25px;
 }
 
-/* ── Circle ── */
 .circle {
-  width: 150px;              /* equal width + height = perfect circle */
+  width: 150px;
   height: 150px;
   border-radius: 50%;
   background: var(--accent);
@@ -58,7 +48,6 @@
   justify-content: center;
 }
 
-/* ── Stat Info ── */
 .stat-info small {
   color: var(--accent);
   letter-spacing: 1px;
@@ -76,11 +65,6 @@
   max-width: 220px;
 }
 
-/* ════════════════════════════════
-   RESPONSIVE
-════════════════════════════════ */
-
-/* ── Tablet ── */
 @media (max-width: 768px) {
   .stats-section {
     padding: 60px 20px;
@@ -92,21 +76,19 @@
   }
 }
 
-/* ── Mobile (600px) — was already present ── */
 @media (max-width: 600px) {
   .stat-card {
-    flex-direction: column;  /* already existed */
-    text-align: center;      /* already existed */
+    flex-direction: column;
+    text-align: center;
     align-items: center;
   }
 
   .stat-info p {
-    max-width: 100%;         /* ← remove max-width cap when centred */
+    max-width: 100%;
     margin: 0 auto;
   }
 }
 
-/* ── Small mobile ── */
 @media (max-width: 400px) {
   .stats-section {
     padding: 48px 16px;
