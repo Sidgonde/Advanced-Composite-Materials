@@ -13,9 +13,7 @@
   ],
 
   "founder": [
-    { "initial": "NS", "image": "./assets/images/PI_profile.jpg", "name": "Dr. Nagappa Siddgonde", "role": "Assistant Professor, Dept. of AE IIT Madras", "bio": "Dr Siddgonde leads the ACMS Laboratory at IIT Madras. His research focuses on advanced and sustainable composite materials, manufacturing, experimental characterization, and multiscale modelling.
-
-With over ten years of research experience, his work bridges microstructural architecture, manufacturing, and structural performance, targeting next-generation composites for aerospace, defence, and engineering applications.", "cv": "./assets/images/Nagappa_CV.pdf"
+    { "initial": "NS", "image": "./assets/images/PI_profile.jpg", "name": "Dr. Nagappa Siddgonde", "role": "Assistant Professor, Dept. of AE IIT Madras", "bio": "Dr Siddgonde leads the ACMS Laboratory at IIT Madras. His research focuses on advanced and sustainable composite materials, manufacturing, experimental characterization, and multiscale modellingWith over ten years of research experience, his work bridges microstructural architecture, manufacturing, and structural performance, targeting next-generation composites for aerospace, defence, and engineering applications.", "cv": "./assets/images/Nagappa_CV.pdf"
     }
   ],
 
