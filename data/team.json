@@ -6,7 +6,7 @@
   "Team": [
     {
       "name": "Dharani B",
-      "role": "PhD Research Scholar",
+      "role": "PhD Scholar",
       "category": "phd",
       "image": "./assets/images/Dharani.png",
       "gradYear": "",
@@ -17,7 +17,7 @@
     },
     {
       "name": "Vislavath Uday Kiran",
-      "role": "PhD Research Scholar",
+      "role": "PhD Scholar",
       "category": "phd",
       "image": "./assets/images/Uday.png",
       "gradYear": "",
@@ -28,7 +28,7 @@
     },
     {
       "name": "Parag Garg",
-      "role": "PhD Research Scholar",
+      "role": "PhD Scholar",
       "category": "phd",
       "image": "./assets/images/Parag.jpg",
       "gradYear": "",
@@ -55,6 +55,22 @@
     },
     {
       "name": "Potula Vamshidhar Reddy",
+      "role": "M.Tech Student",
+      "category": "mtech",
+      "image": "./assets/images/P_Vamshidhar.png",
+      "description": "Area of interest: Aircraft Strcutural Repairs.",
+      "socials": { "linkedin": "#", "researchGate": "#", "g_scholar": "#", "email": "mailto:ae25m001@smail.iitm.ac.in" }
+    },
+    {
+      "name": "Rakesh",
+      "category": "alumni",
+      "degree": "mtech",
+      "gradYear": "",
+      "thesis": "",
+      "currentRole": ""
+    },
+    {
+      "name": "James",
       "category": "alumni",
       "degree": "M.Tech",
       "gradYear": "",
