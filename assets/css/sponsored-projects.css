@@ -161,11 +161,11 @@ main {
 }
 .section-title span { color: var(--teal); }
 .project-count {
-  font-size: .82rem;
-  font-weight: 500;
-  color: var(--text-soft);
-  background: var(--cream);
-  border: 1px solid var(--border);
+  font-size: .85rem;
+  font-weight: 600;
+  color: var(--navy);
+  background: var(--white);
+  border: 1px solid var(--teal-border);
   padding: 5px 14px;
   border-radius: 50px;
 }

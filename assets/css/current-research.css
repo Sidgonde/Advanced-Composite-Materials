@@ -190,20 +190,27 @@ main {
 .rcard.flip .rcard-thumb { order: 2; }
 .rcard.flip .rcard-body  { order: 1; }
 
-/* Image column stretches to the full card height; the image fills it edge to edge. */
+/* Image column stretches to the full card height (same grey behind the image).
+   The image itself has a fixed size and is never cropped, so "Show more" doesn't resize it. */
 .rcard-thumb {
   position: relative;
   min-height: 280px;
   align-self: stretch;
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
 }
-.rcard-thumb img {
-  position: absolute; inset: 0;
-  width: 100%; height: 100%;
-  object-fit: cover; object-position: center;
-  display: block;
+.rcard-thumb:has(img:not([style*="none"])) {
   background: #f1f5f9;
+}
+.rcard-thumb img {
+  width: 100%;
+  height: 280px;
+  object-fit: contain; object-position: center;
+  display: block;
+  flex-shrink: 0;
 }
 
 .thumb-fallback {
@@ -344,6 +351,7 @@ main {
   }
   .rcard-thumb,
   .rcard.flip .rcard-thumb { order: 1; height: 220px; min-height: 0; align-self: start; }
+  .rcard-thumb img { height: 220px; }
   .rcard-body,
   .rcard.flip .rcard-body  { order: 2; }
   main  { padding: 40px 4% 64px; }
