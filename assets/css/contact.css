@@ -223,7 +223,6 @@ textarea:focus {
   margin-bottom: 6px;
 }
 
-.position-type,
 .position-status {
   display: inline-flex;
   align-items: center;
@@ -234,11 +233,6 @@ textarea:focus {
   text-transform: uppercase;
   padding: 3px 9px;
   border-radius: 50px;
-}
-
-.position-type {
-  background: var(--secondary);
-  color: #fff;
 }
 
 .position-status {

@@ -71,7 +71,6 @@ function positionCard(pos) {
       ${esc(pos.linkLabel || "Apply / Enquire")} <span aria-hidden="true">→</span>
     </a>` : "";
   const badges = [
-    filled(pos.type) ? `<span class="position-type">${esc(pos.type)}</span>` : "",
     filled(pos.status) ? `<span class="position-status"><span class="pos-dot"></span>${esc(pos.status)}</span>` : "",
   ].join("");
 
