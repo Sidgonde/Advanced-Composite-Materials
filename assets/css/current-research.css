@@ -140,7 +140,7 @@ main {
   font-weight: 700;
   color: var(--navy);
 }
-.section-title span { color: var(--teal); }
+.section-title span { color: var(--highlight-dark); }
 .research-count {
   font-size: .85rem; font-weight: 600;
   color: var(--navy);
@@ -231,8 +231,7 @@ main {
 .rcard-index {
   font-size: .78rem; font-weight: 700;
   letter-spacing: .12em; text-transform: uppercase;
-  color: var(--teal);
-  opacity: .75;
+  color: var(--highlight-dark);
 }
 
 .rcard-title {
