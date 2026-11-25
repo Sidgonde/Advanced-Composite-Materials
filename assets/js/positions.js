@@ -21,33 +21,30 @@ function linkify(value) {
   );
 }
 
-const iconBubble = (icon, cls) =>
+const iconSpan = (icon, cls) =>
   filled(icon) ? `<span class="${cls}" aria-hidden="true">${esc(icon)}</span>` : "";
 
-// "areas": research-area tiles. Each item is a plain string, or { icon, title, text }.
+// "areas": compact chips. Each item is a plain string, or { icon, title, text }.
+// (text, if given, shows as a tooltip on the chip)
 function areasBlock(pos) {
-  const tiles = (pos.areas || [])
+  const chips = (pos.areas || [])
     .map(a => (typeof a === "string" ? { title: a } : a || {}))
     .filter(a => filled(a.title) || filled(a.text))
     .map(a => `
-      <li class="pos-area">
-        ${iconBubble(a.icon, "pos-area-icon")}
-        <div>
-          ${filled(a.title) ? `<h4 class="pos-area-title">${esc(a.title)}</h4>` : ""}
-          ${filled(a.text) ? `<p class="pos-area-text">${linkify(a.text)}</p>` : ""}
-        </div>
+      <li class="pos-chip"${filled(a.text) && filled(a.title) ? ` title="${esc(a.text)}"` : ""}>
+        ${iconSpan(a.icon, "pos-chip-icon")}${esc(filled(a.title) ? a.title : a.text)}
       </li>`);
-  if (!tiles.length) return "";
+  if (!chips.length) return "";
   return `
-    <div class="pos-areas-wrap">
-      <span class="pos-eyebrow">${esc(pos.areasTitle || "Research Areas")}</span>
-      <ul class="pos-areas">${tiles.join("")}</ul>
+    <div class="pos-row">
+      <span class="pos-row-label">${esc(pos.areasTitle || "Research Areas")}</span>
+      <ul class="pos-chips">${chips.join("")}</ul>
     </div>`;
 }
 
-// "details": Key Details timeline. Each row is { icon, label, value }; add as many as needed.
+// "details": compact two-column grid. Each row is { icon, label, value }; add as many as needed.
 // Older fields (start / deadline / eligibility) are still shown if present.
-function detailsBlock(pos, button) {
+function detailsBlock(pos) {
   const rows = [
     ...(pos.details || []),
     { icon: "📅", label: "Start", value: pos.start },
@@ -57,20 +54,13 @@ function detailsBlock(pos, button) {
     .filter(d => d && filled(d.value))
     .map(d => `
       <li class="pos-detail">
-        <span class="pos-detail-icon" aria-hidden="true">${filled(d.icon) ? esc(d.icon) : "•"}</span>
+        ${iconSpan(d.icon, "pos-detail-icon")}
         <div>
           ${filled(d.label) ? `<span class="pos-detail-label">${esc(d.label)}</span>` : ""}
           <span class="pos-detail-value">${linkify(d.value)}</span>
         </div>
       </li>`);
-  if (!rows.length && !button) return "";
-  return `
-    <aside class="pos-details-panel">
-      ${rows.length ? `
-        <span class="pos-eyebrow">${esc(pos.detailsTitle || "Key Details")}</span>
-        <ul class="pos-details">${rows.join("")}</ul>` : ""}
-      ${button}
-    </aside>`;
+  return rows.length ? `<ul class="pos-details">${rows.join("")}</ul>` : "";
 }
 
 function positionCard(pos) {
@@ -82,24 +72,21 @@ function positionCard(pos) {
     </a>` : "";
   const badges = [
     filled(pos.type) ? `<span class="position-type">${esc(pos.type)}</span>` : "",
-    filled(pos.status) ? `<span class="position-status"><span class="pos-pulse"></span>${esc(pos.status)}</span>` : "",
+    filled(pos.status) ? `<span class="position-status"><span class="pos-dot"></span>${esc(pos.status)}</span>` : "",
   ].join("");
-
-  const areas = areasBlock(pos);
-  const details = detailsBlock(pos, button);
 
   return `
     <article class="position-card">
-      <header class="pos-banner">
-        ${badges ? `<div class="position-head">${badges}</div>` : ""}
-        <h3 class="position-title">${iconBubble(pos.icon, "pos-title-icon")}<span>${esc(pos.title)}</span></h3>
-        ${filled(pos.description) ? `<p class="position-desc">${linkify(pos.description)}</p>` : ""}
-      </header>
-      ${areas || details ? `
-        <div class="pos-body${areas && details ? "" : " pos-body--single"}">
-          ${areas}
-          ${details}
-        </div>` : ""}
+      <div class="pos-top">
+        <div class="pos-top-text">
+          ${badges ? `<div class="position-head">${badges}</div>` : ""}
+          <h3 class="position-title">${iconSpan(pos.icon, "pos-title-icon")}<span>${esc(pos.title)}</span></h3>
+        </div>
+        ${button}
+      </div>
+      ${filled(pos.description) ? `<p class="position-desc">${linkify(pos.description)}</p>` : ""}
+      ${areasBlock(pos)}
+      ${detailsBlock(pos)}
     </article>`;
 }
 
