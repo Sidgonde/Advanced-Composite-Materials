@@ -246,34 +246,6 @@
 .status-limited     .fac-status-dot { background: #3b82f6; }
 .status-limited                      { color: #1d4ed8; }
 
-/* Per-card "contact for this facility" line */
-.fac-contact {
-  display: flex;
-  align-items: flex-start;
-  gap: 8px;
-  margin: 12px 0 0;
-  padding-top: 10px;
-  border-top: 1px solid #f1f5f9;
-  font-size: 12.5px;
-  line-height: 1.5;
-  color: #475569;
-}
-
-.fac-contact i {
-  color: #009688;
-  font-size: 14px;
-  line-height: 1.3;
-}
-
-.fac-contact a {
-  color: #00796b;
-  font-weight: 600;
-  text-decoration: none;
-  word-break: break-word;
-}
-
-.fac-contact a:hover { text-decoration: underline; }
-
 /* Centered booking/queries note under all machine cards */
 .fac-booking-note {
   margin: 36px auto 0;

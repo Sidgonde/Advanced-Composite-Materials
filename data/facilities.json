@@ -11,14 +11,6 @@
     { "value": "24/7", "label": "Access for Researchers" }
   ],
 
-  "defaultContact": {
-    "name": "Dr. R. Venkatesh",
-    "email": "facilities@acm.iitm.ac.in",
-    "phone": "",
-    "link": "",
-    "linkLabel": "Booking link"
-  },
-
   "bookingNote": "For instrument-related queries or to book any machine, contact <a href=\"mailto:facilities@acm.iitm.ac.in\">facilities@acm.iitm.ac.in</a>.",
 
   "equipment": [
@@ -36,8 +28,7 @@
         "Digital image correlation ready"
       ],
       "availabilityLabel": "Location: Composite Technology Centre, IITM",
-      "status": "Available",
-      "contact": { "name": "", "email": "", "phone": "", "link": "" }
+      "status": "Available"
     },
     {
       "name": "Autoclave",
@@ -53,8 +44,7 @@
         "Multi-zone heating"
       ],
       "availabilityLabel": "Location: Composite Technology Centre, IITM",
-      "status": "Available",
-      "contact": { "name": "", "email": "", "phone": "", "link": "" }
+      "status": "Available"
     },
     {
       "name": "Differential Scanning Calorimeter",
@@ -70,8 +60,7 @@
         "Auto-sampler available"
       ],
       "availabilityLabel": "Location: Composite Technology Centre, IITM",
-      "status": "Available",
-      "contact": { "name": "", "email": "", "phone": "", "link": "" }
+      "status": "Available"
     },
     {
       "name": "Filament Winding Machine",
@@ -87,8 +76,7 @@
         "Compatible with glass, carbon, aramid"
       ],
       "availabilityLabel": "Location: Composite Technology Centre, IITM",
-      "status": "Available",
-      "contact": { "name": "", "email": "", "phone": "", "link": "" }
+      "status": "Available"
     },
     {
       "name": "Raman Spectrometer",
@@ -104,8 +92,7 @@
         "Mapping and imaging mode"
       ],
       "availabilityLabel": "Machine Available",
-      "status": "Maintenance",
-      "contact": { "name": "", "email": "", "phone": "", "link": "" }
+      "status": "Maintenance"
     },
     {
       "name": "High-Performance Computing Cluster",
@@ -121,8 +108,7 @@
         "ABAQUS, ANSYS, LAMMPS licensed"
       ],
       "availabilityLabel": "Machine Available",
-      "status": "Available",
-      "contact": { "name": "", "email": "", "phone": "", "link": "" }
+      "status": "Available"
     },
     {
       "name": "Dynamic Mechanical Analyser",
@@ -138,8 +124,7 @@
         "Multiple clamp geometries"
       ],
       "availabilityLabel": "Location: Composite Technology Centre, IITM",
-      "status": "Available",
-      "contact": { "name": "", "email": "", "phone": "", "link": "" }
+      "status": "Available"
     }
   ],
 
