@@ -88,6 +88,40 @@
   height: 100%;
 }
 
+/* Home slider arrows + dots: Bootstrap's white defaults vanish on the light image background */
+#aboutCarouselId .carousel-control-prev,
+#aboutCarouselId .carousel-control-next {
+  width: 15%;
+  opacity: 1;
+}
+
+#aboutCarouselId .carousel-control-prev-icon,
+#aboutCarouselId .carousel-control-next-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background-color: rgba(0, 31, 48, 0.75);
+  background-size: 45%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  transition: background-color 0.2s ease;
+}
+
+#aboutCarouselId .carousel-control-prev:hover .carousel-control-prev-icon,
+#aboutCarouselId .carousel-control-next:hover .carousel-control-next-icon,
+#aboutCarouselId .carousel-control-prev:focus-visible .carousel-control-prev-icon,
+#aboutCarouselId .carousel-control-next:focus-visible .carousel-control-next-icon {
+  background-color: var(--secondary);
+}
+
+#aboutCarouselId .carousel-indicators [data-bs-target] {
+  background-color: var(--secondary);
+  opacity: 0.35;
+}
+
+#aboutCarouselId .carousel-indicators .active {
+  opacity: 1;
+}
+
 /* Home slider: click a slide to view it enlarged */
 .carousel-inner img.zoomable {
   cursor: zoom-in;
