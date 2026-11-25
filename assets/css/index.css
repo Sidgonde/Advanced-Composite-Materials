@@ -42,7 +42,7 @@
 
 .services-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
   gap: 30px;
   margin-top: -220px;
   align-items: stretch;
@@ -223,7 +223,11 @@
 }
 
 .feature-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 26px;
+  line-height: 1;
   padding: 14px;
   background: var(--highlight);
   border-radius: 50%;
@@ -345,7 +349,7 @@
   }
 
   .feature-item {
-    align-items: center;
+    align-items: flex-start;
     text-align: left;
   }
 

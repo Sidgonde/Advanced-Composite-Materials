@@ -1,6 +1,5 @@
-const BASE_PATH = window.location.hostname.includes("github.io")
-  ? "/Advanced-Composite-Materials"
-  : ".";
+// Home page "Blogs & Announcements": latest 6 updates + detail modal.
+import { esc, fetchJSON } from "./utils.js";
 
 let latestItems = [];
 
@@ -17,8 +16,7 @@ async function loadUpdates() {
   const grid = document.getElementById("updatesGrid");
   if (!grid) return;
 
-  const response = await fetch(`${BASE_PATH}/data/updates.json`);
-  const items = await response.json();
+  const items = await fetchJSON("updates.json");
 
   const sorted = [...items].sort((a, b) => new Date(b.date) - new Date(a.date));
   latestItems = sorted.slice(0, 6);
@@ -31,11 +29,11 @@ async function loadUpdates() {
 
     card.innerHTML = `
       <div class="update-meta">
-        <span class="update-tag ${item.type}">${item.type}</span>
+        <span class="update-tag ${esc(item.type)}">${esc(item.type)}</span>
         <span class="update-date">${formatDate(item.date)}</span>
       </div>
-      <h3 class="update-title">${item.title}</h3>
-      <p class="update-desc">${item.description}</p>
+      <h3 class="update-title">${esc(item.title)}</h3>
+      <p class="update-desc">${esc(item.description)}</p>
       <button type="button" class="update-link" data-index="${index}">Read more →</button>
     `;
 
@@ -87,4 +85,4 @@ document.addEventListener("keydown", e => {
   }
 });
 
-document.addEventListener("DOMContentLoaded", loadUpdates);
+loadUpdates().catch(err => console.error("Updates load failed:", err));

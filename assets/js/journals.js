@@ -1,12 +1,11 @@
-﻿const container = document.getElementById("journalsContainer");
+// Publications (journals) page.
+import { fetchJSON } from "./utils.js";
+
+const container = document.getElementById("journalsContainer");
 const recentContainer = document.getElementById("recentCards");
 
-const BASE_PATH = window.location.hostname.includes("github.io")
-  ? "/Advanced-Composite-Materials"
-  : ".";
 
-fetch(`${BASE_PATH}/data/journals.json`)
-  .then((res) => res.json())
+fetchJSON("journals.json")
   .then((data) => {
     document.getElementById("ribbonTitle").innerHTML = data.ribbon.title;
     document.getElementById("ribbonDesc").innerHTML = data.ribbon.description;

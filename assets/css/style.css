@@ -49,6 +49,23 @@ svg {
   display: block;
 }
 
+[hidden] {
+  display: none !important;
+}
+
+/* Site icons (assets/js/icons.js): 1em by default so they scale with the text, colour from the text.
+   :where() keeps these defaults at zero specificity, so any page rule (e.g. ".card-icon svg") wins. */
+.icon {
+  display: inline-block;
+  flex-shrink: 0;
+  vertical-align: -0.125em;
+}
+
+:where(.icon:not([width])) {
+  width: 1em;
+  height: 1em;
+}
+
 .btn-primary {
   background-color: var(--primary);
   color: var(--dark-text);

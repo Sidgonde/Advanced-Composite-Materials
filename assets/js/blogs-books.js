@@ -1,15 +1,14 @@
-﻿document.addEventListener("DOMContentLoaded", function () {
+// Blogs & Books page with type tabs.
+import { fetchJSON } from "./utils.js";
+
+document.addEventListener("DOMContentLoaded", function () {
   const grid = document.getElementById("cardGrid");
   const tabs = document.querySelectorAll(".tab");
 
   let allItems = [];
 
- const BASE_PATH = window.location.hostname.includes("github.io")
-    ? "/Advanced-Composite-Materials"
-    : ".";
 
-  fetch(`${BASE_PATH}/data/blogs-books.json`)
-    .then(res => res.json())
+  fetchJSON("blogs-books.json")
     .then(data => {
       document.getElementById("ribbonTitle").innerHTML = data.ribbon.title;
       document.getElementById("ribbonDesc").innerHTML = data.ribbon.description;
@@ -17,7 +16,8 @@
       allItems = data.items;
 
       renderCards(allItems);
-    });
+    })
+    .catch(err => console.error("Blogs & Books load failed:", err));
 
   tabs.forEach(tab => {
     tab.addEventListener("click", () => {

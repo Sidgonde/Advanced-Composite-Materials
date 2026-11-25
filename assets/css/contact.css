@@ -227,6 +227,7 @@ textarea:focus {
 
 /* Faint watermark in the corner */
 .pos-watermark {
+  color: var(--secondary);
   position: absolute;
   right: -10px;
   bottom: -26px;
@@ -337,7 +338,9 @@ textarea:focus {
 
 .pos-title-icon {
   flex-shrink: 0;
+  display: inline-flex;
   font-size: 18px;
+  color: var(--highlight-dark);
 }
 
 /* Buttons: primary (Apply) + outline (Enquire) */
@@ -427,10 +430,6 @@ textarea:focus {
   font-size: 13px;
   font-weight: 600;
   color: var(--secondary);
-}
-
-.pos-chip-icon {
-  font-size: 13px;
 }
 
 /* View / Hide details toggle */
@@ -551,8 +550,10 @@ textarea:focus {
 
 .pos-detail-icon {
   flex-shrink: 0;
-  font-size: 14px;
-  line-height: 1.45;
+  display: inline-flex;
+  margin-top: 2px;
+  font-size: 15px;
+  color: #00796b;
 }
 
 .pos-detail-label {
@@ -570,6 +571,9 @@ textarea:focus {
 
 /* Copy-email button */
 .pos-copy {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
   margin-left: 6px;
   padding: 1px 6px;
   border: 1px solid #d9e2e6;

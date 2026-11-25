@@ -18,7 +18,7 @@
       "name": "Universal Testing Machine",
       "model": "Instron 8801",
       "category": "Mechanical",
-      "icon": "graph-up",
+      "icon": "chart-line",
       "image": "./assets/images/IITKgp.jpg",
       "description": "Servo-hydraulic testing system for fatigue, tensile, compression and fracture testing of composite specimens.",
       "specs": [
@@ -34,7 +34,7 @@
       "name": "Autoclave",
       "model": "Thermal Equipment Corp TA-36",
       "category": "Fabrication",
-      "icon": "fire",
+      "icon": "flame",
       "image": "",
       "description": "Precision autoclave for high-performance thermoset and thermoplastic composite laminate consolidation under controlled temperature and pressure.",
       "specs": [
@@ -50,7 +50,7 @@
       "name": "Differential Scanning Calorimeter",
       "model": "TA Instruments DSC 250",
       "category": "Thermal",
-      "icon": "thermometer-half",
+      "icon": "thermometer",
       "image": "",
       "description": "Measures thermal transitions including cure kinetics, Tg, crystallinity and specific heat of polymer composites.",
       "specs": [
@@ -66,7 +66,7 @@
       "name": "Filament Winding Machine",
       "model": "McClean Anderson MW-Series",
       "category": "Fabrication",
-      "icon": "arrow-repeat",
+      "icon": "refresh-cw",
       "image": "",
       "description": "CNC-controlled 6-axis filament winding for manufacturing cylindrical and complex-geometry fibre-reinforced composite structures.",
       "specs": [
@@ -82,7 +82,7 @@
       "name": "Raman Spectrometer",
       "model": "Horiba LabRAM HR Evolution",
       "category": "Characterization",
-      "icon": "broadcast",
+      "icon": "radio",
       "image": "",
       "description": "Confocal Raman microscopy for molecular characterisation of fibres, matrices and fibre–matrix interfaces in composites.",
       "specs": [
@@ -98,7 +98,7 @@
       "name": "High-Performance Computing Cluster",
       "model": "In-house HPC — 48 cores",
       "category": "Computational",
-      "icon": "hdd-stack",
+      "icon": "server",
       "image": "",
       "description": "Dedicated cluster for FEM simulations, molecular dynamics and machine-learning assisted material modelling.",
       "specs": [
@@ -152,7 +152,7 @@
       ]
     },
     {
-      "icon": "person-badge",
+      "icon": "id-card",
       "title": "Training & Support",
       "items": [
         "Instrument-specific training by lab in-charge",
@@ -163,7 +163,7 @@
       ]
     },
     {
-      "icon": "envelope",
+      "icon": "mail",
       "title": "Contact & Charges",
       "items": [
         "Lab Manager: Dr. R. Venkatesh",

@@ -1,6 +1,6 @@
-const BASE_PATH = window.location.hostname.includes("github.io")
-  ? "/Advanced-Composite-Materials"
-  : ".";
+// Team page: filterable member cards, collaborators, stats, expertise, logo marquee.
+import { esc, fetchJSON } from "./utils.js";
+import { icon } from "./icons.js";
 
 const TABS = [
   { label: "All",          key: "all" },
@@ -15,12 +15,6 @@ const TABS = [
 
 const PHOTO_CATEGORIES = ["postdoc", "phd", "ms", "mtech"];
 
-function esc(value) {
-  return String(value ?? "")
-    .replace(/&/g, "&amp;").replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;").replace(/"/g, "&quot;");
-}
-
 function detailRow(label, value) {
   if (!value || !String(value).trim()) return "";
   return `
@@ -31,8 +25,7 @@ function detailRow(label, value) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  fetch(`${BASE_PATH}/data/team.json`)
-    .then(res => res.json())
+  fetchJSON("team.json")
     .then(data => {
       document.getElementById("ribbonTitle").innerHTML = data.ribbon.title;
       document.getElementById("ribbonDesc").innerHTML  = data.ribbon.description;
@@ -60,14 +53,9 @@ document.addEventListener("DOMContentLoaded", () => {
       function compactSocialLinks(member) {
         const s = member.socials || {};
         return `
-          <a href="${s.email || "#"}" aria-label="Email"><i class="bi bi-envelope"></i></a>
-          <a href="${s.g_scholar || "#"}" target="_blank" rel="noopener" aria-label="Google Scholar">
-            <svg class="gscholar-icon" width="16" height="16" fill="currentColor" viewBox="0 0 24 24" role="img" xmlns="http://www.w3.org/2000/svg">
-              <title>Google Scholar icon</title>
-              <path d="M12 24a7 7 0 1 1 0-14 7 7 0 0 1 0 14zm0-24L0 9.5l4.838 3.94A8 8 0 0 1 12 9a8 8 0 0 1 7.162 4.44L24 9.5z"/>
-            </svg>
-          </a>
-          <a href="${s.linkedin || "#"}" target="_blank" rel="noopener" aria-label="Profile"><i class="bi bi-linkedin"></i></a>
+          <a href="${s.email || "#"}" aria-label="Email">${icon("mail", { size: 18 })}</a>
+          <a href="${s.g_scholar || "#"}" target="_blank" rel="noopener" aria-label="Google Scholar">${icon("google-scholar", { size: 16 })}</a>
+          <a href="${s.linkedin || "#"}" target="_blank" rel="noopener" aria-label="LinkedIn">${icon("linkedin", { size: 18 })}</a>
         `;
       }
 
@@ -76,9 +64,9 @@ document.addEventListener("DOMContentLoaded", () => {
         return `
           <a href="${s.researchGate || "#"}" target="_blank" rel="noopener" aria-label="ResearchGate">
           <span class="researchgate-icon" aria-hidden="true"></span></a>
-          <a href="${s.email || "#"}" aria-label="Email"><i class="bi bi-envelope"></i></a>
-          <a href="${s.linkedin || "#"}" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
-          <a href="#" aria-label="GitHub"><i class="bi bi-github"></i></a>
+          <a href="${s.email || "#"}" aria-label="Email">${icon("mail", { size: 18 })}</a>
+          <a href="${s.linkedin || "#"}" target="_blank" rel="noopener" aria-label="LinkedIn">${icon("linkedin", { size: 18 })}</a>
+          <a href="#" aria-label="GitHub">${icon("github", { size: 18 })}</a>
         `;
       }
 
@@ -300,15 +288,11 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       function getIcon(type) {
-        const icons = {
-          palette: `<i class="bi bi-palette2 expert-logo"></i>`,
-          code:    `<i class="bi bi-code-slash expert-logo"></i>`,
-          chart:   `<i class="bi bi-graph-up expert-logo"></i>`,
-          team:    `<i class="bi bi-people-fill expert-logo"></i>`,
-          bulb:    `<i class="bi bi-lightbulb expert-logo"></i>`,
-          gear:    `<i class="bi bi-gear expert-logo"></i>`
+        const names = {
+          palette: "palette", code: "code", chart: "chart-line",
+          team: "users", bulb: "lightbulb", gear: "settings",
         };
-        return icons[type] || "⭐";
+        return icon(names[type] || type, { strokeWidth: 1.5 }) || icon("sparkles", { strokeWidth: 1.5 });
       }
     })
     .catch(err => console.error("Error loading team data:", err));

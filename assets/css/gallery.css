@@ -214,7 +214,7 @@ main {
   font-size: .72rem; color: rgba(255,255,255,.62);
   display: flex; align-items: center; gap: 5px;
 }
-.overlay-timeline svg { width: 11px; height: 11px; flex-shrink: 0; }
+.overlay-timeline svg { width: 11px; height: 11px; flex-shrink: 0; color: rgba(255,255,255,.62); }
 
 .gallery-item-zoom {
   position: absolute; top: 12px; right: 12px;
@@ -235,7 +235,7 @@ main {
   background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
   display: flex; align-items: center; justify-content: center;
 }
-.img-placeholder svg { width: 40px; height: 40px; opacity: .25; }
+.img-placeholder svg { width: 40px; height: 40px; opacity: .25; color: rgba(255,255,255,.28); }
 
 .loading-state, .empty-state, .error-state {
   text-align: center; padding: 80px 20px;
@@ -307,7 +307,7 @@ main {
   background: var(--navy);
   border-radius: var(--radius);
 }
-.modal-img-fallback svg { width: 64px; height: 64px; }
+.modal-img-fallback svg { width: 64px; height: 64px; color: rgba(255,255,255,.3); stroke-width: 1.4; }
 
 .modal-counter {
   position: absolute; bottom: 14px; left: 14px;
@@ -368,7 +368,7 @@ main {
   display: flex; align-items: center; justify-content: center;
   flex-shrink: 0;
 }
-.modal-meta-icon svg { width: 15px; height: 15px; }
+.modal-meta-icon svg { width: 15px; height: 15px; color: #58e3e1; }
 .modal-meta-label {
   display: block;
   font-size: .68rem; font-weight: 700;

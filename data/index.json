@@ -3,22 +3,22 @@
     {
       "title": "Experimental mechanics",
       "description": "Investigating the mechanical, thermal, fracture and fatigue bahavior of composite materials through advanced testing techniques.",
-      "icon": "🧪"
+      "icon": "flask-conical"
     },
     {
       "title": "Multiscale modeling",
       "description": "Bringing length scales from micro to macro to predict materials bahavior using computational and analytical approaches.",
-      "icon": "🔬"
+      "icon": "layers"
     },
     {
       "title": "Fracture mechanics",
       "description": "Understanding crack initiation and propogation to improve damage tolerance and safe design of composite materials and structures.",
-      "icon": "⚗️"
+      "icon": "zap"
     },
     {
       "title": "Textile composites",
       "description": "Designing and developing high performance textile reinforced composites for light weight, durable and sustainable applications.",
-      "icon": "📄"
+      "icon": "grid-3x3"
     }
   ],
   "aboutSection": {
@@ -27,17 +27,17 @@
     "description": "We develop and characterize next-generation composite materials and structures through advanced experimental, computational, and multiscale research approaches.",
     "features": [
       {
-        "icon": "🧪",
+        "icon": "factory",
         "title": "Composites Manufacturing",
         "text": "Advanced fabrication and processing of thermoset and thermoplastic composites using vacuum infusion, VARTM, RFI, autoclave curing, and related manufacturing techniques."
       },
       {
-        "icon": "🔬",
+        "icon": "microscope",
         "title": "Experimental Mechanics",
         "text": "Comprehensive mechanical characterization of composite materials, including mechanical, thermal, fatigue, and fracture-mechanics testing."
       },
       {
-        "icon": "💻",
+        "icon": "cpu",
         "title": "Computational Mechanics",
         "text": "Multiscale modelling, finite element analysis, progressive failure, and fracture mechanics of composite systems."
       }

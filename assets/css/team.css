@@ -76,7 +76,7 @@
   margin-top: 50px;
   display: grid;
   gap: 25px;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 320px));
+  grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 320px));
   justify-content: center;
   align-items: stretch;
 }
@@ -200,14 +200,11 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  min-height: 27px;
   font-size: 16px;
   color: #6c757d;
   text-decoration: none;
   transition: color 0.3s;
-}
-
-.social-links a i {
-  font-size: 18px;
 }
 
 .researchgate-icon {
@@ -223,10 +220,6 @@
   mask-repeat: no-repeat;
   -webkit-mask-position: center;
   mask-position: center;
-}
-
-.gscholar-icon {
-  display: inline-block !important;
 }
 
 .social-links a:hover {
@@ -441,7 +434,7 @@
 
 .expertise-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
   gap: 70px 60px;
 }
 
@@ -459,6 +452,9 @@
 }
 
 .expertise-icon {
+  display: flex;
+  align-items: center;
+  height: 60px;
   font-size: 40px;
   margin-bottom: 20px;
   filter: grayscale(100%);
@@ -514,7 +510,7 @@
 
 @media (max-width: 768px) {
   .team-grid {
-    grid-template-columns: repeat(auto-fill, minmax(260px, 300px));
+    grid-template-columns: repeat(auto-fill, minmax(min(260px, 100%), 300px));
   }
 
   .team-card {

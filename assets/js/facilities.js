@@ -1,6 +1,6 @@
-﻿const BASE_PATH = window.location.hostname.includes("github.io")
-  ? "/Advanced-Composite-Materials"
-  : ".";
+// Facilities page: stats, category filter, equipment cards, info cards, booking note.
+import { fetchJSON } from "./utils.js";
+import { icon, hasIcon } from "./icons.js";
 
 const CATEGORY_CLASS_MAP = {
   "Characterization": "cat-characterization",
@@ -13,8 +13,7 @@ const CATEGORY_CLASS_MAP = {
 };
 
 document.addEventListener("DOMContentLoaded", () => {
-  fetch(`${BASE_PATH}/data/facilities.json`)
-    .then((res) => res.json())
+  fetchJSON("facilities.json")
     .then((data) => {
       renderRibbon(data.ribbon);
       renderStats(data.stats);
@@ -93,10 +92,10 @@ function renderEquipment(equipment) {
     const statusClass = `status-${item.status.toLowerCase().replace(/\s+/g, "-")}`;
     const imageHTML = item.image
       ? `<img src="${item.image}" alt="${item.name}" class="fac-card-img" loading="lazy">`
-      : `<div class="fac-card-placeholder"><i class="bi bi-${item.icon || "cpu"}"></i></div>`;
+      : `<div class="fac-card-placeholder">${icon(hasIcon(item.icon) ? item.icon : "cpu", { strokeWidth: 1.5 })}</div>`;
 
     const specsHTML = item.specs.map(spec =>
-      `<li><i class="bi bi-check2"></i>${spec}</li>`
+      `<li>${icon("check")}${spec}</li>`
     ).join("");
 
     return `
@@ -124,12 +123,12 @@ function renderInfoCards(info) {
 
   grid.innerHTML = info.map(card => {
     const itemsHTML = card.items.map(item =>
-      `<li><i class="bi bi-chevron-right"></i>${item}</li>`
+      `<li>${icon("chevron-right")}${item}</li>`
     ).join("");
 
     return `
       <div class="fac-info-card">
-        <div class="fac-info-icon"><i class="bi bi-${card.icon}"></i></div>
+        <div class="fac-info-icon">${icon(hasIcon(card.icon) ? card.icon : "info")}</div>
         <div class="fac-info-title">${card.title}</div>
         <ul class="fac-info-list">${itemsHTML}</ul>
       </div>

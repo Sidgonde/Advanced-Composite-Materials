@@ -46,7 +46,7 @@
 
 .services-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
   gap: 30px;
   margin-top: 30px;
 }
@@ -305,7 +305,7 @@
   }
 
   .services-container {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
     gap: 20px;
   }
 
@@ -319,6 +319,10 @@
 }
 
 @media (max-width: 600px) {
+  .founder-bio {
+    text-align: left;
+  }
+
   .about-hero {
     padding: 56px 16px;
   }

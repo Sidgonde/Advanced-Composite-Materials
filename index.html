@@ -4,11 +4,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ACM | Home</title>
+    <link rel="icon" href="./assets/images/favicon.png" type="image/png" />
+    <link rel="apple-touch-icon" href="./assets/images/apple-touch-icon.png" />
     <meta name="description" content="Advanced Composite Materials Lab — innovating next-generation material science through cutting-edge composite research." />
     <meta property="og:title" content="Advanced Composite Materials Lab" />
     <meta property="og:description" content="Innovating next-generation material science." />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Advanced Composite Materials Lab" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
     <link
       rel="stylesheet"
@@ -124,9 +128,7 @@
     <div class="update-modal-overlay" id="updateModalOverlay" role="dialog" aria-modal="true" aria-labelledby="updateModalTitle">
       <div class="update-modal-box">
         <button class="update-modal-close" id="updateModalClose" aria-label="Close">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
-            <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
-          </svg>
+          <i data-icon="x"></i>
         </button>
 
         <div class="update-modal-meta">
@@ -159,265 +161,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
     <script type="module" src="./assets/js/app.js"></script>
 
-    <script type="module">
-      import { createCard } from "./components/card.js";
-      import { createCarousel } from "./components/carousel.js";
-      const BASE_PATH = window.location.hostname.includes("github.io")
-        ? "/Advanced-Composite-Materials"
-        : ".";
-
-      const cache = {};
-      async function fetchJSON(file) {
-        if (cache[file]) return cache[file];
-        const res = await fetch(`${BASE_PATH}/data/${file}`);
-        const data = await res.json();
-        cache[file] = data;
-        return data;
-      }
-
-      async function loadServices() {
-        const data = await fetchJSON("index.json");
-        const container = document.getElementById("servicesContainer");
-        if (!container) return;
-
-        container.innerHTML = "";
-        data.services.forEach((service, i) => {
-          const wrapper = document.createElement("div");
-          wrapper.className = "reveal";
-          wrapper.style.transitionDelay = `${i * 80}ms`;
-          wrapper.innerHTML = createCard(service);
-          container.appendChild(wrapper);
-        });
-      }
-
-      // Click a slide to view it enlarged; the slider pauses while the zoom view is open.
-      function enableCarouselZoom(carouselEl, carousel) {
-        if (!carouselEl) return;
-
-        const overlay = document.createElement("div");
-        overlay.className = "img-zoom-overlay";
-        overlay.hidden = true;
-        overlay.setAttribute("role", "dialog");
-        overlay.setAttribute("aria-modal", "true");
-        overlay.setAttribute("aria-label", "Enlarged image");
-        overlay.innerHTML = `
-          <button type="button" class="img-zoom-close" aria-label="Close">&times;</button>
-          <img class="img-zoom-img" alt="">`;
-        document.body.appendChild(overlay);
-
-        const zoomImg  = overlay.querySelector(".img-zoom-img");
-        const closeBtn = overlay.querySelector(".img-zoom-close");
-
-        function open(src, alt) {
-          zoomImg.src = src;
-          zoomImg.alt = alt || "";
-          overlay.hidden = false;
-          document.body.style.overflow = "hidden";
-          carousel.pause();
-          closeBtn.focus();
-        }
-
-        function close() {
-          overlay.hidden = true;
-          document.body.style.overflow = "";
-          carousel.cycle();
-        }
-
-        carouselEl.querySelectorAll(".carousel-item img").forEach(img => {
-          img.classList.add("zoomable");
-          img.title = "Click to enlarge";
-          img.addEventListener("click", () => open(img.src, img.alt));
-        });
-
-        overlay.addEventListener("click", e => {
-          if (e.target !== zoomImg) close();
-        });
-        document.addEventListener("keydown", e => {
-          if (e.key === "Escape" && !overlay.hidden) close();
-        });
-      }
-
-      async function loadAbout() {
-        const data = await fetchJSON("index.json");
-        const about = data.aboutSection;
-
-        document.getElementById("aboutTag").textContent = about.tag;
-        document.getElementById("aboutTitle").textContent = about.title;
-        document.getElementById("aboutDesc").textContent = about.description;
-
-        document.getElementById("aboutCarousel").innerHTML = createCarousel({
-          id: "aboutCarouselId",
-          images: about.images,
-        });
-
-        const aboutCarousel = new bootstrap.Carousel("#aboutCarouselId", {
-          interval: 4000,
-          ride: "carousel",
-          pause: false,
-          touch: true,
-        });
-        enableCarouselZoom(document.getElementById("aboutCarouselId"), aboutCarousel);
-
-        const featureList = document.getElementById("featureList");
-        featureList.innerHTML = "";
-        about.features.forEach((item) => {
-          featureList.innerHTML += `
-            <div class="feature-item">
-              <div class="feature-icon">${item.icon}</div>
-              <div>
-                <div class="feature-title">${item.title}</div>
-                <div class="feature-text">${item.text}</div>
-              </div>
-            </div>`;
-        });
-      }
-
-      function animateCounter(spanEl, circleEl, target) {
-        const duration = 1800;
-        const startTime = performance.now();
-        function step(now) {
-          const progress = Math.min((now - startTime) / duration, 1);
-          const eased = 1 - Math.pow(1 - progress, 3);
-          const current = Math.round(eased * target);
-          spanEl.textContent = current + "%";
-          circleEl.style.background =
-            `conic-gradient(var(--highlight) ${current * 3.6}deg, #eee ${current * 3.6}deg)`;
-          if (progress < 1) requestAnimationFrame(step);
-        }
-        requestAnimationFrame(step);
-      }
-
-      async function loadStats() {
-        const items = await fetchJSON("stats.json");
-        const container = document.getElementById("statsContainer");
-        container.innerHTML = "";
-
-        items.forEach((item) => {
-          const card = document.createElement("div");
-          card.className = "stat-card reveal";
-
-          const circle = document.createElement("div");
-          circle.className = "circle";
-          circle.style.background = "conic-gradient(var(--highlight) 0deg, #eee 0deg)";
-
-          const valueSpan = document.createElement("span");
-          valueSpan.textContent = "0%";
-          circle.appendChild(valueSpan);
-
-          const info = document.createElement("div");
-          info.className = "stat-info";
-          info.innerHTML = `
-            <small>${item.tag}</small>
-            <h3>${item.label}</h3>
-            <p>${item.desc}</p>
-          `;
-
-          card.append(circle, info);
-          container.appendChild(card);
-
-          const io = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-              if (!entry.isIntersecting) return;
-              io.unobserve(entry.target);
-              animateCounter(valueSpan, circle, item.value);
-            });
-          }, { threshold: 0.5 });
-          io.observe(card);
-        });
-      }
-
-      loadServices();
-      loadAbout();
-      loadStats();
-    </script>
-
+    <script type="module" src="./assets/js/home.js"></script>
     <script type="module" src="./assets/js/updates.js"></script>
 
-    <script>
-      (() => {
-        const canvas = document.getElementById("particle-canvas");
-        const ctx = canvas.getContext("2d");
-        let particles = [];
-        let animId = null;
-        let running = false;
-        const PARTICLE_COUNT = 80;
-
-        function resizeCanvas() {
-          canvas.width = window.innerWidth;
-          canvas.height = window.innerHeight;
-        }
-        resizeCanvas();
-        window.addEventListener("resize", resizeCanvas);
-
-        class Particle {
-          constructor() {
-            this.x = Math.random() * canvas.width;
-            this.y = Math.random() * canvas.height;
-            this.radius = Math.random() * 2 + 1;
-            this.speedX = (Math.random() - 0.5) * 0.6;
-            this.speedY = (Math.random() - 0.5) * 0.6;
-          }
-          draw() {
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-            ctx.fillStyle = "rgba(88, 227, 225, 0.8)";
-            ctx.fill();
-          }
-          update() {
-            this.x += this.speedX;
-            this.y += this.speedY;
-            if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
-            if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
-          }
-        }
-
-        function initParticles() {
-          particles = [];
-          for (let i = 0; i < PARTICLE_COUNT; i++) particles.push(new Particle());
-        }
-
-        function connectParticles() {
-          for (let i = 0; i < particles.length; i++) {
-            for (let j = i + 1; j < particles.length; j++) {
-              const dx = particles[i].x - particles[j].x;
-              const dy = particles[i].y - particles[j].y;
-              const distance = Math.sqrt(dx * dx + dy * dy);
-              if (distance < 120) {
-                ctx.strokeStyle = `rgba(88,227,225,${1 - distance / 120})`;
-                ctx.lineWidth = 0.5;
-                ctx.beginPath();
-                ctx.moveTo(particles[i].x, particles[i].y);
-                ctx.lineTo(particles[j].x, particles[j].y);
-                ctx.stroke();
-              }
-            }
-          }
-        }
-
-        function animate() {
-          ctx.clearRect(0, 0, canvas.width, canvas.height);
-          particles.forEach(p => { p.update(); p.draw(); });
-          connectParticles();
-          animId = requestAnimationFrame(animate);
-        }
-
-        new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting && !running) {
-              running = true;
-              animate();
-            } else if (!entry.isIntersecting && running) {
-              running = false;
-              cancelAnimationFrame(animId);
-              animId = null;
-            }
-          });
-        }, { threshold: 0.01 }).observe(document.getElementById("landing"));
-
-        initParticles();
-        running = true;
-        animate();
-      })();
-    </script>
   </body>
 </html>

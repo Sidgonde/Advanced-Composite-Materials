@@ -1,11 +1,11 @@
-﻿document.addEventListener("DOMContentLoaded", function () {
+// Conferences page: conferences, invited talks, proceedings with type tabs.
+import { fetchJSON } from "./utils.js";
+
+document.addEventListener("DOMContentLoaded", function () {
   const timeline = document.getElementById("conferenceTimeline");
   const tabs = document.querySelectorAll(".tab");
   let allItems = [];
 
-  const BASE_PATH = window.location.hostname.includes("github.io")
-    ? "/Advanced-Composite-Materials"
-    : ".";
 
   function highlightName(text, name) {
     if (!text) return "";
@@ -14,8 +14,7 @@
     return text.replace(regex, `<span class="highlight-name">$1</span>`);
   }
 
-  fetch(`${BASE_PATH}/data/conferences.json`)
-    .then((res) => res.json())
+  fetchJSON("conferences.json")
     .then((data) => {
       document.getElementById("ribbonTitle").innerHTML = data.ribbon.title;
       document.getElementById("ribbonDesc").innerHTML = data.ribbon.description;
@@ -26,7 +25,8 @@
 
       allItems = [...conferences, ...talks, ...proceedings];
       renderTimeline(allItems);
-    });
+    })
+    .catch((err) => console.error("Conferences load failed:", err));
 
   tabs.forEach((tab) => {
     tab.addEventListener("click", () => {
@@ -51,7 +51,7 @@
 
         div.innerHTML = `
           <div class="year">${year}</div>
-          ${year ? '<div class="dot"></div>' : "."}
+          ${year ? '<div class="dot"></div>' : ""}
           <div class="conf-card">
             <span class="badge talk">Talk</span>
             <h3>${item.title}</h3>
@@ -66,7 +66,7 @@
 
         div.innerHTML = `
           <div class="year">${year}</div>
-          ${year ? '<div class="dot"></div>' : "."}
+          ${year ? '<div class="dot"></div>' : ""}
           <div class="conf-card">
             <span class="badge ${badgeClass}">${item.type}</span>
             <h3>${item.title}</h3>

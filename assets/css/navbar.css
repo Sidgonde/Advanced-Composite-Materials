@@ -252,3 +252,14 @@ nav.desktop-nav li:hover > .dropdown-content {
     max-width: 200px;
   }
 }
+
+/* Sidebar dropdown caret (Lucide chevron) */
+.nav-caret {
+  font-size: 0.9em;
+  margin-left: 2px;
+  transition: transform 0.25s ease;
+}
+
+.dropdown.open > button .nav-caret {
+  transform: rotate(180deg);
+}

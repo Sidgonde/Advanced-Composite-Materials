@@ -1,58 +1,51 @@
-﻿const BASE_PATH = window.location.hostname.includes("github.io")
-  ? "/Advanced-Composite-Materials"
-  : ".";
+// Gallery page: category filter, masonry grid, image viewer (modal with prev/next).
+import { esc, fetchJSON, assetUrl } from "./utils.js";
+import { icon } from "./icons.js";
 
-const svgClock = `<svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.62)"
-  stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-  <circle cx="12" cy="12" r="10"/>
-  <polyline points="12 6 12 12 16 14"/>
-</svg>`;
-
-const svgImgPlaceholder = `<svg viewBox="0 0 24 24" fill="none"
-  stroke="rgba(255,255,255,.28)" stroke-width="1.4">
-  <rect x="3" y="3" width="18" height="18" rx="2"/>
-  <circle cx="8.5" cy="8.5" r="1.5"/>
-  <polyline points="21 15 16 10 5 21"/>
-</svg>`;
-
-const svgZoom = `<svg viewBox="0 0 24 24" fill="none" stroke="#fff"
-  stroke-width="2.2" stroke-linecap="round">
-  <circle cx="11" cy="11" r="8"/>
-  <line x1="21" y1="21" x2="16.65" y2="16.65"/>
-  <line x1="11" y1="8"  x2="11" y2="14"/>
-  <line x1="8"  y1="11" x2="14" y2="11"/>
-</svg>`;
+const svgClock = icon("clock");
+const svgImgPlaceholder = icon("image", { strokeWidth: 1.4 });
+const svgZoom = icon("zoom-in", { strokeWidth: 2.2 });
 
 let allItems       = [];
 let filteredItems  = [];
-let currentIndex   = 0;
+let currentIndex   = 0;   // position inside filteredItems (the viewer follows the active filter)
 
-function buildCard(item, globalIndex) {
+function buildCard(item, position) {
   const div = document.createElement('div');
   div.className = 'gallery-item';
-  div.dataset.index = globalIndex;
+  div.tabIndex = 0;
+  div.setAttribute('role', 'button');
+  div.setAttribute('aria-label', `View ${item.title}`);
 
   const imgOrPlaceholder = item.image
-    ? `<img src="${BASE_PATH}/${item.image}" alt="${item.title}" loading="lazy"
-         onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
+    ? `<img src="${esc(assetUrl(item.image))}" alt="${esc(item.title)}" loading="lazy">`
     : '';
 
   div.innerHTML = `
     ${imgOrPlaceholder}
-    <div class="img-placeholder" ${item.image ? 'style="display:none"' : ''}>
+    <div class="img-placeholder"${item.image ? ' hidden' : ''}>
       ${svgImgPlaceholder}
     </div>
     <div class="gallery-item-overlay">
-      <div class="overlay-category">${item.category}</div>
-      <div class="overlay-title">${item.title}</div>
+      <div class="overlay-category">${esc(item.category)}</div>
+      <div class="overlay-title">${esc(item.title)}</div>
       <div class="overlay-timeline">
         ${svgClock}
-        ${item.timeline}
+        ${esc(item.timeline)}
       </div>
     </div>
     <div class="gallery-item-zoom">${svgZoom}</div>`;
 
-  div.addEventListener('click', () => openModal(globalIndex));
+  // Missing image → placeholder instead of a broken image icon.
+  div.querySelector('img')?.addEventListener('error', e => {
+    e.target.hidden = true;
+    div.querySelector('.img-placeholder').hidden = false;
+  });
+
+  div.addEventListener('click', () => openModal(position));
+  div.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal(position); }
+  });
   return div;
 }
 
@@ -70,10 +63,7 @@ function renderGrid(items) {
 
   stats.innerHTML = `Showing <span>${items.length}</span> of <span>${allItems.length}</span> items`;
 
-  items.forEach((item, i) => {
-    const globalIndex = allItems.indexOf(item);
-    grid.appendChild(buildCard(item, globalIndex));
-  });
+  items.forEach((item, i) => grid.appendChild(buildCard(item, i)));
 }
 
 function buildFilters(categories) {
@@ -81,6 +71,7 @@ function buildFilters(categories) {
   bar.innerHTML = '';
 
   const all = document.createElement('button');
+  all.type        = 'button';
   all.className   = 'filter-btn active';
   all.textContent = 'All';
   all.addEventListener('click', () => applyFilter('All', all));
@@ -89,6 +80,7 @@ function buildFilters(categories) {
   categories.forEach(cat => {
     const btn = document.createElement('button');
     btn.className   = 'filter-btn';
+    btn.type        = 'button';
     btn.textContent = cat;
     btn.addEventListener('click', () => applyFilter(cat, btn));
     bar.appendChild(btn);
@@ -117,9 +109,9 @@ const modalTimeline = document.getElementById('modalTimeline');
 const modalCounter  = document.getElementById('modalCounter');
 const modalCategory = document.getElementById('modalCategory');
 
-function openModal(globalIndex) {
-  currentIndex = globalIndex;
-  populateModal(allItems[globalIndex]);
+function openModal(position) {
+  currentIndex = position;
+  populateModal(filteredItems[position]);
   overlay.classList.add('open');
   document.body.style.overflow = 'hidden';
 }
@@ -143,7 +135,7 @@ function populateModal(item) {
     modalImg.alt = item.title;
     modalImg.style.display = 'block';
     modalFallback.style.display = 'none';
-    modalImg.src = `${BASE_PATH}/${item.image}`;
+    modalImg.src = assetUrl(item.image);
     if (modalImg.complete && modalImg.naturalWidth) {
       modalImgPane.style.aspectRatio = `${modalImg.naturalWidth} / ${modalImg.naturalHeight}`;
     }
@@ -158,17 +150,17 @@ function populateModal(item) {
   modalDesc.textContent      = item.description;
   modalVenue.textContent     = item.venue;
   modalTimeline.textContent  = item.timeline;
-  modalCounter.textContent   = `${currentIndex + 1} / ${allItems.length}`;
+  modalCounter.textContent   = `${currentIndex + 1} / ${filteredItems.length}`;
 
   document.getElementById('modalPrev').style.display = currentIndex > 0 ? 'flex' : 'none';
-  document.getElementById('modalNext').style.display = currentIndex < allItems.length - 1 ? 'flex' : 'none';
+  document.getElementById('modalNext').style.display = currentIndex < filteredItems.length - 1 ? 'flex' : 'none';
 }
 
 function navigateModal(direction) {
   const next = currentIndex + direction;
-  if (next < 0 || next >= allItems.length) return;
+  if (next < 0 || next >= filteredItems.length) return;
   currentIndex = next;
-  populateModal(allItems[currentIndex]);
+  populateModal(filteredItems[currentIndex]);
 }
 
 document.getElementById('modalClose').addEventListener('click', closeModal);
@@ -191,10 +183,7 @@ async function init() {
   grid.innerHTML = '<div class="loading-state">Loading gallery…</div>';
 
   try {
-    const res = await fetch(`${BASE_PATH}/data/gallery.json`);
-    if (!res.ok) throw new Error(`HTTP ${res.status}: ${res.statusText}`);
-
-    const data = await res.json();
+    const data = await fetchJSON('gallery.json');
     allItems = data;
 
     const categories = [...new Set(data.map(item => item.category))];
@@ -206,8 +195,7 @@ async function init() {
     console.error('Gallery load error:', err);
     grid.innerHTML = `
       <div class="error-state">
-        ⚠️ Could not load gallery. Please try again later.<br>
-        <small style="opacity:.6">${err.message}</small>
+        ${icon('circle-alert')} Could not load gallery. Please try again later.
       </div>`;
   }
 }

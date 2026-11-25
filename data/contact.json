@@ -11,30 +11,13 @@
       "status": "Open",
       "posted": "2026-11-25",
       "lastDate": "2027-12-25",
-      "icon": "🚀",
       "title": "Ph.D. & M.S. Research Scholar Positions — January 2027 Intake",
       "description": "The Department of Aerospace Engineering, IIT Madras, invites applications from motivated candidates for full-time Ph.D. and M.S. research scholar positions in the following areas:",
       "areas": [
-        {
-          "icon": "🔬",
-          "title": "Micromechanics",
-          "text": "Micromechanics"
-        },
-        {
-          "icon": "📐",
-          "title": "Experimental Mechanics",
-          "text": ""
-        },
-        {
-          "icon": "💥",
-          "title": "Fracture Mechanics",
-          "text": ""
-        },
-        {
-          "icon": "🧪",
-          "title": "Polymer Composite Materials",
-          "text": ""
-        }
+        "Micromechanics",
+        "Experimental Mechanics",
+        "Fracture Mechanics",
+        "Polymer Composite Materials"
       ],
       "steps": [
         "Check eligibility",
@@ -44,27 +27,22 @@
       ],
       "details": [
         {
-          "icon": "📅",
           "label": "Intake",
           "value": "January 2027"
         },
         {
-          "icon": "⏰",
           "label": "Application last date",
           "value": "To be announced"
         },
         {
-          "icon": "✅",
           "label": "Eligibility",
           "value": "Master's degree in Mechanical, Aerospace, or Materials Engineering."
         },
         {
-          "icon": "📝",
           "label": "Selection",
           "value": "Shortlisted applicants will be contacted for an interview and offered institute fellowship support."
         },
         {
-          "icon": "✉️",
           "label": "Contact",
           "value": "Interested candidates may write directly to nagappa@smail.iitm.ac.in"
         }

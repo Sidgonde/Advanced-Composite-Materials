@@ -202,7 +202,7 @@ main {
   justify-content: center;
   background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
 }
-.rcard-thumb:has(img:not([style*="none"])) {
+.rcard-thumb:has(img:not([hidden])) {
   background: #f1f5f9;
 }
 .rcard-thumb img {
@@ -217,6 +217,7 @@ main {
   position: absolute; inset: 0;
   display: flex; align-items: center; justify-content: center;
   opacity: .20;
+  color: #fff;
 }
 .thumb-fallback svg { width: 52px; height: 52px; }
 
@@ -275,10 +276,9 @@ main {
 }
 .toggle-desc:hover { color: var(--navy); }
 .toggle-desc .arrow {
-  display: inline-block;
+  display: inline-flex;
   transition: transform var(--transition);
-  font-style: normal;
-  font-size: .7rem;
+  font-size: .85rem;
 }
 .toggle-desc.open .arrow { transform: rotate(180deg); }
 
@@ -307,7 +307,7 @@ main {
   display: flex; align-items: center; justify-content: center;
   flex-shrink: 0;
 }
-.doi-icon svg { width: 13px; height: 13px; }
+.doi-icon svg { width: 13px; height: 13px; color: var(--teal); }
 .doi-label {
   font-size: .66rem; font-weight: 700;
   letter-spacing: .09em; text-transform: uppercase;
@@ -322,6 +322,7 @@ main {
   display: block;
 }
 .doi-value:hover { color: #007b79; text-decoration: underline; }
+.doi-value.is-empty { opacity: .4; }
 
 .empty-state,
 .loading-state,
@@ -333,6 +334,7 @@ main {
 .empty-state p { color: var(--text-soft); font-size: .95rem; }
 .loading-state { color: var(--text-soft); font-size: .95rem; }
 .error-state   { color: #c0392b; font-size: .95rem; }
+.error-state svg { margin-right: 4px; }
 
 @media (max-width: 900px) {
   .rcard,

@@ -104,6 +104,8 @@
 }
 
 .conf-card {
+  min-width: 0;
+  overflow-wrap: anywhere;
   margin-left: 45px;
   background: #ffffff;
   border-radius: 14px;
@@ -154,6 +156,8 @@
 }
 
 .doi-link {
+  max-width: 100%;
+  word-break: break-all;
   display: inline-flex;
   align-items: center;
   gap: 5px;

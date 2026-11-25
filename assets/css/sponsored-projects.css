@@ -251,7 +251,7 @@ main {
   justify-content: center;
   margin-bottom: 18px;
 }
-.card-icon svg { width: 22px; height: 22px; }
+.card-icon svg { width: 22px; height: 22px; color: var(--teal); }
 
 .card-title {
   font-size: 1.18rem;
@@ -333,6 +333,7 @@ main {
 .empty-state p   { color: var(--text-soft); font-size: .95rem; }
 .loading-state   { color: var(--text-soft); font-size: .95rem; }
 .error-state     { color: #c0392b;          font-size: .95rem; }
+.error-state svg { margin-right: 4px; }
 
 @media (max-width: 700px) {
   .tab-btn   { padding: 10px 22px; font-size: .85rem; }

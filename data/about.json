@@ -6,10 +6,10 @@
   "vision": "To be a leading research laboratory advancing sustainable composite materials and structures for next-generation engineering solutions.",
 
   "features": [
-    { "icon": "🎯", "title": "Research Excellence", "description": "Pursuing fundamental and applied research in advanced composite materials and structures." },
-    { "icon": "🤝", "title": "Collaborative Research", "description": "Fostering interdisciplinary partnerships with academic institutions, research organisations, and industry." },
-    { "icon": "⚙️", "title": "Integrated Research Approach", "description": "Bridging materials development, innovative manufacturing, experimental characterization, and multiscale modelling." },
-    { "icon": "🚀", "title": "Innovation & Impact", "description": "Developing sustainable, high-performance composite materials and engineering solutions for aerospace and defence applications." }
+    { "icon": "target", "title": "Research Excellence", "description": "Pursuing fundamental and applied research in advanced composite materials and structures." },
+    { "icon": "handshake", "title": "Collaborative Research", "description": "Fostering interdisciplinary partnerships with academic institutions, research organisations, and industry." },
+    { "icon": "settings", "title": "Integrated Research Approach", "description": "Bridging materials development, innovative manufacturing, experimental characterization, and multiscale modelling." },
+    { "icon": "rocket", "title": "Innovation & Impact", "description": "Developing sustainable, high-performance composite materials and engineering solutions for aerospace and defence applications." }
   ],
 
   "founder": [

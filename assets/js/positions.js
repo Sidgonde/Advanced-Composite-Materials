@@ -1,29 +1,35 @@
 // Open Positions section on the contact page (data: data/contact.json → "Positions").
 //
-// Fields per position (all optional except title):
-//   status, icon, title, description
+// Fields per position (all optional except title). Icons are chosen automatically.
+//   status, title, description
 //   posted     "YYYY-MM-DD"  → "Posted 25 Nov 2026"
 //   lastDate   "YYYY-MM-DD"  → countdown pill ("12 days left"); after this date the
 //                              position shows as Closed. Also fills the "last date" detail row.
-//   areas      [ { icon, title, text } | "text" ]        → chips (text = hover tooltip)
-//   steps      [ "Check eligibility", "Apply", ... ]      → numbered "How to apply" strip
-//   details    [ { icon, label, value } ]                 → details grid (as many rows as needed)
-//   applyLink / applyLabel                                → primary button (e.g. admissions portal)
-//   link / linkLabel                                      → secondary "Enquire" button
-//   watermark  emoji shown faintly in the card corner (default 🎓, "" to hide)
-const BASE_PATH = window.location.hostname.includes("github.io")
-  ? "/Advanced-Composite-Materials"
-  : ".";
+//   areas      [ "Micromechanics", "Fracture Mechanics", ... ]   → chips
+//   steps      [ "Check eligibility", "Apply", ... ]              → numbered "How to apply" strip
+//   details    [ { label, value } ]                               → details grid (as many rows as needed)
+//   applyLink / applyLabel                                        → primary button (e.g. admissions portal)
+//   link / linkLabel                                              → secondary "Enquire" button
+import { esc, filled, fetchJSON } from "./utils.js";
+import { icon } from "./icons.js";
 
 const DAY_MS = 24 * 60 * 60 * 1000;
 
-function esc(value) {
-  return String(value ?? "")
-    .replace(/&/g, "&amp;").replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;").replace(/"/g, "&quot;");
-}
-
-const filled = v => v != null && String(v).trim() !== "";
+// Detail-row icon picked from its label (first match wins).
+const DETAIL_ICONS = [
+  [/last\s*date|deadline|closing/i, "calendar-clock"],
+  [/intake|start|joining|date|session/i, "calendar"],
+  [/eligib|qualif|requirement/i, "badge-check"],
+  [/select|interview|test|exam|process/i, "clipboard-check"],
+  [/contact|email|mail|write/i, "mail"],
+  [/phone|call|mobile/i, "phone"],
+  [/fellowship|stipend|salary|funding|scholarship/i, "wallet"],
+  [/apply|portal|website|link/i, "link"],
+  [/location|venue|place/i, "map-pin"],
+  [/document|cv|resume|statement/i, "file-text"],
+  [/duration|period|time/i, "clock"],
+];
+const detailIcon = label => (DETAIL_ICONS.find(([re]) => re.test(label || "")) || [, "info"])[1];
 
 // Escape text, then turn URLs and email addresses into clickable links.
 // withCopy adds a small "copy" button after each email address.
@@ -33,7 +39,7 @@ function linkify(value, withCopy = false) {
     (_match, url, email) => {
       if (url) return `<a href="${url}" target="_blank" rel="noopener noreferrer">${url}</a>`;
       const copy = withCopy
-        ? `<button type="button" class="pos-copy" data-copy="${email}" aria-label="Copy email address ${email}" title="Copy email">📋</button>`
+        ? `<button type="button" class="pos-copy" data-copy="${email}" aria-label="Copy email address ${email}" title="Copy email">${icon("copy")}</button>`
         : "";
       return `<a href="mailto:${email}">${email}</a>${copy}`;
     }
@@ -52,7 +58,7 @@ function parseDate(value, endOfDay = false) {
 const formatDate = d =>
   d.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
 
-// Days until the last date: null (no date), negative (closed), 0 (today), n.
+// Days until the last date: null (no date), -1 (closed), 0 (today), n.
 function daysLeft(pos) {
   const end = parseDate(pos.lastDate, true);
   if (!end) return null;
@@ -64,9 +70,6 @@ function daysLeft(pos) {
 }
 
 const isClosed = pos => daysLeft(pos) === -1;
-
-const iconSpan = (icon, cls) =>
-  filled(icon) ? `<span class="${cls}" aria-hidden="true">${esc(icon)}</span>` : "";
 
 function metaRow(pos) {
   const left = daysLeft(pos);
@@ -81,8 +84,7 @@ function metaRow(pos) {
 
   if (left !== null && !closed) {
     const text = left === 0 ? "Last day today" : `${left} day${left === 1 ? "" : "s"} left`;
-    const urgent = left <= 7 ? " is-urgent" : "";
-    parts.push(`<span class="pos-countdown${urgent}">⏳ ${text}</span>`);
+    parts.push(`<span class="pos-countdown${left <= 7 ? " is-urgent" : ""}">${icon("hourglass")}${text}</span>`);
   }
 
   const posted = parseDate(pos.posted);
@@ -91,15 +93,12 @@ function metaRow(pos) {
   return parts.length ? `<div class="position-head">${parts.join("")}</div>` : "";
 }
 
-// "areas": compact chips. Each item is a plain string, or { icon, title, text }.
+// "areas": chips. Plain strings (older { title } objects still work).
 function areasBlock(pos) {
   const chips = (pos.areas || [])
-    .map(a => (typeof a === "string" ? { title: a } : a || {}))
-    .filter(a => filled(a.title) || filled(a.text))
-    .map(a => `
-      <li class="pos-chip"${filled(a.text) && filled(a.title) ? ` title="${esc(a.text)}"` : ""}>
-        ${iconSpan(a.icon, "pos-chip-icon")}${esc(filled(a.title) ? a.title : a.text)}
-      </li>`);
+    .map(a => (typeof a === "string" ? a : a?.title))
+    .filter(filled)
+    .map(a => `<li class="pos-chip">${esc(a)}</li>`);
   if (!chips.length) return "";
   return `
     <div class="pos-row">
@@ -121,30 +120,30 @@ function stepsBlock(pos) {
     </div>`;
 }
 
-// "details": compact two-column grid. Each row is { icon, label, value }.
+// "details": compact two-column grid. Each row is { label, value }.
 // Older fields (start / deadline / eligibility) are still shown if present.
 function detailsBlock(pos) {
-  const rows = [...(pos.details || [])].map(d => ({ ...d }));
+  const rows = (pos.details || []).map(d => ({ ...d }));
 
   // A valid lastDate fills (or adds) the "last date" row.
   const end = parseDate(pos.lastDate);
   if (end) {
     const row = rows.find(d => /last\s*date|deadline/i.test(d.label || ""));
     if (row) row.value = formatDate(end);
-    else rows.unshift({ icon: "⏰", label: "Application last date", value: formatDate(end) });
+    else rows.unshift({ label: "Application last date", value: formatDate(end) });
   }
 
   rows.push(
-    { icon: "📅", label: "Start", value: pos.start },
-    { icon: "⏰", label: "Last Date", value: pos.deadline },
-    { icon: "✅", label: "Eligibility", value: pos.eligibility },
+    { label: "Start", value: pos.start },
+    { label: "Last Date", value: pos.deadline },
+    { label: "Eligibility", value: pos.eligibility },
   );
 
   const items = rows
     .filter(d => d && filled(d.value))
     .map(d => `
       <li class="pos-detail">
-        ${iconSpan(d.icon, "pos-detail-icon")}
+        <span class="pos-detail-icon">${icon(detailIcon(d.label))}</span>
         <div>
           ${filled(d.label) ? `<span class="pos-detail-label">${esc(d.label)}</span>` : ""}
           <span class="pos-detail-value">${linkify(d.value, true)}</span>
@@ -158,7 +157,7 @@ function buttons(pos) {
     const external = /^https?:\/\//i.test(href);
     return `
       <a class="position-btn ${cls}" href="${esc(href)}"${external ? ' target="_blank" rel="noopener noreferrer"' : ""}>
-        ${esc(label)} <span aria-hidden="true">${external ? "↗" : "→"}</span>
+        ${esc(label)} ${icon(external ? "arrow-up-right" : "arrow-right")}
       </a>`;
   };
   const hasApply = filled(pos.applyLink) && !isClosed(pos);
@@ -173,16 +172,15 @@ let cardId = 0;
 function positionCard(pos) {
   const id = `pos-more-${++cardId}`;
   const more = stepsBlock(pos) + detailsBlock(pos);
-  const watermark = pos.watermark === undefined ? "🎓" : pos.watermark;
 
   return `
     <div class="reveal">
       <article class="position-card${isClosed(pos) ? " is-closed" : ""}">
-        ${iconSpan(watermark, "pos-watermark")}
+        <span class="pos-watermark">${icon("graduation-cap", { strokeWidth: 1.25 })}</span>
         <div class="pos-top">
           <div class="pos-top-text">
             ${metaRow(pos)}
-            <h3 class="position-title">${iconSpan(pos.icon, "pos-title-icon")}<span>${esc(pos.title)}</span></h3>
+            <h3 class="position-title"><span class="pos-title-icon">${icon("briefcase")}</span><span>${esc(pos.title)}</span></h3>
           </div>
           ${buttons(pos)}
         </div>
@@ -190,7 +188,7 @@ function positionCard(pos) {
         ${areasBlock(pos)}
         ${more ? `
           <button type="button" class="pos-toggle" aria-expanded="false" aria-controls="${id}">
-            <span class="pos-toggle-text">View details</span> <span class="pos-toggle-arrow" aria-hidden="true">▾</span>
+            <span class="pos-toggle-text">View details</span> <span class="pos-toggle-arrow">${icon("chevron-down")}</span>
           </button>
           <div class="pos-more" id="${id}">
             <div class="pos-more-inner">${more}</div>
@@ -204,6 +202,7 @@ async function copyText(text) {
     await navigator.clipboard.writeText(text);
     return;
   }
+  // Fallback for plain-http / file previews.
   const ta = document.createElement("textarea");
   ta.value = text;
   ta.setAttribute("readonly", "");
@@ -228,16 +227,17 @@ function bindInteractions(container) {
 
     const copyBtn = e.target.closest(".pos-copy");
     if (copyBtn) {
+      const reset = () => {
+        copyBtn.innerHTML = icon("copy");
+        copyBtn.classList.remove("is-copied");
+      };
       copyText(copyBtn.dataset.copy)
         .then(() => {
-          copyBtn.textContent = "✓ Copied";
+          copyBtn.innerHTML = `${icon("check")} Copied`;
           copyBtn.classList.add("is-copied");
         })
-        .catch(() => { copyBtn.textContent = "✕"; })
-        .finally(() => setTimeout(() => {
-          copyBtn.textContent = "📋";
-          copyBtn.classList.remove("is-copied");
-        }, 1600));
+        .catch(() => { copyBtn.innerHTML = icon("x"); })
+        .finally(() => setTimeout(reset, 1600));
     }
   });
 }
@@ -247,8 +247,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!container) return;
   bindInteractions(container);
 
-  fetch(`${BASE_PATH}/data/contact.json`)
-    .then(res => res.json())
+  fetchJSON("contact.json")
     .then(data => {
       const positions = data.Positions || [];
       container.innerHTML = positions.length

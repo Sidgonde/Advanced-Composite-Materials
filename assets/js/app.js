@@ -1,67 +1,57 @@
-const BASE_PATH = window.location.hostname.includes("github.io")
-  ? "/Advanced-Composite-Materials"
-  : ".";
+// Runs on every page: navbar + footer, active link, sticky header, scroll reveal, icons.
+import { BASE_PATH } from "./utils.js";
+import { hydrateIcons } from "./icons.js";
+import { renderFooter } from "./footer.js";
 
-async function loadHTML(targetId, filePath, onLoad) {
+async function loadHTML(targetId, filePath) {
+  const target = document.getElementById(targetId);
+  if (!target) return false;
   try {
     const res = await fetch(filePath);
     if (!res.ok) throw new Error(`${filePath} not found`);
-
-    const html = await res.text();
-    const target = document.getElementById(targetId);
-    if (!target) return;
-
-    target.innerHTML = html;
-    onLoad && onLoad();
+    target.innerHTML = await res.text();
+    return true;
   } catch (err) {
     console.error("HTML Load Error:", err);
+    return false;
   }
 }
 
 function setActiveNav() {
-  const currentPage = window.location.pathname.split("/").pop();
+  const currentPage = window.location.pathname.split("/").pop() || "index.html";
 
-  const activateLinks = (selector) => {
-    document.querySelectorAll(selector).forEach(link => {
-      const href = link.getAttribute("href");
+  document.querySelectorAll("nav.desktop-nav a, .sidebar a").forEach(link => {
+    if (link.getAttribute("href") !== currentPage) return;
+    link.classList.add("active");
 
-      if (href === currentPage) {
-        link.classList.add("active");
-
-        const dropdown = link.closest(".dropdown");
-        if (dropdown) {
-          dropdown.classList.add("open");
-
-          const parentLink = dropdown.querySelector(":scope > a");
-          parentLink && parentLink.classList.add("active");
-        }
-      }
-    });
-  };
-
-  activateLinks("nav.desktop-nav a");
-  activateLinks(".sidebar a");
-  document.querySelectorAll(".contact-btn").forEach(btn => {
-  btn.addEventListener("click", () => {
-    window.location.href = `${BASE_PATH}/contact.html`;
+    const dropdown = link.closest(".dropdown");
+    if (dropdown) {
+      dropdown.classList.add("open");
+      dropdown.querySelector(":scope > a")?.classList.add("active");
+    }
   });
-});
+
+  document.querySelectorAll(".contact-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      window.location.href = `${BASE_PATH}/contact.html`;
+    });
+  });
 }
 
 window.toggleSidebar = () => {
   const isOpen = document.getElementById("sidebar")?.classList.toggle("show");
-  const btn = document.querySelector(".hamburger");
-  if (btn) btn.setAttribute("aria-expanded", isOpen ? "true" : "false");
+  document.querySelector(".hamburger")?.setAttribute("aria-expanded", isOpen ? "true" : "false");
 };
 
-window.toggleDropdown = (el) => {
+window.toggleDropdown = el => {
   const isOpen = el?.parentElement?.classList.toggle("open");
-  if (el) el.setAttribute("aria-expanded", isOpen ? "true" : "false");
+  el?.setAttribute("aria-expanded", isOpen ? "true" : "false");
 };
 
-function initScrollReveal() {
+// Fade-in on scroll for .reveal elements, and <i data-icon> → SVG, including content added later.
+function initDynamicContent() {
   const io = new IntersectionObserver(
-    (entries) => entries.forEach(entry => {
+    entries => entries.forEach(entry => {
       if (!entry.isIntersecting) return;
       entry.target.classList.add("visible");
       io.unobserve(entry.target);
@@ -69,51 +59,36 @@ function initScrollReveal() {
     { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
   );
 
-  function observeNew() {
+  const scan = () => {
     document.querySelectorAll(".reveal:not(.observed)").forEach(el => {
       el.classList.add("observed");
       io.observe(el);
     });
-  }
+    hydrateIcons(document);
+  };
 
-  observeNew();
-
-  new MutationObserver(observeNew).observe(document.body, {
-    childList: true,
-    subtree: true,
-  });
+  scan();
+  new MutationObserver(scan).observe(document.body, { childList: true, subtree: true });
 }
 
 function initStickyHeader() {
   const header = document.querySelector("header");
   if (!header) return;
-
-  const onScroll = () => {
-    header.classList.toggle("scrolled", window.scrollY > 24);
-  };
+  const onScroll = () => header.classList.toggle("scrolled", window.scrollY > 24);
   onScroll();
   window.addEventListener("scroll", onScroll, { passive: true });
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  loadHTML(
-    "navbar-placeholder",
-    `${BASE_PATH}/components/navbar.html`,
-    () => {
-      setActiveNav();
-      initStickyHeader();
-    }
-  );
+  loadHTML("navbar-placeholder", `${BASE_PATH}/components/navbar.html`).then(ok => {
+    if (!ok) return;
+    setActiveNav();
+    initStickyHeader();
+  });
 
-  loadHTML(
-    "footer-placeholder",
-    `${BASE_PATH}/components/footer.html`,
-    () => {
-      const script = document.createElement("script");
-      script.src = `${BASE_PATH}/assets/js/footer.js`;
-      document.body.appendChild(script);
-    }
-  );
+  loadHTML("footer-placeholder", `${BASE_PATH}/components/footer.html`).then(ok => {
+    if (ok) renderFooter();
+  });
 
-  initScrollReveal();
+  initDynamicContent();
 });
