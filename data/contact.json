@@ -9,6 +9,8 @@
   "Positions": [
     {
       "status": "Open",
+      "posted": "2026-11-25",
+      "lastDate": "",
       "icon": "🚀",
       "title": "Ph.D. & M.S. Research Scholar Positions — January 2027 Intake",
       "description": "The Department of Aerospace Engineering, IIT Madras, invites applications from motivated candidates for full-time Ph.D. and M.S. research scholar positions in the following areas:",
@@ -34,6 +36,12 @@
           "text": ""
         }
       ],
+      "steps": [
+        "Check eligibility",
+        "Apply on the portal",
+        "Email your CV",
+        "Interview"
+      ],
       "details": [
         {
           "icon": "📅",
@@ -56,18 +64,15 @@
           "value": "Shortlisted applicants will be contacted for an interview and offered institute fellowship support."
         },
         {
-          "icon": "🌐",
-          "label": "Apply online",
-          "value": "https://research.iitm.ac.in/"
-        },
-        {
           "icon": "✉️",
           "label": "Contact",
           "value": "Interested candidates may write directly to nagappa@smail.iitm.ac.in"
         }
       ],
       "link": "#contactForm",
-      "linkLabel": "Enquire Now"
+      "linkLabel": "Enquire",
+      "applyLink": "https://research.iitm.ac.in/",
+      "applyLabel": "Apply on Portal"
     }
   ]
 }
