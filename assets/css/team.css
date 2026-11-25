@@ -255,18 +255,32 @@
   display: block;
 }
 
-.team-coguide {
-  margin: 0 0 14px;
-  padding: 10px 14px;
-  background: #e0f2f1;
-  border-left: 3px solid #009688;
-  border-radius: 8px;
+/* Guide / Co-Guide: compact plain rows, no background */
+.team-guides {
+  margin: 0 0 8px;
   text-align: left;
 }
 
-.team-coguide-name {
-  display: block;
-  font-size: 14px;
+.team-guide-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin: 0;
+  padding: 2px 0;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.team-guide-label {
+  flex-shrink: 0;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #8a959c;
+}
+
+.team-guide-name {
   font-weight: 600;
   color: #00695c;
 }

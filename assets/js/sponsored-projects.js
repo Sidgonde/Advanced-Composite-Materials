@@ -83,10 +83,9 @@ function roleMetaRow(entry) {
 function projectTypeRow(rawType) {
   if (!rawType || !rawType.trim()) return '';
   const isConsultancy = /consult/i.test(rawType);
-  const label   = isConsultancy ? 'Consultancy' : rawType.trim().replace(/^\w/, c => c.toUpperCase());
-  const variant = isConsultancy ? 'consultancy' : 'sponsored';
+  const label = isConsultancy ? 'Consultancy' : rawType.trim().replace(/^\w/, c => c.toUpperCase());
   return `
-    <div class="meta-row type-row type-${variant}">
+    <div class="meta-row">
       <div class="meta-icon">${icons.tag}</div>
       <div class="meta-text">
         <span class="meta-label">Project Type</span>

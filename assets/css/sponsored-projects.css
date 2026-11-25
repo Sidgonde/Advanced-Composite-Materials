@@ -322,37 +322,6 @@ main {
 
 .meta-icon.role-icon-other svg { color: var(--text-soft); }
 
-.type-row {
-  align-items: center;
-  padding: 9px 12px;
-  border-radius: 10px;
-  margin-bottom: 4px;
-}
-.type-row .meta-text  { padding-top: 0; }
-.type-row .meta-value { font-weight: 700; }
-
-.type-row.type-sponsored {
-  background: var(--navy);
-}
-.type-row.type-sponsored .meta-icon {
-  background: rgba(88,227,225,.15);
-  border-color: rgba(88,227,225,.35);
-}
-.type-row.type-sponsored .meta-label { color: rgba(255,255,255,.7); }
-.type-row.type-sponsored .meta-value { color: #fff; }
-
-.type-row.type-consultancy {
-  background: var(--teal-dim);
-  border: 1px solid var(--teal-border);
-}
-.type-row.type-consultancy .meta-icon {
-  background: #fff;
-  border-color: var(--teal-border);
-}
-.type-row.type-consultancy .meta-icon svg { color: #007b79; }
-.type-row.type-consultancy .meta-label { color: #007b79; }
-.type-row.type-consultancy .meta-value { color: var(--navy); }
-
 .empty-state,
 .loading-state,
 .error-state {

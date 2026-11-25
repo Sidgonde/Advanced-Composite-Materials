@@ -82,13 +82,17 @@ document.addEventListener("DOMContentLoaded", () => {
         `;
       }
 
-      function coGuideRow(member) {
-        if (!member.coGuide || !member.coGuide.trim()) return "";
-        return `
-          <div class="team-coguide">
-            <span class="team-detail-label">Co-Guide</span>
-            <span class="team-coguide-name">${esc(member.coGuide)}</span>
-          </div>`;
+      // Guide / Co-Guide: each line renders only when its field is filled in team.json.
+      function guideRows(member) {
+        const rows = [["Guide", member.guide], ["Co-Guide", member.coGuide]]
+          .filter(([, name]) => name && String(name).trim())
+          .map(([label, name]) => `
+            <p class="team-guide-row">
+              <span class="team-guide-label">${label}</span>
+              <span class="team-guide-name">${esc(name)}</span>
+            </p>`)
+          .join("");
+        return rows ? `<div class="team-guides">${rows}</div>` : "";
       }
 
       function alumniCardBody(member) {
@@ -99,6 +103,7 @@ document.addEventListener("DOMContentLoaded", () => {
           ${graduated ? `<p class="team-role">${esc(graduated)}</p>` : ""}
           ${detailRow("Thesis", member.thesis)}
           ${detailRow("Current Role", member.currentRole)}
+          ${guideRows(member)}
         `;
       }
 
@@ -112,7 +117,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <p class="team-desc">${esc(member.description)}</p>
             <button type="button" class="team-desc-toggle" hidden>Read more</button>` : ""}
           <div class="team-card-footer">
-            ${coGuideRow(member)}
+            ${guideRows(member)}
             <div class="social-links">
               ${member.category === "student" ? compactSocialLinks(member) : fullSocialLinks(member)}
             </div>
