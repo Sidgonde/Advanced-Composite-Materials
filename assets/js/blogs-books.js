@@ -11,8 +11,8 @@
   fetch(`${BASE_PATH}/data/blogs-books.json`)
     .then(res => res.json())
     .then(data => {
-      document.getElementById("ribbonTitle").innerText = data.ribbon.title;
-      document.getElementById("ribbonDesc").innerText = data.ribbon.description;
+      document.getElementById("ribbonTitle").innerHTML = data.ribbon.title;
+      document.getElementById("ribbonDesc").innerHTML = data.ribbon.description;
 
       allItems = data.items;
 

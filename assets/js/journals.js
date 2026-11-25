@@ -8,8 +8,8 @@ const BASE_PATH = window.location.hostname.includes("github.io")
 fetch(`${BASE_PATH}/data/journals.json`)
   .then((res) => res.json())
   .then((data) => {
-    document.getElementById("ribbonTitle").innerText = data.ribbon.title;
-    document.getElementById("ribbonDesc").innerText = data.ribbon.description;
+    document.getElementById("ribbonTitle").innerHTML = data.ribbon.title;
+    document.getElementById("ribbonDesc").innerHTML = data.ribbon.description;
 
     document.getElementById("recentTitle").innerText =
       data["recent-highlights"]["recent-section-title"];

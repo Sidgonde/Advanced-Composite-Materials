@@ -190,6 +190,53 @@
         });
       }
 
+      // Click a slide to view it enlarged; the slider pauses while the zoom view is open.
+      function enableCarouselZoom(carouselEl, carousel) {
+        if (!carouselEl) return;
+
+        const overlay = document.createElement("div");
+        overlay.className = "img-zoom-overlay";
+        overlay.hidden = true;
+        overlay.setAttribute("role", "dialog");
+        overlay.setAttribute("aria-modal", "true");
+        overlay.setAttribute("aria-label", "Enlarged image");
+        overlay.innerHTML = `
+          <button type="button" class="img-zoom-close" aria-label="Close">&times;</button>
+          <img class="img-zoom-img" alt="">`;
+        document.body.appendChild(overlay);
+
+        const zoomImg  = overlay.querySelector(".img-zoom-img");
+        const closeBtn = overlay.querySelector(".img-zoom-close");
+
+        function open(src, alt) {
+          zoomImg.src = src;
+          zoomImg.alt = alt || "";
+          overlay.hidden = false;
+          document.body.style.overflow = "hidden";
+          carousel.pause();
+          closeBtn.focus();
+        }
+
+        function close() {
+          overlay.hidden = true;
+          document.body.style.overflow = "";
+          carousel.cycle();
+        }
+
+        carouselEl.querySelectorAll(".carousel-item img").forEach(img => {
+          img.classList.add("zoomable");
+          img.title = "Click to enlarge";
+          img.addEventListener("click", () => open(img.src, img.alt));
+        });
+
+        overlay.addEventListener("click", e => {
+          if (e.target !== zoomImg) close();
+        });
+        document.addEventListener("keydown", e => {
+          if (e.key === "Escape" && !overlay.hidden) close();
+        });
+      }
+
       async function loadAbout() {
         const data = await fetchJSON("index.json");
         const about = data.aboutSection;
@@ -203,12 +250,13 @@
           images: about.images,
         });
 
-        new bootstrap.Carousel("#aboutCarouselId", {
+        const aboutCarousel = new bootstrap.Carousel("#aboutCarouselId", {
           interval: 4000,
           ride: "carousel",
           pause: false,
           touch: true,
         });
+        enableCarouselZoom(document.getElementById("aboutCarouselId"), aboutCarousel);
 
         const featureList = document.getElementById("featureList");
         featureList.innerHTML = "";

@@ -19,15 +19,59 @@ document.addEventListener("DOMContentLoaded", () => {
       renderRibbon(data.ribbon);
       renderStats(data.stats);
       renderFilters(data.equipment);
-      renderEquipment(data.equipment);
+      renderEquipment(data.equipment, data.defaultContact);
+      renderBookingNote(data.bookingNote);
       renderInfoCards(data.info);
     })
     .catch((err) => console.error("Facilities load error:", err));
 });
 
 function renderRibbon({ title, description }) {
-  document.getElementById("ribbonTitle").innerText = title;
-  document.getElementById("ribbonDesc").innerText  = description;
+  document.getElementById("ribbonTitle").innerHTML = title;
+  document.getElementById("ribbonDesc").innerHTML  = description;
+}
+
+// One-line "contact for this facility" note. If a card fills any of its own `contact`
+// fields, that contact is used as-is; otherwise `defaultContact` is used.
+// Empty fields are skipped, and nothing renders if all are empty.
+function contactLine(itemContact = {}, defaultContact = {}) {
+  const hasOwn = ["name", "email", "phone", "link"].some(k => (itemContact[k] || "").trim());
+  const source = hasOwn ? itemContact : defaultContact;
+  const pick = key => (source[key] || "").trim();
+  const name  = pick("name");
+  const email = pick("email");
+  const phone = pick("phone");
+  const link  = pick("link");
+  if (!name && !email && !phone && !link) return "";
+
+  const parts = [];
+  if (email) parts.push(`<a href="mailto:${email}">${email}</a>`);
+  if (phone) parts.push(`<a href="tel:${phone.replace(/\s+/g, "")}">${phone}</a>`);
+  if (link) {
+    const external = /^https?:\/\//i.test(link);
+    const label = pick("linkLabel") || "Booking link";
+    parts.push(`<a href="${link}"${external ? ' target="_blank" rel="noopener"' : ""}>${label}</a>`);
+  }
+
+  let text = "To use this facility, contact";
+  if (name) text += ` <strong>${name}</strong>`;
+  if (name && parts.length) text += ":";
+  if (parts.length) text += ` ${parts.join(" · ")}`;
+
+  return `
+    <p class="fac-contact">
+      <i class="bi bi-person-lines-fill"></i>
+      <span>${text}</span>
+    </p>`;
+}
+
+function renderBookingNote(note) {
+  const el = document.getElementById("facBookingNote");
+  if (!el) return;
+  if (note && note.trim()) {
+    el.innerHTML = note;
+    el.hidden = false;
+  }
 }
 
 function renderStats(stats) {
@@ -75,7 +119,7 @@ function applyFilter(selected) {
   empty.classList.toggle("hidden", visible > 0);
 }
 
-function renderEquipment(equipment) {
+function renderEquipment(equipment, defaultContact) {
   const grid = document.getElementById("facGrid");
 
   grid.innerHTML = equipment.map(item => {
@@ -95,7 +139,7 @@ function renderEquipment(equipment) {
         <div class="fac-card-body">
           <span class="fac-card-category ${catClass}">${item.category}</span>
           <div class="fac-card-title">${item.name}</div>
-          ${item.model ? `<div class="fac-card-model">${item.model}</div>` : "."}
+          ${item.model ? `<div class="fac-card-model">${item.model}</div>` : ""}
           <p class="fac-card-desc">${item.description}</p>
           <ul class="fac-specs">${specsHTML}</ul>
           <div class="fac-status-label">${item.availabilityLabel || "Facility Availability"}</div>
@@ -103,6 +147,7 @@ function renderEquipment(equipment) {
             <span class="fac-status-dot"></span>
             ${item.status}
           </div>
+          ${contactLine(item.contact, defaultContact)}
         </div>
       </div>
     `;

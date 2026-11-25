@@ -28,6 +28,9 @@ h1, h2, h3, h4, h5, h6 {
   --light-text: #ffffff;
   --grey-text: #aeaeae;
   --highlight: #58e3e1;
+  /* Readable teal for text/labels on light backgrounds (--highlight is too light there) */
+  --highlight-dark: #007b79;
+  --highlight-soft: #e3f8f8;
 }
 
 .container {

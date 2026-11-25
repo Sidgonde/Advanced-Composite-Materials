@@ -107,8 +107,8 @@
     fetch("./data/contact.json")
       .then(res => res.json())
       .then(data => {
-        document.querySelector(".contact-form-wrapper h2").textContent = data.title;
-        document.querySelector(".subtitle").textContent = data.subtitle;
+        document.querySelector(".contact-form-wrapper h2").innerHTML = data.title;
+        document.querySelector(".subtitle").innerHTML = data.subtitle;
         document.getElementById("emailid").textContent = data.email;
 
         document.getElementById("twitter-link").href = data.socials.twitter;

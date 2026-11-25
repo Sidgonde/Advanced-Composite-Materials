@@ -198,8 +198,8 @@
     fetch(`${BASE_PATH}/data/about.json`)
       .then(res => res.json())
       .then(data => {
-        els.title.textContent    = data.title;
-        els.subtitle.textContent = data.subtitle;
+        els.title.innerHTML    = data.title;
+        els.subtitle.innerHTML = data.subtitle;
         els.mission.textContent  = data.mission;
         els.vision.textContent   = data.vision;
 
@@ -241,7 +241,7 @@
               <div class="feature-card edu-card">
                 <div class="institution-logo edu-logo">${institutionLogo(e, e.institution)}</div>
                 <h5 style="font-weight: 1000;">${e.degree}</h5>
-                <p class="text-muted">${e.institution} – ${e.year}</p>
+                <p class="text-muted">${e.institution}</p>
                 <small class="edu-details">${e.details}</small>
                 ${e.advisor ? `<small class="edu-advisor">${e.advisor}</small>` : ""}
               </div>
