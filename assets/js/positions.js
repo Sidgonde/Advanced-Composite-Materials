@@ -21,22 +21,33 @@ function linkify(value) {
   );
 }
 
-// "areas": bullet points. Each item is a plain string, or { icon, title, text }.
-function areasList(areas) {
-  const items = (areas || [])
-    .map(a => (typeof a === "string" ? { text: a } : a || {}))
+const iconBubble = (icon, cls) =>
+  filled(icon) ? `<span class="${cls}" aria-hidden="true">${esc(icon)}</span>` : "";
+
+// "areas": research-area tiles. Each item is a plain string, or { icon, title, text }.
+function areasBlock(pos) {
+  const tiles = (pos.areas || [])
+    .map(a => (typeof a === "string" ? { title: a } : a || {}))
     .filter(a => filled(a.title) || filled(a.text))
-    .map(a => {
-      const icon  = filled(a.icon) ? `<span class="position-icon" aria-hidden="true">${esc(a.icon)}</span>` : "";
-      const title = filled(a.title) ? `<strong>${esc(a.title)}</strong>${filled(a.text) ? ": " : ""}` : "";
-      return `<li>${icon}<span>${title}${filled(a.text) ? linkify(a.text) : ""}</span></li>`;
-    });
-  return items.length ? `<ul class="position-areas">${items.join("")}</ul>` : "";
+    .map(a => `
+      <li class="pos-area">
+        ${iconBubble(a.icon, "pos-area-icon")}
+        <div>
+          ${filled(a.title) ? `<h4 class="pos-area-title">${esc(a.title)}</h4>` : ""}
+          ${filled(a.text) ? `<p class="pos-area-text">${linkify(a.text)}</p>` : ""}
+        </div>
+      </li>`);
+  if (!tiles.length) return "";
+  return `
+    <div class="pos-areas-wrap">
+      <span class="pos-eyebrow">${esc(pos.areasTitle || "Research Areas")}</span>
+      <ul class="pos-areas">${tiles.join("")}</ul>
+    </div>`;
 }
 
-// "details": highlighted info box. Each row is { icon, label, value }; add as many as needed.
+// "details": Key Details timeline. Each row is { icon, label, value }; add as many as needed.
 // Older fields (start / deadline / eligibility) are still shown if present.
-function detailsBox(pos) {
+function detailsBlock(pos, button) {
   const rows = [
     ...(pos.details || []),
     { icon: "📅", label: "Start", value: pos.start },
@@ -45,33 +56,50 @@ function detailsBox(pos) {
   ]
     .filter(d => d && filled(d.value))
     .map(d => `
-      <li>
-        ${filled(d.icon) ? `<span class="position-icon" aria-hidden="true">${esc(d.icon)}</span>` : ""}
-        <span>${filled(d.label) ? `<strong>${esc(d.label)}:</strong> ` : ""}${linkify(d.value)}</span>
+      <li class="pos-detail">
+        <span class="pos-detail-icon" aria-hidden="true">${filled(d.icon) ? esc(d.icon) : "•"}</span>
+        <div>
+          ${filled(d.label) ? `<span class="pos-detail-label">${esc(d.label)}</span>` : ""}
+          <span class="pos-detail-value">${linkify(d.value)}</span>
+        </div>
       </li>`);
-  return rows.length ? `<ul class="position-details">${rows.join("")}</ul>` : "";
+  if (!rows.length && !button) return "";
+  return `
+    <aside class="pos-details-panel">
+      ${rows.length ? `
+        <span class="pos-eyebrow">${esc(pos.detailsTitle || "Key Details")}</span>
+        <ul class="pos-details">${rows.join("")}</ul>` : ""}
+      ${button}
+    </aside>`;
 }
 
 function positionCard(pos) {
   const link = pos.link || "";
   const external = /^https?:\/\//i.test(link);
+  const button = link ? `
+    <a class="position-btn" href="${esc(link)}"${external ? ' target="_blank" rel="noopener noreferrer"' : ""}>
+      ${esc(pos.linkLabel || "Apply / Enquire")} <span aria-hidden="true">→</span>
+    </a>` : "";
   const badges = [
     filled(pos.type) ? `<span class="position-type">${esc(pos.type)}</span>` : "",
-    filled(pos.status) ? `<span class="position-status">${esc(pos.status)}</span>` : "",
+    filled(pos.status) ? `<span class="position-status"><span class="pos-pulse"></span>${esc(pos.status)}</span>` : "",
   ].join("");
+
+  const areas = areasBlock(pos);
+  const details = detailsBlock(pos, button);
+
   return `
     <article class="position-card">
-      ${badges ? `<div class="position-head">${badges}</div>` : ""}
-      <h3 class="position-title">
-        ${filled(pos.icon) ? `<span class="position-icon" aria-hidden="true">${esc(pos.icon)}</span>` : ""}${esc(pos.title)}
-      </h3>
-      ${filled(pos.description) ? `<p class="position-desc">${linkify(pos.description)}</p>` : ""}
-      ${areasList(pos.areas)}
-      ${detailsBox(pos)}
-      ${link ? `
-        <a class="position-btn" href="${esc(link)}"${external ? ' target="_blank" rel="noopener noreferrer"' : ""}>
-          ${esc(pos.linkLabel || "Apply / Enquire")}
-        </a>` : ""}
+      <header class="pos-banner">
+        ${badges ? `<div class="position-head">${badges}</div>` : ""}
+        <h3 class="position-title">${iconBubble(pos.icon, "pos-title-icon")}<span>${esc(pos.title)}</span></h3>
+        ${filled(pos.description) ? `<p class="position-desc">${linkify(pos.description)}</p>` : ""}
+      </header>
+      ${areas || details ? `
+        <div class="pos-body${areas && details ? "" : " pos-body--single"}">
+          ${areas}
+          ${details}
+        </div>` : ""}
     </article>`;
 }
 
