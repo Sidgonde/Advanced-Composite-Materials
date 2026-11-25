@@ -9,29 +9,65 @@ function esc(value) {
     .replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 }
 
-function detailRow(label, value) {
-  if (!value || !String(value).trim()) return "";
-  return `
-    <p class="position-detail">
-      <span class="position-detail-label">${label}</span>
-      <span class="position-detail-value">${esc(value)}</span>
-    </p>`;
+const filled = v => v != null && String(v).trim() !== "";
+
+// Escape text, then turn URLs and email addresses into clickable links.
+function linkify(value) {
+  return esc(value).replace(
+    /(https?:\/\/[^\s<]+[^\s<.,;:)])|([\w.+-]+@[\w-]+(?:\.[\w-]+)+)/g,
+    (match, url, email) => url
+      ? `<a href="${url}" target="_blank" rel="noopener noreferrer">${url}</a>`
+      : `<a href="mailto:${email}">${email}</a>`
+  );
+}
+
+// "areas": bullet points. Each item is a plain string, or { icon, title, text }.
+function areasList(areas) {
+  const items = (areas || [])
+    .map(a => (typeof a === "string" ? { text: a } : a || {}))
+    .filter(a => filled(a.title) || filled(a.text))
+    .map(a => {
+      const icon  = filled(a.icon) ? `<span class="position-icon" aria-hidden="true">${esc(a.icon)}</span>` : "";
+      const title = filled(a.title) ? `<strong>${esc(a.title)}</strong>${filled(a.text) ? ": " : ""}` : "";
+      return `<li>${icon}<span>${title}${filled(a.text) ? linkify(a.text) : ""}</span></li>`;
+    });
+  return items.length ? `<ul class="position-areas">${items.join("")}</ul>` : "";
+}
+
+// "details": highlighted info box. Each row is { icon, label, value }; add as many as needed.
+// Older fields (start / deadline / eligibility) are still shown if present.
+function detailsBox(pos) {
+  const rows = [
+    ...(pos.details || []),
+    { icon: "📅", label: "Start", value: pos.start },
+    { icon: "⏰", label: "Last Date", value: pos.deadline },
+    { icon: "✅", label: "Eligibility", value: pos.eligibility },
+  ]
+    .filter(d => d && filled(d.value))
+    .map(d => `
+      <li>
+        ${filled(d.icon) ? `<span class="position-icon" aria-hidden="true">${esc(d.icon)}</span>` : ""}
+        <span>${filled(d.label) ? `<strong>${esc(d.label)}:</strong> ` : ""}${linkify(d.value)}</span>
+      </li>`);
+  return rows.length ? `<ul class="position-details">${rows.join("")}</ul>` : "";
 }
 
 function positionCard(pos) {
   const link = pos.link || "";
   const external = /^https?:\/\//i.test(link);
+  const badges = [
+    filled(pos.type) ? `<span class="position-type">${esc(pos.type)}</span>` : "",
+    filled(pos.status) ? `<span class="position-status">${esc(pos.status)}</span>` : "",
+  ].join("");
   return `
     <article class="position-card">
-      <div class="position-head">
-        ${pos.type ? `<span class="position-type">${esc(pos.type)}</span>` : ""}
-        ${pos.status ? `<span class="position-status">${esc(pos.status)}</span>` : ""}
-      </div>
-      <h3 class="position-title">${esc(pos.title)}</h3>
-      ${pos.description ? `<p class="position-desc">${esc(pos.description)}</p>` : ""}
-      ${detailRow("Eligibility", pos.eligibility)}
-      ${detailRow("Start", pos.start)}
-      ${detailRow("Last Date", pos.deadline)}
+      ${badges ? `<div class="position-head">${badges}</div>` : ""}
+      <h3 class="position-title">
+        ${filled(pos.icon) ? `<span class="position-icon" aria-hidden="true">${esc(pos.icon)}</span>` : ""}${esc(pos.title)}
+      </h3>
+      ${filled(pos.description) ? `<p class="position-desc">${linkify(pos.description)}</p>` : ""}
+      ${areasList(pos.areas)}
+      ${detailsBox(pos)}
       ${link ? `
         <a class="position-btn" href="${esc(link)}"${external ? ' target="_blank" rel="noopener noreferrer"' : ""}>
           ${esc(pos.linkLabel || "Apply / Enquire")}

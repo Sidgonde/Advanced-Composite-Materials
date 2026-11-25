@@ -10,11 +10,63 @@
     {
       "type": "PhD / MS",
       "status": "Open",
+      "icon": "🚀",
       "title": "Ph.D. & M.S. Research Scholar Positions — January 2027 Intake",
-      "description": "The Department of Aerospace Engineering, IIT Madras, invites applications from motivated candidates for full-time Ph.D. and M.S. research scholar positions in Micromechanics, Experimental Mechanics, Fracture Mechanics and Polymer Composite Materials. Shortlisted applicants will be contacted for an interview and offered institute fellowship support.",
-      "eligibility": "Master's degree in Mechanical, Aerospace, or Materials Engineering.",
-      "start": "January 2027",
-      "deadline": "",
+      "description": "The Department of Aerospace Engineering, IIT Madras, invites applications from motivated candidates for full-time Ph.D. and M.S. research scholar positions in the following areas:",
+      "areas": [
+        {
+          "icon": "🔬",
+          "title": "Micromechanics",
+          "text": ""
+        },
+        {
+          "icon": "📐",
+          "title": "Experimental Mechanics",
+          "text": ""
+        },
+        {
+          "icon": "💥",
+          "title": "Fracture Mechanics",
+          "text": ""
+        },
+        {
+          "icon": "🧪",
+          "title": "Polymer Composite Materials",
+          "text": ""
+        }
+      ],
+      "details": [
+        {
+          "icon": "📅",
+          "label": "Intake",
+          "value": "January 2027"
+        },
+        {
+          "icon": "⏰",
+          "label": "Application last date",
+          "value": "To be announced"
+        },
+        {
+          "icon": "✅",
+          "label": "Eligibility",
+          "value": "Master's degree in Mechanical, Aerospace, or Materials Engineering."
+        },
+        {
+          "icon": "📝",
+          "label": "Selection",
+          "value": "Shortlisted applicants will be contacted for an interview and offered institute fellowship support."
+        },
+        {
+          "icon": "🌐",
+          "label": "Apply online",
+          "value": "https://research.iitm.ac.in/"
+        },
+        {
+          "icon": "✉️",
+          "label": "Contact",
+          "value": "Interested candidates may write directly to nagappa@smail.iitm.ac.in"
+        }
+      ],
       "link": "#contactForm",
       "linkLabel": "Enquire Now"
     }

@@ -172,7 +172,7 @@ textarea:focus {
 .positions-grid {
   display: grid;
   gap: 25px;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: 1fr;
   text-align: left;
 }
 
@@ -181,7 +181,7 @@ textarea:focus {
   border: 1px solid #e3e8ec;
   border-left: 4px solid #009688;
   border-radius: 14px;
-  padding: 26px 26px 24px;
+  padding: 32px 36px 30px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
   display: flex;
   flex-direction: column;
@@ -215,18 +215,32 @@ textarea:focus {
 }
 
 .position-title {
-  font-size: 20px;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  font-size: 22px;
   font-weight: 700;
-  color: #222;
+  color: var(--secondary);
   line-height: 1.35;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
 .position-desc {
-  font-size: 15px;
-  color: #6c757d;
-  line-height: 1.6;
+  font-size: 15.5px;
+  color: #3d4a52;
+  line-height: 1.7;
   margin-bottom: 14px;
+}
+
+.position-card a:not(.position-btn) {
+  color: #00796b;
+  font-weight: 600;
+  word-break: break-word;
+}
+
+.position-icon {
+  flex-shrink: 0;
+  line-height: 1.5;
 }
 
 .position-btn {
@@ -260,29 +274,52 @@ textarea:focus {
   font-weight: 600;
 }
 
-.position-detail {
-  font-size: 14px;
-  line-height: 1.55;
-  color: #444;
-  margin-bottom: 10px;
+/* Bullet points (research areas etc.) */
+.position-areas {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 18px;
 }
 
-.position-detail-label {
-  display: block;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #6b7780;
-  margin-bottom: 2px;
+.position-areas li {
+  display: flex;
+  gap: 10px;
+  padding: 7px 0 7px 2px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #2f3b42;
 }
 
-.position-detail-value {
-  display: block;
+.position-areas strong {
+  color: var(--secondary);
+}
+
+/* Highlighted details box (dates, eligibility, apply, contact ...) */
+.position-details {
+  list-style: none;
+  margin: 4px 0 22px;
+  padding: 14px 18px;
+  background: #f1f5f9;
+  border-left: 4px solid var(--secondary);
+  border-radius: 8px;
+}
+
+.position-details li {
+  display: flex;
+  gap: 10px;
+  padding: 4px 0;
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: #2f3b42;
+}
+
+.position-details strong {
+  color: var(--secondary);
 }
 
 @media (max-width: 600px) {
   .positions-section { padding: 50px 16px; }
   .positions-heading { font-size: 26px; }
-  .positions-grid { grid-template-columns: 1fr; }
+  .position-card { padding: 24px 20px; }
+  .position-title { font-size: 19px; }
 }
