@@ -63,12 +63,51 @@
   max-width: 360px;
 }
 
+/* Slightly wider card so the justified bio reads evenly */
+#founderGrid .founderinnerGrid {
+  width: 100%;
+  max-width: 420px;
+}
+
 .founder-card {
-  padding: 24px 20px;
+  padding: 30px 26px 24px;
   margin: 0;
   border: 1px solid var(--secondary);
-  border-radius: 10px;
+  border-top: 4px solid var(--highlight);
+  border-radius: 12px;
   height: 100%;
+  background: #fff;
+  box-shadow: 0 12px 30px rgba(0, 31, 48, 0.08);
+}
+
+.founder-card .founder-avatar {
+  width: 160px;
+  height: 160px;
+  font-size: 54px;
+  box-shadow: 0 0 0 6px var(--highlight-soft), 0 8px 20px rgba(0, 31, 48, 0.15);
+}
+
+.founder-name {
+  font-weight: 700;
+  color: var(--secondary);
+  margin-bottom: 4px;
+}
+
+.founder-role {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--highlight-dark) !important;
+  margin-bottom: 14px;
+}
+
+.founder-bio {
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
+  line-height: 1.7;
+  font-size: 0.95rem;
+  padding-top: 14px;
+  border-top: 1px solid #e6edf0;
 }
 
 .founder-avatar {
@@ -292,10 +331,11 @@
     grid-template-columns: 1fr;
   }
 
-  .founder-avatar {
-    width: 88px;
-    height: 88px;
-    font-size: 32px;
+  .founder-avatar,
+  .founder-card .founder-avatar {
+    width: 130px;
+    height: 130px;
+    font-size: 44px;
   }
   .stats-item {
     font-size: 24px;

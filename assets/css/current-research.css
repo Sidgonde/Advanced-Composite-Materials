@@ -142,10 +142,10 @@ main {
 }
 .section-title span { color: var(--teal); }
 .research-count {
-  font-size: .82rem; font-weight: 500;
-  color: var(--text-soft);
-  background: var(--cream);
-  border: 1px solid var(--border);
+  font-size: .85rem; font-weight: 600;
+  color: var(--navy);
+  background: var(--white);
+  border: 1px solid var(--teal-border);
   padding: 5px 14px; border-radius: 50px;
 }
 
@@ -173,7 +173,7 @@ main {
   box-shadow: var(--shadow-sm);
   display: grid;
   grid-template-columns: 340px 1fr;
-  align-items: start;
+  align-items: stretch;
   transition: transform var(--transition),
               box-shadow var(--transition),
               border-color var(--transition);
@@ -190,35 +190,21 @@ main {
 .rcard.flip .rcard-thumb { order: 2; }
 .rcard.flip .rcard-body  { order: 1; }
 
+/* Image column stretches to the full card height; the image fills it edge to edge. */
 .rcard-thumb {
   position: relative;
-  height: 280px;
-  align-self: start;
+  min-height: 280px;
+  align-self: stretch;
   overflow: hidden;
   background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
 }
 .rcard-thumb img {
+  position: absolute; inset: 0;
   width: 100%; height: 100%;
-  object-fit: contain; object-position: center;
+  object-fit: cover; object-position: center;
   display: block;
   background: #f1f5f9;
-  transition: transform .5s ease;
 }
-.rcard:hover .rcard-thumb img { transform: scale(1.05); }
-
-.rcard-thumb::after {
-  content: '';
-  position: absolute;
-  top: 0; bottom: 0;
-  width: 3px;
-  background: var(--teal);
-  right: 0;
-  transform: scaleY(0);
-  transform-origin: bottom;
-  transition: transform var(--transition);
-}
-.rcard.flip .rcard-thumb::after { right: auto; left: 0; transform-origin: bottom; }
-.rcard:hover .rcard-thumb::after { transform: scaleY(1); }
 
 .thumb-fallback {
   position: absolute; inset: 0;
@@ -357,16 +343,9 @@ main {
     grid-template-rows: 200px auto;
   }
   .rcard-thumb,
-  .rcard.flip .rcard-thumb { order: 1; height: 220px; align-self: start; }
+  .rcard.flip .rcard-thumb { order: 1; height: 220px; min-height: 0; align-self: start; }
   .rcard-body,
   .rcard.flip .rcard-body  { order: 2; }
-  .rcard-thumb::after,
-  .rcard.flip .rcard-thumb::after {
-    top: auto; left: 0; right: 0; bottom: 0;
-    width: 100%; height: 3px;
-    transform: scaleX(0); transform-origin: left;
-  }
-  .rcard:hover .rcard-thumb::after { transform: scaleX(1); }
   main  { padding: 40px 4% 64px; }
   .hero { padding: 52px 4% 44px; }
   .tab-btn { padding: 9px 18px; font-size: .82rem; }

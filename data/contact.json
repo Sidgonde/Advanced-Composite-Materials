@@ -5,5 +5,18 @@
   "socials": {
     "twitter": "https://twitter.com/your-org",
     "linkedin": "https://www.linkedin.com/in/nagappa-siddgonde-phd-442442a2/"
-  }
+  },
+  "Positions": [
+    {
+      "type": "PhD / MS",
+      "status": "Open",
+      "title": "Ph.D. & M.S. Research Scholar Positions — January 2027 Intake",
+      "description": "The Department of Aerospace Engineering, IIT Madras, invites applications from motivated candidates for full-time Ph.D. and M.S. research scholar positions in Micromechanics, Experimental Mechanics, Fracture Mechanics and Polymer Composite Materials. Shortlisted applicants will be contacted for an interview and offered institute fellowship support.",
+      "eligibility": "Master's degree in Mechanical, Aerospace, or Materials Engineering.",
+      "start": "January 2027",
+      "deadline": "",
+      "link": "#contactForm",
+      "linkLabel": "Enquire Now"
+    }
+  ]
 }

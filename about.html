@@ -214,9 +214,9 @@
                 ${t.image
                   ? `<img class="founder-avatar founder-avatar-photo" src="${t.image}" alt="${t.name}" loading="lazy">`
                   : `<div class="founder-avatar">${t.initial}</div>`}
-                <h5 class="mt-3">${t.name}</h5>
-                <p class="text-dark">${t.role}</p>
-                <p class="text-muted">${t.bio}</p>
+                <h5 class="mt-3 founder-name">${t.name}</h5>
+                <p class="text-dark founder-role">${t.role}</p>
+                <p class="text-muted founder-bio">${t.bio}</p>
                 ${t.cv
                   ? `<a class="d-block founder-btn" href="${t.cv}" target="_blank" rel="noopener">View CV</a>`
                   : `<button class="d-block founder-btn" disabled>View CV</button>`}

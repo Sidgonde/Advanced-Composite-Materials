@@ -236,35 +236,6 @@ document.addEventListener("DOMContentLoaded", () => {
         collabContainer.appendChild(card);
       });
 
-      const positionsContainer = document.getElementById("positionsContainer");
-      if (positionsContainer) {
-        const positions = data.Positions || [];
-        positionsContainer.innerHTML = positions.length
-          ? positions.map(pos => {
-              const external = /^https?:\/\//i.test(pos.link || "");
-              return `
-                <article class="position-card">
-                  <div class="position-head">
-                    ${pos.type ? `<span class="position-type">${esc(pos.type)}</span>` : ""}
-                    ${pos.status ? `<span class="position-status">${esc(pos.status)}</span>` : ""}
-                  </div>
-                  <h3 class="position-title">${esc(pos.title)}</h3>
-                  ${pos.description ? `<p class="position-desc">${esc(pos.description)}</p>` : ""}
-                  ${detailRow("Eligibility", pos.eligibility)}
-                  ${detailRow("Start", pos.start)}
-                  ${detailRow("Last Date", pos.deadline)}
-                  ${pos.link ? `
-                    <a class="position-btn" href="${esc(pos.link)}"${external ? ' target="_blank" rel="noopener noreferrer"' : ""}>
-                      ${esc(pos.linkLabel || "Apply / Enquire")}
-                    </a>` : ""}
-                </article>`;
-            }).join("")
-          : `<p class="positions-empty">
-               There are no open positions at the moment. Motivated candidates are
-               welcome to <a href="./contact.html">get in touch</a>.
-             </p>`;
-      }
-
       const statsGrid = document.getElementById("statsGrid");
       data.Stats.forEach(stat => {
         const item = document.createElement("div");
